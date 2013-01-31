@@ -1,0 +1,18 @@
+<%= form_for @issue do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.label :description, "Issue Description" %>
+  <%= f.text_area :description %>
+  <%= f.label :originator_id, "Originator" %>
+  <%= f.text_field :originator_id %>
+  <%= f.label :originator_id, "Originator Email" %>
+  <%= f.label :department_in_charge_id, "Group in Charge" %>	
+  <%= f.text_field :department_in_charge_id %>
+  <%= f.label :type_id, "Type" %>
+  <%= f.text_field :type_id %>
+  <%= f.label :impact_id, "Impact" %>
+  <%= f.text_field :impact_id %>
+  <%= f.label :iso_nc_id, "ISO Reference ID" %>
+  <%= f.text_field :iso_nc_id %>
+  <%= f.submit "Submit", :disable_with => 'Submiting...' %>
+<% end %>

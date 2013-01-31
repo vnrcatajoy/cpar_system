@@ -1,7 +1,8 @@
 <h1>View All Issues</h1>
+<%= link_to 'Report New Issue', new_issue_path %>
 
 <% for issue in @issues %>
   <li>
-    <%= issue.title %>
+    <%= issue.title %> : <%= issue.description %>
   </li>
 <% end %>
