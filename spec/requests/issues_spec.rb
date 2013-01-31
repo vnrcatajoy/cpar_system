@@ -1,11 +1,19 @@
 require 'spec_helper'
 
 describe "Issues" do
-  describe "GET /issues" do
-    it "works! (now write some real specs)" do
-      # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
-      get issues_index_path
-      response.status.should be(200)
-    end
+  before do
+    #create an issue with fixed params
+    @issue = Issue.create title: 'Slow Internet Connection', description: 'It sucks.'
   end
+
+  describe "GET /issues" do
+    it "displays all issues [title]" do
+      visit issues_path
+      page.should have_content 'Slow Internet Connection'
+
+      save_and_open_page
+    end
+    
+  end
+
 end

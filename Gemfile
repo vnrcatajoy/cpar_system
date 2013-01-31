@@ -27,7 +27,7 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'guard-rspec'
-  gem 'rb-inotify'
+  gem 'rb-inotify', '~> 0.8.8'
   gem 'minitest'
   gem 'launchy'
 end
