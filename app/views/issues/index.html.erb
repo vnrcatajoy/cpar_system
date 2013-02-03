@@ -1,8 +1,20 @@
 <h1>View All Issues</h1>
 <%= link_to 'Report New Issue', new_issue_path %>
+  <table>
+    <tr>
+      <td>Title</td>
+      <td>Originator</td>
+      <td>Impact</td>
+      <td>Status</td>
+    </tr>
 
-<% for issue in @issues %>
-  <li>
-    <%= issue.title %> : <%= issue.description %>
-  </li>
-<% end %>
+    <% @issues.each do |issue| %>
+    	<tr>
+        <td> <%= issue.title %> </td>
+        <td> <%= issue.user.name %> </td>
+        <td> <%= issue.issue_impact.name %> </td>
+        <td> <%= issue.issue_status.name %> </td>
+    	</tr>
+    <% end %>
+
+  </table>

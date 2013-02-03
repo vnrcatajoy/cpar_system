@@ -2,16 +2,42 @@ require 'spec_helper'
 
 describe "Issues" do
   before do
+    #create default User Types
+    UserType.create name: 'Administrator'
+    UserType.create name: 'Customer'
+
+    #create a default User
+    User.create name: 'Nico Catajoy', phone: '5191568', mobile: '09173068540', email: 'vnrcajoy@gmail.com', type_id: 1
+
+    #create default Departments
+    Department.create name: 'Admin'
+    Department.create name: 'Maintainance'
+
+    #create default Impact Types
+    IssueImpact.create name: '1-Critical'
+    IssueImpact.create name: '2-Major'
+    IssueImpact.create name: '3-Minor'
+
+    #create default Issue Status
+    IssueStatus.create name: 'New'
+    IssueStatus.create name: 'Investigating'
+    IssueStatus.create name: 'Correcting'
+    IssueStatus.create name: 'Closed'
+
   	#create an issue with fixed params
-    @issue = Issue.create title: 'Slow Internet Connection', description: 'It sucks.'
+    @issue = Issue.create title: 'ITDC Slow Internet Connection', description: 'Low bandwidth', user_id: 1, impact_id: 1, status_id: 1, department_id: 1
+    
   end
 
   describe "GET /issues" do
-    it "displays all issues with title and their description" do
-      visit issues_path
-      
-      page.should have_content 'Slow Internet Connection'
-      page.should have_content 'It sucks.'
+    it "displays all issues with title, originator name, impact and status" do
+      visit issues_path       
+      save_and_open_page
+
+      page.should have_content 'ITDC Slow Internet Connection'
+      page.should have_content 'Nico Catajoy'
+      page.should have_content '1-Critical'
+      page.should have_content 'New'
 
     end
 

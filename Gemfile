@@ -30,6 +30,8 @@ group :test, :development do
   gem 'rb-inotify', '~> 0.8.8'
   gem 'minitest'
   gem 'launchy'
+  gem 'faker'
+  gem 'factory_girl_rails'
 end
 
 # To use ActiveModel has_secure_password

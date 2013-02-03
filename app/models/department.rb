@@ -1,5 +1,5 @@
 class Department < ActiveRecord::Base
-  has_many :issue
+  has_many :issues
 
-  attr_accessible :description, :name, :user_id
+  attr_accessible :description, :name
 end

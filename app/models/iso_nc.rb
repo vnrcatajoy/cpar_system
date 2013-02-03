@@ -1,5 +1,5 @@
 class IsoNc < ActiveRecord::Base
-  has_many :issue
+  has_many :issues
 
   attr_accessible :title
 end
