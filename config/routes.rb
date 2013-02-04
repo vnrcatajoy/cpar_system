@@ -1,6 +1,6 @@
 CparSystem::Application.routes.draw do
   root to: 'issues#index'
-  match '/issues', to: "issues#index"
+  get 'issues/index'
   
   resources :issues
 

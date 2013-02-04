@@ -8,7 +8,16 @@ class IssuesController < ApplicationController
   end
 
   def create
-  	@issue = Issue.create params[:issue]
+    @issue = Issue.new params[:issue]
+
+    if @issue.save
+      redirect_to issues_path, notice: 'Issue has successfuly been created!'
+    else
+      format.html  { render :action => "new" }
+      format.json  { render :json => @issue.errors,
+                    :status => :unprocessable_entity }
+    end
+
   end
 
 end

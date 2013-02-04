@@ -48,9 +48,9 @@ describe "Issues" do
 
       page.should have_content 'Title'
       page.should have_content 'Description'
-      page.should have_content 'Originator'
+      page.should have_content 'User'
       page.should have_content 'Originator Email'
-      page.should have_content 'Group in Charge'
+      page.should have_content 'Department'
       page.should have_content 'Type'
       page.should have_content 'Impact'
       page.should have_content 'ISO Reference ID'
@@ -63,11 +63,12 @@ describe "Issues" do
 
       fill_in 'Title', with: 'No projects'
       fill_in 'Description', with: 'Lalala just going to test the description box'
-      fill_in 'Originator', with: 1
-      fill_in 'Group in Charge', with: 1
+      fill_in 'User', with: 1
+      fill_in 'Department', with: 1
       fill_in "Type", with: 1
       fill_in "Impact", with: 1
-      fill_in "ISO Reference", with: 1
+      fill_in "Status", with: 1
+      fill_in "ISO Reference ID", with: 1
 
       click_button 'Create Issue'
 
