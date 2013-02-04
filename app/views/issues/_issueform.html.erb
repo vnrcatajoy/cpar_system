@@ -1,18 +1,41 @@
-<%= form_for @issue do |f| %>
+<%= form_for @issue, :action => 'create' do |f| %>
   <%= f.label :title %>
   <%= f.text_field :title %>
-  <%= f.label :description, "Issue Description" %>
+  <br/>
+  
+  <%= f.label :description %>
+  <br/>
   <%= f.text_area :description %>
-  <%= f.label :user_id, "Originator" %>
+  <br/>
+
+  <%= f.label :user_id %>
   <%= f.text_field :user_id %>
-  <%= f.label :user_id, "Originator Email" %>
-  <%= f.label :department_id, "Group in Charge" %>	
+  <br/>
+
+  Originator Email #placeholder
+  <br/>
+
+  <%= f.label :department_id %>	
   <%= f.text_field :department_id %>
-  <%= f.label :type_id, "Type" %>
+  <br/>
+
+  <%= f.label :type_id %>
   <%= f.text_field :type_id %>
-  <%= f.label :impact_id, "Impact" %>
+  <br/>
+
+  <%= f.label :impact_id %>
   <%= f.text_field :impact_id %>
-  <%= f.label :iso_nc_id, "ISO Reference ID" %>
+  <br/>
+
+  <%= f.label :status_id %>
+  <%= f.text_field :status_id %>
+  <br/>
+
+  <%= f.label :iso_nc_id %>
   <%= f.text_field :iso_nc_id %>
-  <%= f.submit "Submit", :disable_with => 'Submiting...' %>
+  <br/>
+
+  
+  <%= f.submit %>
+
 <% end %>

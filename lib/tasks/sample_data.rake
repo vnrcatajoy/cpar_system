@@ -26,10 +26,10 @@ namespace :db do
 
     20.times do |n|
       name = Faker::Name.name
-      email = "example-#{n+1}@example.com"
+      email = Faker::Internet.email
       type_id = (n%6) + 1
-      phone = "#{n+12345}"
-      mobile = "#{n+23456}"
+      phone = Faker::PhoneNumber.phone_number
+      mobile = Faker::PhoneNumber.cell_phone
       department_id = (n%4) + 1
       User.create!(name: name,
                     email: email,
@@ -58,7 +58,7 @@ namespace :db do
                     status_id: 1, 
                     department_id: 1)
 
-    10.times do |i|
+    5.times do |i|
       title = "Sample Title#{i}"
       description = "Sample Description#{i}"
       user_id = i + 1 

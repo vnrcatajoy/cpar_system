@@ -1,7 +1,7 @@
 CparSystem::Application.routes.draw do
   root to: 'issues#index'
   match '/issues', to: "issues#index"
-
+  
   resources :issues
 
   # The priority is based upon order of creation:

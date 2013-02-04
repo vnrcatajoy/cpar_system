@@ -1,11 +1,13 @@
 <h1>View All Issues</h1>
-<%= link_to 'Report New Issue', new_issue_path %>
   <table>
     <tr>
-      <td>Title</td>
-      <td>Originator</td>
-      <td>Impact</td>
-      <td>Status</td>
+      <th>Title</th>
+      <th>Originator</th>
+      <th>Impact</th>
+      <th>Status</th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
 
     <% @issues.each do |issue| %>
@@ -14,7 +16,12 @@
         <td> <%= issue.user.name %> </td>
         <td> <%= issue.issue_impact.name %> </td>
         <td> <%= issue.issue_status.name %> </td>
+        <td><%= link_to 'Show', issue %></td>
+        <td><%= link_to 'Edit', edit_issue_path(issue) %></td>
+        <td><%= link_to 'Destroy', issue, :confirm => 'Are you sure?', :method => :delete %></td>
     	</tr>
     <% end %>
 
   </table>
+
+<%= link_to 'Report New Issue', new_issue_path %>

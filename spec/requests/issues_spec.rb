@@ -32,7 +32,6 @@ describe "Issues" do
   describe "GET /issues" do
     it "displays all issues with title, originator name, impact and status" do
       visit issues_path       
-      save_and_open_page
 
       page.should have_content 'ITDC Slow Internet Connection'
       page.should have_content 'Nico Catajoy'
@@ -48,7 +47,7 @@ describe "Issues" do
       current_path.should == new_issue_path
 
       page.should have_content 'Title'
-      page.should have_content 'Issue Description'
+      page.should have_content 'Description'
       page.should have_content 'Originator'
       page.should have_content 'Originator Email'
       page.should have_content 'Group in Charge'
@@ -56,6 +55,30 @@ describe "Issues" do
       page.should have_content 'Impact'
       page.should have_content 'ISO Reference ID'
       #add cause and action plan
+
+    end
+
+    it "creates a new issue" do
+      visit new_issue_path
+
+      fill_in 'Title', with: 'No projects'
+      fill_in 'Description', with: 'Lalala just going to test the description box'
+      fill_in 'Originator', with: 1
+      fill_in 'Group in Charge', with: 1
+      fill_in "Type", with: 1
+      fill_in "Impact", with: 1
+      fill_in "ISO Reference", with: 1
+
+      click_button 'Create Issue'
+
+      current_path.should == issues_path
+
+      page.should have_content 'No projects'
+      page.should have_content 'Nico Catajoy'
+      page.should have_content '1-Critical'
+      page.should have_content 'New'
+
+      save_and_open_page
 
     end
   end

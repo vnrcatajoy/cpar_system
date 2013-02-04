@@ -13,16 +13,16 @@ FactoryGirl.define do
     description "Sample description"
   end
 
-  # factory :issue do
-  # 	title "Sample Title"
-  # 	description "Sample Description"
-  # 	type_id 1
-  # 	status_id 1
-  # 	impact_id 1
-  # 	user_id 1
-  # 	department_id 1
-  # 	cause_id 1
-  # 	action_plan_id 1
-  # end
+  factory :issue do
+  	title "Sample Title"
+  	description "Sample Description"
+  	type_id 1
+  	status_id 1
+  	impact_id 1
+  	user_id 1
+  	department_id 1
+  	cause_id 1
+  	action_plan_id 1
+  end
 
 end
