@@ -17,6 +17,10 @@ class IssuesController < ApplicationController
       format.json  { render :json => @issue.errors,
                     :status => :unprocessable_entity }
     end
+  end
+
+  def show
+    @issue = Issue.find params[:id]
 
   end
 

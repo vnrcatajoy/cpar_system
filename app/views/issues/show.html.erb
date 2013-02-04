@@ -1,0 +1,46 @@
+<h1>Show Issue</h1>
+
+<p id="notice"> <%= notice %> </p>
+ 
+<p>
+  <b>Title:</b>
+  <%= @issue.title %>
+</p>
+ 
+<p>
+  <b>Description:</b>
+  <%= @issue.description %>
+</p>
+ 
+<p>
+  <b>Originator:</b>
+  <%= @issue.user.name %>
+</p>
+
+<p>
+  <b>Originator Email:</b>
+  <%= @issue.user.email %>
+</p>
+
+<p>
+  <b>Department:</b>
+  <%= @issue.department.name %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @issue.issue_type.name %>
+</p>
+ 
+ <p>
+  <b>Impact:</b>
+  <%= @issue.issue_impact.name %>
+</p>
+
+<p>
+  <b>ISO Reference ID:</b>
+  <%= @issue.iso_nc.title %>
+</p>
+
+<%= link_to 'Edit', edit_issue_path(@issue) %> |
+<%= link_to 'Back', issues_path %>

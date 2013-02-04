@@ -24,8 +24,23 @@ describe "Issues" do
     IssueStatus.create name: 'Correcting'
     IssueStatus.create name: 'Closed'
 
+    #create default Issue Types
+    IssueType.create name: 'Process Related'
+    IssueType.create name: 'KPI'
+    IssueType.create name: 'Supplier Related'
+    IssueType.create name: 'Top Priority'
+
+    #create default ISO Non Conformance Types
+    IsoNc.create title: '1A'
+    IsoNc.create title: '1B'
+    IsoNc.create title: '2A'
+    IsoNc.create title: '2B'
+    IsoNc.create title: '3A'
+    IsoNc.create title: '3B'
+
   	#create an issue with fixed params
-    @issue = Issue.create title: 'ITDC Slow Internet Connection', description: 'Low bandwidth', user_id: 1, impact_id: 1, status_id: 1, department_id: 1
+    @issue = Issue.create title: 'ITDC Slow Internet Connection', description: 'Low Bandwidth', user_id: 1, 
+                          impact_id: 1, status_id: 1, department_id: 1, type_id: 4, iso_nc_id: 5
     
   end
 
@@ -79,9 +94,24 @@ describe "Issues" do
       page.should have_content '1-Critical'
       page.should have_content 'New'
 
+    end
+
+    it "shows an issue" do
+      visit issue_path(@issue)
+
+      page.should have_content 'ITDC Slow Internet Connection'
+      page.should have_content 'Low Bandwidth'
+      page.should have_content 'Nico Catajoy'
+      page.should have_content 'vncatajoy@gmail.com'
+      page.should have_content 'Administration'
+      page.should have_content 'Top Priority'
+      page.should have_content '1-Critical'
+      page.should have_content '3A'
+
       save_and_open_page
 
     end
+
   end
 
 end

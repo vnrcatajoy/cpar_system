@@ -50,13 +50,25 @@ namespace :db do
     IssueImpact.create!(name: '2-Major')
     IssueImpact.create!(name: '3-Minor')
 
+    #add sample IssueType
+    5.times do |n|
+      IssueType.create!(name: "Issue#{n}")
+    end
+
+    #add sample ISO NC Types
+    5.times do |n|
+      IsoNc.create!(title: "IsoNc#{n}")
+    end
+
     #add sample Issues
     Issue.create!(title: 'ITDC Slow Internet Connection', 
                     description: 'Low bandwidth', 
                     user_id: 1, 
                     impact_id: 1, 
                     status_id: 1, 
-                    department_id: 1)
+                    department_id: 1,
+                    type_id: 1,
+                    iso_nc_id: 1)
 
     5.times do |i|
       title = "Sample Title#{i}"
@@ -65,13 +77,17 @@ namespace :db do
       impact_id = (i%3) + 1
       status_id = (i%5) + 1
       department_id = (i%4) + 1
+      type_id = (i%5) + 1
+      iso_nc_id = (i%5) + 1
 
       Issue.create!(title: title, 
                       description: description,
                       user_id: user_id,
                       impact_id: impact_id,
                       status_id: status_id,
-                      department_id: department_id)
+                      department_id: department_id,
+                      type_id: type_id,
+                      iso_nc_id: iso_nc_id)
     end
 
   end
