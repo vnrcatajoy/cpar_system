@@ -7,8 +7,7 @@
       <th>Impact</th>
       <th>Status</th>
       <th></th>
-      <th></th>
-      <th></th>
+
     </tr>
 
     <% @issues.each do |issue| %>
@@ -17,9 +16,19 @@
         <td> <%= issue.user.name %> </td>
         <td> <%= issue.issue_impact.name %> </td>
         <td> <%= issue.issue_status.name %> </td>
-        <td><%= link_to 'Show', issue %></td>
-        <td><%= link_to 'Edit', edit_issue_path(issue) %></td>
-        <td><%= link_to 'Destroy', issue, :confirm => 'Are you sure?', :method => :delete %></td>
+        <td>
+          <div id="command_container">
+            <ul>
+              <li id="issue_<%= issue.id %>">
+                <%= link_to 'Show', issue %> |  
+                <%= link_to 'Edit', edit_issue_path(issue) %> |
+                <%= link_to 'Delete', issue, :confirm => 'Are you sure?', :method => :delete %>   
+              </li>
+            </ul>
+          </div>
+
+        </td>
+        
     	</tr>
     <% end %>
 
