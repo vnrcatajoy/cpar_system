@@ -1,8 +1,13 @@
 CparSystem::Application.routes.draw do
+
   root to: 'issues#index'
   get 'issues/index'
   
+  get "users/new"
+  match '/signup',  to: 'users#new'
+
   resources :issues
+  resources :users
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

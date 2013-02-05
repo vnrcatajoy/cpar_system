@@ -4,7 +4,7 @@ gem 'rails', '3.2.11'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-
+gem 'bcrypt-ruby', '3.0.1'
 gem 'sqlite3'
 
 # Gems used only for assets and not required
@@ -26,7 +26,7 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'guard-rspec'
-  gem 'rb-inotify', '~> 0.8.8'
+  gem 'rb-inotify', '~> 0.8.8', :require => false
   gem 'minitest'
   gem 'launchy'
   gem 'faker'

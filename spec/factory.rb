@@ -6,6 +6,8 @@ FactoryGirl.define do
     department_id "1"
     phone "5191568"
     mobile "09173068540"
+    password "foobar"
+    password_confirmation "foobar"
   end
 
   factory :department do
