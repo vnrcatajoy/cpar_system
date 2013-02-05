@@ -22,7 +22,9 @@ namespace :db do
                   phone: '5191568',
                   mobile: '09173068540',
                   type_id: 1,
-                  department_id: 1)
+                  department_id: 1,
+                  password: 'password',
+                  password_confirmation: 'password')
 
     20.times do |n|
       name = Faker::Name.name
@@ -31,11 +33,16 @@ namespace :db do
       phone = Faker::PhoneNumber.phone_number
       mobile = Faker::PhoneNumber.cell_phone
       department_id = (n%4) + 1
+      password = "password#{n}"
+      password_confirmation = "password#{n}"
       User.create!(name: name,
                     email: email,
                     type_id: type_id,
                     phone: phone,
-                    mobile: mobile)
+                    mobile: mobile,
+                    department_id: department_id,
+                    password: password,
+                    password_confirmation: password_confirmation)
     end
 
     #add sample IssueStatus

@@ -7,10 +7,14 @@ describe "Issues" do
     UserType.create name: 'Customer'
 
     #create a default User
-    User.create name: 'Nico Catajoy', phone: '5191568', mobile: '09173068540', email: 'vnrcajoy@gmail.com', type_id: 1
+    User.create name: 'Nico Catajoy', phone: '5191568', mobile: '09173068540', 
+                email: 'vnrcatajoy@gmail.com', 
+                type_id: 1, 
+                password: 'password',
+                password_confirmation: 'password'
 
     #create default Departments
-    Department.create name: 'Admin'
+    Department.create name: 'Administration'
     Department.create name: 'Maintainance'
 
     #create default Impact Types
@@ -102,7 +106,7 @@ describe "Issues" do
       page.should have_content 'ITDC Slow Internet Connection'
       page.should have_content 'Low Bandwidth'
       page.should have_content 'Nico Catajoy'
-      page.should have_content 'vncatajoy@gmail.com'
+      page.should have_content 'vnrcatajoy@gmail.com'
       page.should have_content 'Administration'
       page.should have_content 'Top Priority'
       page.should have_content '1-Critical'
