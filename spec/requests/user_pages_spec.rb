@@ -45,5 +45,21 @@ describe "User pages" do
         it { should have_link('Sign out') }
       end
     end
-  end  
+  end 
+
+  describe "edit" do
+    let(:user) { FactoryGirl.create(:user) }
+    before { visit edit_user_path(user) }
+
+    describe "page" do
+      it { should have_selector('h1',    text: "Update your profile") }
+      it { should have_selector('title', text: "Edit user") }
+    end
+
+    describe "with invalid information" do
+      before { click_button "Save changes" }
+
+      it { should have_content('error') }
+    end
+  end 
 end
