@@ -30,7 +30,7 @@ group :test, :development do
   gem 'minitest'
   gem 'launchy'
   gem 'faker'
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', :require => false #don't Use anymore
 end
 
 # To use ActiveModel has_secure_password
