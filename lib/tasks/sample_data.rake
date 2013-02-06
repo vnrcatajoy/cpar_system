@@ -26,6 +26,15 @@ namespace :db do
                   password: 'password',
                   password_confirmation: 'password')
 
+    User.create!(name: 'Homer Isidro', 
+                  email: 'homer.isidro@gmail.com',
+                  phone: '1234567',
+                  mobile: '09123456789',
+                  type_id: 1,
+                  department_id: 1,
+                  password: 'password',
+                  password_confirmation: 'password')
+
     20.times do |n|
       name = Faker::Name.name
       email = Faker::Internet.email
