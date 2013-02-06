@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe "Issues" do
   before do
+    ##CREATE SAMPLE DATA
+
     #create default User Types
     UserType.create name: 'Administrator'
     UserType.create name: 'Customer'
@@ -11,7 +13,8 @@ describe "Issues" do
                 email: 'vnrcatajoy@gmail.com', 
                 type_id: 1, 
                 password: 'password',
-                password_confirmation: 'password'
+                password_confirmation: 'password',
+                department_id: 1
 
     #create default Departments
     Department.create name: 'Administration'
@@ -42,90 +45,114 @@ describe "Issues" do
     IsoNc.create title: '3A'
     IsoNc.create title: '3B'
 
-  	#create an issue with fixed params
+    #create an issue with fixed params
     @issue = Issue.create title: 'ITDC Slow Internet Connection', description: 'Low Bandwidth', user_id: 1, 
                           impact_id: 1, status_id: 1, department_id: 1, type_id: 4, iso_nc_id: 5
-    
   end
 
-  describe "GET /issues" do
-    it "displays all issues with title, originator name, impact and status" do
-      visit issues_path       
+  describe "issues" do
+    before { visit issues_path }
 
-      page.should have_content 'ITDC Slow Internet Connection'
-      page.should have_content 'Nico Catajoy'
-      page.should have_content '1-Critical'
-      page.should have_content 'New'
+    it "displays all issues with their title, originator name, impact and status" do      
+
+      Issue.all.each do |issue|
+        page.should have_content issue.title
+        page.should have_content issue.user.name
+        page.should have_content issue.issue_impact.name
+        page.should have_content issue.issue_status.name
+      end
 
     end
+  end
 
-    it "creates a new issue" do
+  describe "new issue page" do
+    before do
       visit issues_path
       click_link 'Report New Issue'
-
       current_path.should == new_issue_path
-
-      fill_in 'Title', with: 'No projects'
-      fill_in 'Description', with: 'Lalala just going to test the description box'
-      fill_in 'User', with: 1
-      fill_in 'Department', with: 1
-      fill_in "Type", with: 1
-      fill_in "Impact", with: 1
-      fill_in "Status", with: 1
-      fill_in "ISO Reference ID", with: 1
-
-      click_button 'Create Issue'
-
-      current_path.should == issues_path
-
-      page.should have_content 'No projects'
-      page.should have_content 'Nico Catajoy'
-      page.should have_content '1-Critical'
-      page.should have_content 'New'
-
     end
 
-    it "shows an issue" do
-      visit issues_path
-      find("#issue_#{@issue.id}").click_link 'Show'
+    describe "with invalid information" do
+      it "should not create a new issue with empty parameters" do
+        click_button 'Create Issue'
+        page.should have_content 'There was an error in creating your issue.'
+        current_path.should == new_issue_path
+      end
+    end
 
-      page.should have_content 'ITDC Slow Internet Connection'
-      page.should have_content 'Low Bandwidth'
-      page.should have_content 'Nico Catajoy'
-      page.should have_content 'vnrcatajoy@gmail.com'
-      page.should have_content 'Administration'
-      page.should have_content 'Top Priority'
-      page.should have_content '1-Critical'
-      page.should have_content '3A'
-      page.should have_content 'New'
+    describe "with valid information" do
+      it "creates a new issue" do    
+        fill_in 'Title',          with: 'No projects'
+        fill_in 'Description',    with: 'Lalala just going to test the description box'
+        fill_in 'User',           with: 1
 
+        select 'Administration',  from: "Department"
+        select 'KPI',             from: "Type"
+        select '1-Critical',      from: "Impact"
+        select 'New',             from: "Status"
+        select '1A',          from: "ISO Reference ID"
+
+        click_button 'Create Issue'
+
+        current_path.should == issues_path
+
+        page.should have_content 'The issue has been created!'
+
+        page.should have_content 'No projects'
+        page.should have_content 'Nico Catajoy'
+        page.should have_content '1-Critical'
+        page.should have_content 'New'
+
+      end
     end
   end
 
-  describe "PUT /issues" do
+  describe "show issue page" do
+    before { visit issues_path }
+
+    it "shows an issue" do
+      find("#issue_#{@issue.id}").click_link 'Show'
+
+      page.should have_content @issue.title
+      page.should have_content @issue.description
+      page.should have_content @issue.user.name
+      page.should have_content @issue.user.email
+      page.should have_content @issue.department.name
+      page.should have_content @issue.issue_type.name
+      page.should have_content @issue.issue_impact.name
+      page.should have_content @issue.issue_status.name
+      page.should have_content @issue.iso_nc.title
+
+    end
+  end
+    
+  describe "edit issue page" do
+    before { visit issues_path }
+
     it "edits an issue" do
-      visit issues_path
       find("#issue_#{@issue.id}").click_link 'Edit'
 
       current_path.should == edit_issue_path(@issue)
-      find_field('Title').value.should == 'ITDC Slow Internet Connection'
-      find_field('Description').value.should == 'Low Bandwidth'
-      find_field('User').value.should == '1'
-      # find_field('Orignator Email').value.should == 'vnrcatajoy@gmail.com'
-      find_field('Department').value.should == '1'
-      find_field('Impact').value.should == '1'
-      find_field('Status').value.should == '1'
-      find_field('Type').value.should == '4'
-      find_field('ISO Reference') == '5'
 
-      fill_in 'Title', with: 'Internet connection is very slow'
-      fill_in 'Impact', with: '2'
-      fill_in 'Status', with: '2'
+      find_field('Title').value.should == @issue.title
+      find_field('Description').value.should == @issue.description
+      find_field('User').value.should == @issue.user.id.to_s
+      # find_field('Orignator Email').value.should == 'vnrcatajoy@gmail.com'
+      find_field('Department').find('option[selected]').text.should == @issue.department.name
+      find_field('Impact').find('option[selected]').text.should == @issue.issue_impact.name
+      find_field('Status').find('option[selected]').text.should == @issue.issue_status.name
+      find_field('Type').find('option[selected]').text.should == @issue.issue_type.name
+      find_field('ISO Reference ID').find('option[selected]').text.should == @issue.iso_nc.title
+
+      fill_in 'Title',  with: 'Internet connection is very slow'
+      select '2-Major', from: 'Impact'
+      select 'Investigating', from: 'Status'
 
       click_button 'Update Issue'
 
       current_path.should == issues_path
 
+      page.should have_content 'The issue has been updated successfuly!'
       page.should have_content 'Internet connection is very slow'
       page.should have_content '2-Major'
       page.should have_content 'Investigating'
@@ -133,12 +160,12 @@ describe "Issues" do
     end
   end
 
-  describe "DELETE /issues" do
+  describe "delete issue" do
+    before { visit issues_path }
+
     it "deletes an issue" do
-      visit issues_path
-      
       find("#issue_#{@issue.id}").click_link 'Delete'
-      page.should have_content 'Issue was successfuly deleted.'
+      page.should have_content 'The issue was successfuly deleted.'
       page.should have_no_content 'Internet connection is very slow'
 
     end
