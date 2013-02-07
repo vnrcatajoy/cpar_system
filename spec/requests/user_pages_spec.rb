@@ -20,7 +20,7 @@ describe "User pages" do
     end
 
     #it { should have_selector('title', text: 'All users') }
-    #it { should have_selector('h1',    text: 'All users') }
+    it { should have_selector('h1',    text: 'All users') }
 
     it "should list each user" do
       User.all.each do |user|
@@ -106,16 +106,16 @@ describe "User pages" do
       before do
         fill_in "Name",             with: new_name
         fill_in "Email",            with: new_email
-        #fill_in "Password",         with: 'password'
-        #fill_in "Confirmation",     with: 'password'
+        fill_in "Password",         with: 'password'
+        fill_in "Confirmation",     with: 'password'
         click_button "Save changes"
       end
 
       #it { should have_selector('title', text: new_name) }
-      #it { should have_selector('div.alert.alert-success') }
-      #it { should have_link('Sign out', href: signout_path) }
-      #specify { user.reload.name.should  == new_name }
-      #specify { user.reload.email.should == new_email }
+      it { should have_selector('div.alert.alert-success') }
+      it { should have_link('Sign out', href: signout_path) }
+      specify { user.reload.name.should  == new_name }
+      specify { user.reload.email.should == new_email }
     end
   end 
 end
