@@ -4,36 +4,10 @@
 <div class="row">
   <div class="span6 offset3">
     <%= form_for(@user) do |f| %>
-      <%= render 'shared/error_messages' %>
 
-      <%= f.label :name %>
-      <%= f.text_field :name %>
-
-      <%= f.label :email %>
-      <%= f.text_field :email %>
-
-      <%= f.label :password %>
-      <%= f.password_field :password %>
-
-      <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation %>
-
-      <%= f.label :mobile %>
-      <%= f.text_field :mobile %>
-
-      <%= f.label :phone %>
-      <%= f.text_field :phone %>
-
-      <%= f.label 'Department' %>
-      <%= f.select :department_id, [['DCS',1],['Engg','2'],['ITDC','3'],['Others','4']] %>
-      <!--Temporary, use f.collection_select next time, putting the choices and their maps to integers (department_id, type_id) in an hash-->
-
-      <%= f.label 'User Type' %>
-      <%= f.select :type_id, [['Student',1],['Professor','2'],['Department Head','3'],['Admin','4']] %>
-      <!--Temporary, I think user type (CPAR Originator, QMR, etc) should be admin-assigned and not assigned here-->
-
+      <%= render 'fields', f: f  %>
       <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+    
     <% end %>
-
   </div>
 </div>

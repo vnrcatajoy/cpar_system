@@ -17,7 +17,7 @@ namespace :db do
     UserType.create!(name: 'Customer')
 
     #add sample Users
-    User.create!(name: 'Nico Catajoy', 
+    admin1 = User.create!(name: 'Nico Catajoy', 
                   email: 'vnrcatajoy@gmail.com',
                   phone: '5191568',
                   mobile: '09173068540',
@@ -25,8 +25,9 @@ namespace :db do
                   department_id: 1,
                   password: 'password',
                   password_confirmation: 'password')
+    admin1.toggle!(:admin)
 
-    User.create!(name: 'Homer Isidro', 
+    admin2 = User.create!(name: 'Homer Isidro', 
                   email: 'homer.isidro@gmail.com',
                   phone: '1234567',
                   mobile: '09123456789',
@@ -34,6 +35,7 @@ namespace :db do
                   department_id: 1,
                   password: 'password',
                   password_confirmation: 'password')
+    admin2.toggle!(:admin)
 
     20.times do |n|
       name = Faker::Name.name

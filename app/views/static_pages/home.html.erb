@@ -9,7 +9,9 @@
 	<% else %>
 		<h2>
 		  Please login to use features.
-		  <p><%= link_to "Sign In", signin_path, class: "btn btn-large btn-primary" %></p>
+		  <p><%= link_to "Sign In", signin_path, class: "btn btn-large btn-primary" %>
+		  	 <%= link_to "Sign Up", signup_path, class: "btn btn-large btn-primary" %>
+			</p>
 			</h2>
 	<% end %>
 </div>

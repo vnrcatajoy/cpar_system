@@ -27,7 +27,35 @@ describe "User pages" do
         page.should have_selector('li', text: user.name)
       end
     end
+=begin
+    describe "delete links" do
+
+      it { should_not have_link('delete') }
+
+      describe "as an admin user" do
+        let(:admin) { User.create name: 'Nico Catajoy', phone: '5191568', mobile: '09173068540', 
+                email: 'vnrcatajoy@gmail.com', 
+                type_id: 1,
+                department_id: 1, 
+                password: 'password',
+                password_confirmation: 'password' }
+                #comment out because admin attribute is not accessible,
+                #User.Create cannot make a test Admin Account
+        before do
+          sign_in admin
+          visit users_path
+        end
+
+        it { should have_link('delete', href: user_path(User.first)) }
+        it "should be able to delete another user" do
+          expect { click_link('delete') }.to change(User, :count).by(-1)
+        end
+        it { should_not have_link('delete', href: user_path(admin)) }
+      end
+    end
+=end
   end
+
 
   describe "profile page" do
     let(:user) { User.create name: 'Nico Catajoy', phone: '5191568', mobile: '09173068540', 
