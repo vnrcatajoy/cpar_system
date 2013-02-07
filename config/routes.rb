@@ -2,8 +2,8 @@ CparSystem::Application.routes.draw do
 
   get "static_pages/home"
 
-  root to: 'issues#index'
-  get 'issues/index'
+  root to: 'static_pages#home'
+  get 'issues/index' #just 'issues' does this too, default issues_path is to display all
   
   get "users/new"
   match '/signup',  to: 'users#new'
@@ -13,7 +13,6 @@ CparSystem::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
 
   get "sessions/new"
-  get "sessions/destroy"
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
 

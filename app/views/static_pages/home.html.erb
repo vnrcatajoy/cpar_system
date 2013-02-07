@@ -1,9 +1,15 @@
 <% provide(:title, 'Home') %>
 <div class="page-header">
 	<h1>CPAR System</h1>
-	<h2>
-	  Please login to use features.
-	  <p><%= link_to "Sign In", signin_path, class: "btn btn-large btn-primary" %></p>
-		</h2>
-  	
+	<% if signed_in? %>
+		<div class="hero-unit">
+			<h2> Please follow the links above to your desired feature. </h2>
+			<!--This is temporary-->
+		</div>
+	<% else %>
+		<h2>
+		  Please login to use features.
+		  <p><%= link_to "Sign In", signin_path, class: "btn btn-large btn-primary" %></p>
+			</h2>
+	<% end %>
 </div>

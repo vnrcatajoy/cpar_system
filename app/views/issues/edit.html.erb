@@ -1,4 +1,8 @@
 <% provide(:title, 'Edit Issue') %>
 <h1>Edit Issue</h1>
-<%= render 'issueform' %>
-<%= link_to 'Back', issues_path %>
+<div class="row">
+  <div class="span6 offset3">
+		<%= render 'issueform' %>
+		<%= link_to 'Back', issues_path %>
+	</div>
+</div>

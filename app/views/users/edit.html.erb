@@ -15,8 +15,14 @@
       <%= f.label :password %>
       <%= f.password_field :password %>
 
-      <%= f.label :password_confirmation, "Confirm Password" %>
+      <%= f.label :password_confirmation, "Confirmation" %>
       <%= f.password_field :password_confirmation %>
+
+      <%= f.label :mobile %>
+      <%= f.text_field :mobile %>
+
+      <%= f.label :phone %>
+      <%= f.text_field :phone %>
 
       <%= f.label 'Department' %>
       <%= f.select :department_id, [['DCS',1],['Engg','2'],['ITDC','3'],['Others','4']] %>
