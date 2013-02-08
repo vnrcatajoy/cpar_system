@@ -1,0 +1,14 @@
+<% provide(:title, 'New Action Plan') %>
+<h1>New Action Plan</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@action_plan) do |f| %>
+
+      <%= f.label :description %>
+      <%= f.text_area :description %>
+
+      <%= f.submit "Create Action Plan", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<%= form_for Activity.new do |f2| %>
+    <%= f2.label :activity %>
+    <%= f2.text_field :result %>
+    <p> For Action Plan # <%= a.id %></p>
+    <p><%= a.description %></p> 
+    <!--It works, 'a' is variable passed on from action_plan's edit form variable-->
+    <%= f2.submit "Add Activity", class: "btn btn-large btn-primary" %>
+<% end %>
