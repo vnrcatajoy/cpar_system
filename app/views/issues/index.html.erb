@@ -20,14 +20,16 @@
           <div id="command_container">
             <ul>
               <li id="issue_<%= issue.id %>">
-                <%= link_to 'Show', issue, class: "btn btn-link" %> |  
-                <%= link_to 'Edit', edit_issue_path(issue), class: "btn btn-link" %> |
-                <%= link_to 'Delete', issue, :confirm => 'Are you sure?', :method => :delete , class: "btn btn-link" %>   
+                <%= link_to 'Show', issue, class: "btn btn-link" %> |
+                <%= link_to 'Edit', edit_issue_path(issue), class: "btn btn-link" %>
+                <% if current_user.admin? %>
+                  | <%= link_to 'Delete', issue, :confirm => 'Are you sure?', :method => :delete , class: "btn btn-link" %>
+                <% end %>
               </li>
             </ul>
           </div>
-
         </td>
+        
     	</tr>
 
     <% end %>

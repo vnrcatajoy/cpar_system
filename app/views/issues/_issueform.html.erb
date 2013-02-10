@@ -4,18 +4,11 @@
   <br/>
   
   <%= f.label :description %>
-  <br/>
   <%= f.text_area :description %>
   <br/>
 
-  <%= f.label :user_id %>
-  <%= f.text_field :user_id %>
-  <!-- should be auto fill from Sign up function -->
-  <br/>
-
-  Originator Email Placeholder
-  <!-- should be auto fill from Sign up function -->
-  <br/>
+  Originator Name: <%= current_user.name %> <br/>
+  Originator Email: <%= current_user.email %> <br/>
 
   <%= f.label :department_id %> 
   <%= f.select :department_id, Department.all.collect { |d| [d.name, d.id] } %>

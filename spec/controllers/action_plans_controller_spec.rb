@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ActionsPlanController do
+describe ActionPlansController do
 
   describe "GET 'new'" do
     it "returns http success" do

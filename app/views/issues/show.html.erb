@@ -1,6 +1,4 @@
 <% provide(:title, 'Show Issue') %>
-<h1>Show Issue</h1>
-
 <div class="row">
   <div class="span6 offset3">
     <p id="notice"> <%= notice %> </p>
@@ -50,7 +48,8 @@
       <%= @issue.iso_nc.title %>
     </p>
 
-    <%= link_to 'Edit', edit_issue_path(@issue) %> |
+    <%= link_to 'Edit', edit_issue_path(@issue) %>
+    <%= link_to 'Delete', @issue, :confirm => 'Are you sure?', :method => :delete , class: "btn btn-link" %>
     <%= link_to 'Back', issues_path %>
   </div>
 </div>
