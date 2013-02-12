@@ -4,8 +4,7 @@
 <div class="row">
   <div class="span6 offset3">
     <%= form_for(@action_plan) do |f| %>
-      <%= render 'shared/activity_form', a: @action_plan %>
-
+      <h2>Edit Action Plan Fields</h2>
       <%= f.label :description %>
       <%= f.text_area :description %>
 

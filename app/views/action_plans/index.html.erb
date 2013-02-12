@@ -1,2 +1,17 @@
-<h1>ActionPlan#index</h1>
-<p>Find me in app/views/action_plans/index.html.erb</p>
+<% provide(:title, 'All Action Plans') %>
+<h1>All Action Plans</h1>
+
+<ul class="action_plans">
+	<% @action_plans.each do |action_plan| %>
+  		<li>
+  			<%= link_to "Action Plan # #{action_plan.id}", action_plan %>
+  			<p><%= action_plan.description%></p>
+  		<% if current_user.admin? %>
+ 		   | <%= link_to "delete", action_plan , method: :delete,
+        	                          data: { confirm: "Are you sure?" } %>
+  		<% end %>
+  	<% end %>
+</li>
+</ul>
+
+<%= will_paginate %>

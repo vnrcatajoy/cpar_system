@@ -18,9 +18,13 @@ CparSystem::Application.routes.draw do
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
 
-  get "action_plans/new"
-  get "action_plans/show"
-  get "action_plans/edit"
+  #map.resources :action_plans do |action_plan|  
+   # action_plan.resources :activities
+  #end
+
+  #get "action_plans/new"
+  #get "action_plans/show"
+  #get "action_plans/edit"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
