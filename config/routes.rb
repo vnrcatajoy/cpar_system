@@ -11,8 +11,10 @@ CparSystem::Application.routes.draw do
   resources :issues
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
-  resources :activities
-  resources :action_plans
+  
+  resources :action_plans do
+    resources :activities
+  end
 
   get "sessions/new"
   match '/signin',  to: 'sessions#new'

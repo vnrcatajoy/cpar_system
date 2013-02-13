@@ -3,5 +3,6 @@ class Activity < ActiveRecord::Base
 
   belongs_to :action_plan
   belongs_to :user
+  validates :action_plan_id, presence: true
   validates :user_id, presence: true
 end
