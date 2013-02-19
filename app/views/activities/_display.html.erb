@@ -1,7 +1,9 @@
-<h2>Activity # <% activity.id %> under Action Plan # <% activity.action_plan_id %></h2>
+<h2>Activity # <%= activity.id %> under Action Plan # <%= activity.action_plan_id %></h2>
 <p> <strong>Description:</strong> </p>
 <p><%= activity.result %> </p>
 <p><strong>Author:</strong></p>
-<p><% User.find(activity.user_id).name %></p>
+<p><%= User.find(activity.user_id).name %></p>
 <p> <strong>Target Date:</strong></p>
 <p><%= activity.target_date %></p>
+<p> <strong>Actual Date:</strong></p>
+<p><%= activity.actual_date %></p>

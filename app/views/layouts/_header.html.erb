@@ -13,6 +13,8 @@
           <li><%= link_to "Home", root_path %></li>
           <% if signed_in? %>
             <li><%= link_to "Issues", issues_path %></li>
+            <li><%= link_to "Action Plans", action_plans_path %></li> 
+            <!--temporary, remove this later-->
             <li><%= link_to "Users", users_path %></li>
             <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -20,7 +22,7 @@
               </a>
               <ul class="dropdown-menu">
                 <li><%= link_to "Profile", current_user %></li>
-                <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+                <li><%= link_to "User Settings", edit_user_path(current_user) %></li>
                 <li class="divider"></li>
                 <li>
                   <%= link_to "Sign out", signout_path, method: "delete" %>
