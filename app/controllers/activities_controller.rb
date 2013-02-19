@@ -29,11 +29,19 @@ class ActivitiesController < ApplicationController
 
   def edit
     flash[:success] = "Editing Activity" 
-    @activity = Activity.find params[:id]
+    #@activity = Activity.find(params[:id])
+    @activity = @action_plan.activities.find(params[:id])
   end
 
   def update
+    #@activity = Activity.find(params[:id])
+    @activity = @action_plan.activities.find(params[:id])
     if @activity.update_attributes(params[:activity])
+      flash[:success] = "Activity updated."
+      redirect_to @action_plan
+    else
+      flash.now[:error] = "Please don't leave the fields blank."
+      render 'edit'
     end
   end
 

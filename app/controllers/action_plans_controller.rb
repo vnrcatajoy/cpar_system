@@ -25,7 +25,13 @@ class ActionPlansController < ApplicationController
   end
 
   def update
+    @action_plan = ActionPlan.find params[:id]
     if @action_plan.update_attributes(params[:action_plan])
+      flash[:success] = "Action Plan updated."
+      redirect_to @action_plan
+    else
+      flash.now[:error] = "Please don't leave the fields blank."
+      render 'edit'
     end
   end 
 
