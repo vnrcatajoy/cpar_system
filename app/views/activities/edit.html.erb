@@ -1,4 +1,19 @@
 <% provide(:title, 'Edit Activity') %>
 <h1>Edit Activity</h1>
 
-<%= render 'shared/activity_form', a: @action_plan %>
+
+
+<%= form_for [@action_plan, @activity] do |f2| %>
+    <%= f2.label :description %>
+    <!--Use :result field as description field for Action Plan while not yet finished-->
+    <%= f2.text_area :result %>
+    
+    <%= f2.label :target_date %>
+    <%= f2.date_select(:target_date, start_year: 1990) %>
+
+    <p> To be submitted as User: <%= current_user.name %></p>
+    <p> For Action Plan # <%= @action_plan.id %></p>
+    <p><%= @action_plan.description %></p>
+    <!--It works, 'a' is variable passed on from action_plan's edit form variable-->
+    <%= f2.submit "Save Edits to Activity", class: "btn btn-large btn-primary" %>
+<% end %>
