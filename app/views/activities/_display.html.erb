@@ -7,3 +7,6 @@
 <p><%= activity.target_date %></p>
 <p> <strong>Actual Date:</strong></p>
 <p><%= activity.actual_date %></p>
+<% if current_user?(User.find(activity.user_id)) %>
+            <%= link_to "Edit Activity", edit_action_plan_activity_path(activity), class: "btn btn-small btn-primary" %>
+<% end %>

@@ -1,9 +1,18 @@
 <% provide(:title, @user.name) %>
 <div class="row">
-  <aside class="span4">
+  <aside class="span6">
     <section>
 		<h1><%= @user.name %></h1>
-		<p> <%= @user.email %> </p>
+		<p> <strong>User type:</strong> <%= show_usertype(@user) %> </p>
+		<p> <strong>Department:</strong> <%= show_department(@user) %></p>
+		<h4> Contact Details </h4>
+		<p> <strong>Email:</strong> <%= @user.email %> </p>
+		<p> <strong>Mobile:</strong> <%= @user.mobile %> </p>
+		<p> <strong>Phone:</strong> <%= @user.phone %> </p>
+		<% if current_user?(@user) %>
+			<%= link_to "Edit your Profile", edit_user_path(current_user), class: "btn btn-small btn-primary" %>
+		<% end %>
+		<%= link_to "Back to Users", users_path, class: "btn btn-small btn-primary" %>
 	</section>
 	</aside>
 </div>

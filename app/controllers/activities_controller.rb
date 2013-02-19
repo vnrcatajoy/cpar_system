@@ -28,9 +28,13 @@ class ActivitiesController < ApplicationController
   end
 
   def edit
+    flash[:success] = "Editing Activity" 
+    @activity = Activity.find params[:id]
   end
 
   def update
+    if @activity.update_attributes(params[:activity])
+    end
   end
 
   private
