@@ -8,10 +8,11 @@
   			<p><%= action_plan.description%></p>
   		<% if current_user.admin? %>
  		   | <%= link_to "delete", action_plan , method: :delete,
-        	                          data: { confirm: "Are you sure?" } %>
+        	                          data: { confirm: "Are you sure you want to delete this Action Plan?" } %>
   		<% end %>
+  		</li>
   	<% end %>
-</li>
-</ul>
 
+</ul>
+<%= link_to 'Add New Action Plan', new_action_plan_path, class: "btn btn-large btn-primary" %>
 <%= will_paginate %>

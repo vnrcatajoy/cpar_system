@@ -14,7 +14,7 @@ class ActivitiesController < ApplicationController
     @activity.user_id = @user.id 
     if @activity.save
       flash[:success] = "Successfully added Activity!" 
-      redirect_to(action_plans_path || root_path)
+      redirect_to @action_plan
     else
       flash.now[:error] = "Please fill in the fields properly." 
       render 'new'
@@ -44,6 +44,12 @@ class ActivitiesController < ApplicationController
       flash.now[:error] = "Please don't leave the fields blank."
       render 'edit'
     end
+  end
+
+  def destroy
+    Activity.find(params[:id]).destroy
+    flash[:success] = "Activity destroyed!"
+    redirect_to @action_plan
   end
 
   private

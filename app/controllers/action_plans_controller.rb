@@ -39,4 +39,10 @@ class ActionPlansController < ApplicationController
   	@action_plan = ActionPlan.find params[:id]
     @activities = @action_plan.activities.paginate(page: params[:page],  per_page: 5)
   end
+
+  def destroy
+    ActionPlan.find(params[:id]).destroy
+    flash[:success] = "Action Plan destroyed."
+    redirect_to action_plans_path
+  end
 end
