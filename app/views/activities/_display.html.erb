@@ -10,3 +10,4 @@
 <% if current_user?(User.find(activity.user_id)) %>
     <%= link_to "Edit Activity", [:edit, ActionPlan.find(activity.action_plan_id), activity], class: "btn btn-small btn-primary" %>
 <% end %>
+<%= link_to "Back", @action_plan, class: "btn btn-small btn-primary" %>
