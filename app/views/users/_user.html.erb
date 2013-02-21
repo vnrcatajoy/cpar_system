@@ -1,7 +1,9 @@
 <li>
   <%= link_to user.name, user %> | 
-  <%= "Department: " + show_department(user) %> |
-  <%= "User type: " + show_usertype(user) %> 
+
+  <%= "Department: " + Department.where(id: user.department_id).first.name %> |
+  <%= "User type: " + UserType.where(id: user.type_id).first.name %> 
+
   <% if current_user.admin? && !current_user?(user) %>
     | <%= link_to "delete", user, method: :delete,
                                   data: { confirm: "Are you sure?" } %>

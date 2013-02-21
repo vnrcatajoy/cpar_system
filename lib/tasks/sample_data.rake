@@ -10,8 +10,8 @@ namespace :db do
 
     #add sample User Types
     UserType.create!(name: 'System Administrator')
-    UserType.create!(name: 'Employee')
     UserType.create!(name: 'Department Head')
+    UserType.create!(name: 'Employee')
     UserType.create!(name: 'Incident Manager')
     UserType.create!(name: 'Auditor')
     UserType.create!(name: 'Customer')
@@ -31,7 +31,7 @@ namespace :db do
                   email: 'homer.isidro@gmail.com',
                   phone: '1234567',
                   mobile: '09123456789',
-                  type_id: 1,
+                  type_id: 2,
                   department_id: 1,
                   password: 'password',
                   password_confirmation: 'password')

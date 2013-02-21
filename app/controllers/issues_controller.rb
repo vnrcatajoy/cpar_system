@@ -5,10 +5,10 @@ class IssuesController < ApplicationController
 
   def index
     # still needs to be revised further
-    if current_user.admin?
+    if current_user.type_id == 1
       @issues = Issue.paginate(page: params[:page], per_page: 10)
     else
-      @issues = Issue.where(user_id: current_user.id).paginate(page: params[:page], per_page: 10)
+      @issues = Issue.where("department_id = " + current_user.department_id.to_s + " OR user_id = " + current_user.id.to_s).paginate(page: params[:page], per_page: 10)
     end
   end
 

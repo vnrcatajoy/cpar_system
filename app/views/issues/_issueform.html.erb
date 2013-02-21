@@ -15,7 +15,6 @@
   <%= f.select :department_id, Department.all.collect { |d| [d.name, d.id] } %>
   <br/> 
 
-  
   <%= f.label :type_id %>
   <%= f.select :type_id, IssueType.all.collect { |t| [t.name, t.id] } %>
   <br/>
@@ -24,10 +23,15 @@
   <%= f.select :impact_id, IssueImpact.all.collect { |i| [i.name, i.id] } %>
   <br/>
 
-  <%= f.label :status_id %>
-  <%= f.select :status_id, IssueStatus.all.collect { |s| [s.name, s.id] } %>
-  <br/>
+  <% if @issue.id == nil %>
+    <%= f.hidden_field :status_id, value: 1 %>
+  <% else %>
+    <%= f.label :status_id %>
+    <%= f.select :status_id, IssueStatus.all.collect { |s| [s.name, s.id] } %>
+    <br/>
 
+  <% end %>
+  
   <%= f.label :iso_nc_id, "ISO Reference ID" %>
   <%= f.select :iso_nc_id, IsoNc.all.collect { |i| [i.title, i.id] } %>
   <br/>
