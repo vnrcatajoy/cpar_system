@@ -9,12 +9,16 @@ describe "Issues" do
     UserType.create name: 'Customer'
 
     #create a default User
-    User.create name: 'Nico Catajoy', phone: '5191568', mobile: '09173068540', 
+    user = User.create name: 'Nico Catajoy', phone: '5191568', mobile: '09173068540', 
                 email: 'vnrcatajoy@gmail.com', 
-                type_id: 1, 
+                type_id: 1,
                 password: 'password',
                 password_confirmation: 'password',
                 department_id: 1
+
+    #make user admin
+    user.admin = true
+    user.save
 
     #create default Departments
     Department.create name: 'Administration'
@@ -48,10 +52,15 @@ describe "Issues" do
     #create an issue with fixed params
     @issue = Issue.create title: 'ITDC Slow Internet Connection', description: 'Low Bandwidth', user_id: 1, 
                           impact_id: 1, status_id: 1, department_id: 1, type_id: 4, iso_nc_id: 5
+
+    sign_in user
   end
 
-  describe "issues" do
-    before { visit issues_path }
+  describe "view-all-issue page" do
+    before do 
+      # sign_in user
+      visit issues_path
+    end
 
     it "displays all issues with their title, originator name, impact and status" do      
 
@@ -67,6 +76,7 @@ describe "Issues" do
 
   describe "new issue page" do
     before do
+      # sign_in user
       visit issues_path
       click_link 'Report New Issue'
       current_path.should == new_issue_path
@@ -84,7 +94,6 @@ describe "Issues" do
       it "creates a new issue" do    
         fill_in 'Title',          with: 'No projects'
         fill_in 'Description',    with: 'Lalala just going to test the description box'
-        fill_in 'User',           with: 1
 
         select 'Administration',  from: "Department"
         select 'KPI',             from: "Type"
@@ -108,9 +117,11 @@ describe "Issues" do
   end
 
   describe "show issue page" do
-    before { visit issues_path }
+    before do
+      visit issues_path
+    end
 
-    it "shows an issue" do
+    it "should show an issue" do
       find("#issue_#{@issue.id}").click_link 'Show'
 
       page.should have_content @issue.title
@@ -127,17 +138,21 @@ describe "Issues" do
   end
     
   describe "edit issue page" do
-    before { visit issues_path }
+    before do 
+      visit issues_path
+    end
 
-    it "edits an issue" do
+    it "should edit an issue" do
       find("#issue_#{@issue.id}").click_link 'Edit'
 
       current_path.should == edit_issue_path(@issue)
 
       find_field('Title').value.should == @issue.title
       find_field('Description').value.should == @issue.description
-      find_field('User').value.should == @issue.user.id.to_s
-      # find_field('Orignator Email').value.should == 'vnrcatajoy@gmail.com'
+      
+      page.should have_content @issue.user.name
+      page.should have_content @issue.user.email
+
       find_field('Department').find('option[selected]').text.should == @issue.department.name
       find_field('Impact').find('option[selected]').text.should == @issue.issue_impact.name
       find_field('Status').find('option[selected]').text.should == @issue.issue_status.name
@@ -160,10 +175,12 @@ describe "Issues" do
     end
   end
 
-  describe "delete issue" do
-    before { visit issues_path }
+  describe "delete issue page" do
+    before do 
+      visit issues_path
+    end
 
-    it "deletes an issue" do
+    it "should delete an issue" do
       find("#issue_#{@issue.id}").click_link 'Delete'
       page.should have_content 'The issue was successfuly deleted.'
       page.should have_no_content 'Internet connection is very slow'

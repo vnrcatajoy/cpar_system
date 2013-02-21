@@ -4,16 +4,16 @@ class IssuesController < ApplicationController
   before_filter :admin_user,     only: [:destroy]
 
   def index
+    # still needs to be revised further
     if current_user.admin?
       @issues = Issue.paginate(page: params[:page], per_page: 10)
     else
-      @issues = Issue.paginate(page: params[:page], per_page: 10)
-      #TODO: limit visible issues to user type scope
+      @issues = Issue.where(user_id: current_user.id).paginate(page: params[:page], per_page: 10)
     end
   end
 
   def new
-    @issue = Issue.new user_id: current_user.id
+    @issue = Issue.new
   end
 
   def create
@@ -49,7 +49,4 @@ class IssuesController < ApplicationController
     redirect_to :back, :notice => 'The issue was successfuly deleted.'
   end
 
-  def admin_user
-      redirect_to(root_path) unless current_user.admin?
-  end
 end

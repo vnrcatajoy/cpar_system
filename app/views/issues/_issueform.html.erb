@@ -7,6 +7,7 @@
   <%= f.text_area :description %>
   <br/>
 
+  <%= f.hidden_field :user_id, value: current_user.id %>
   Originator Name: <%= current_user.name %> <br/>
   Originator Email: <%= current_user.email %> <br/>
 
@@ -31,7 +32,6 @@
   <%= f.select :iso_nc_id, IsoNc.all.collect { |i| [i.title, i.id] } %>
   <br/>
 
-  
   <%= f.submit %>
 
 <% end %>
