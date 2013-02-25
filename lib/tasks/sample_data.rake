@@ -26,6 +26,7 @@ namespace :db do
                   password: 'password',
                   password_confirmation: 'password')
     admin1.toggle!(:admin)
+    admin1.toggle!(:with_role)
 
     admin2 = User.create!(name: 'Homer Isidro', 
                   email: 'homer.isidro@gmail.com',
@@ -36,6 +37,7 @@ namespace :db do
                   password: 'password',
                   password_confirmation: 'password')
     admin2.toggle!(:admin)
+    admin2.toggle!(:with_role)
 
     20.times do |n|
       name = Faker::Name.name
@@ -106,6 +108,18 @@ namespace :db do
                       department_id: department_id,
                       type_id: type_id,
                       iso_nc_id: iso_nc_id)
+    end
+
+    5.times do |a|
+      
+      description = "This is the #{a}th Action Plan. Edit this #{a}th description later on."
+
+      actplan = ActionPlan.create!(description: description)
+
+      # Can't populate-generate Activities under Action Plan because one way or the
+      # other, either action_plan_id or user_id of the Activity will be left blank,
+      # which will result to create! failing
+
     end
 
   end
