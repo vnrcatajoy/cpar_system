@@ -1,13 +1,13 @@
 class IssuesController < ApplicationController
   before_filter :signed_in_user, only: [:index, :show, :new, :edit, :update]
-  before_filter :correct_user,   only: [:edit, :update]
+  #before_filter :correct_user, only: [:edit, :update]
   before_filter :admin_user,     only: [:destroy]
 
   def index
     # still needs to be revised further
-    if current_user.type_id == 1
+    if current_user.type_id == 1  #super admin
       @issues = Issue.paginate(page: params[:page], per_page: 10)
-    else
+    else  #get issues reported to you or your department
       @issues = Issue.where("department_id = " + current_user.department_id.to_s + " OR user_id = " + current_user.id.to_s).paginate(page: params[:page], per_page: 10)
     end
   end
