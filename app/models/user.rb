@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :issues
   has_many :activities
+  has_many :causes
   belongs_to :user_type, :foreign_key => 'type_id'
   belongs_to :department
 

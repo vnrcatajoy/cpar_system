@@ -8,10 +8,13 @@ CparSystem::Application.routes.draw do
   get "users/new"
   match '/signup',  to: 'users#new'
 
-  resources :issues
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   
+  resources :issues do
+    resources :causes
+  end
+
   resources :action_plans do
     resources :activities
   end

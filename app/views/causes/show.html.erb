@@ -1,0 +1,20 @@
+<% provide(:title, "Showing Cause") %>
+<div class="row">
+  	<div class="span6">
+    	<h2>Cause # <%= @cause.id %> under Issue # <%= @cause.issue_id %></h2>
+		<p> <strong>Description:</strong> </p>
+		<p><%= @cause.description %> </p>
+		<p><strong>Author:</strong></p>
+		<p><%= User.find(@cause.user_id).name %></p>
+		<p> <strong>Date Issued:</strong></p>
+		<p><%= @cause.date_issued %></p>
+		<p> <strong>Close Out Date:</strong></p>
+		<p><%= @cause.closeout_date %></p>
+		<% if current_user?(User.find(@cause.user_id)) %>
+    		<%= link_to "Edit Cause", [:edit, Issue.find(@cause.issue_id), @cause], class: "btn btn-small btn-primary" %>
+    		<%= link_to "Delete Cause", [Issue.find(@cause.issue_id), @cause] , method: :delete,
+                                    data: { confirm: "Are you sure you want to delete this Cause?" }, class: "btn btn-small btn-primary" %>
+		<% end %>
+		<%= link_to "Back", @issue, class: "btn btn-small btn-primary" %>	
+	</div>
+</div>
