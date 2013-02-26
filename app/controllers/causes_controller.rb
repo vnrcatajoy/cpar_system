@@ -1,7 +1,7 @@
 class CausesController < ApplicationController
   before_filter :signed_in_user
-  before_filter :admin_user,   only: [:edit, :update]
-  #later on, make all Activity actions accessible to admin + concerned department user
+  before_filter :admin_user,   only: [:edit, :update, :destroy]
+  #later on, make all Cause actions accessible to admin + concerned officer
   before_filter :issue_notnil
   before_filter :set_user
 
