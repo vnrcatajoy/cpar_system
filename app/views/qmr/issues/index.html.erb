@@ -1,0 +1,34 @@
+<% provide(:title, 'QMR: Issues Index') %>
+<h1>QMR: Showing All Issues</h1>
+  <table class="table table-striped table-bordered">
+    <tr>
+      <th>Title</th>
+      <th>Originator</th>
+      <th>Impact</th>
+      <th>Status</th>
+      <th></th>
+
+    </tr>
+
+    <% @issues.each do |issue| %>
+    	<tr>
+        <td> <%= link_to issue.title, qmr_issue_path(issue) %> </td>
+        <td> <%= issue.user.name %> </td>
+        <td> <%= issue.issue_impact.name %> </td>
+        <td> <%= issue.issue_status.name %> </td>
+        <td>
+          <div id="command_container">
+            <ul>
+              <li id="issue_<%= issue.id %>">
+                <%= link_to 'Edit', edit_qmr_issue_path(issue), class: "btn btn-link" %>
+                  | <%= link_to 'Delete', [:qmr, issue], :confirm => 'Are you sure?', :method => :delete , class: "btn btn-link" %>
+              </li>
+            </ul>
+          </div>
+        </td>
+    	</tr>
+    <% end %>
+
+  </table>
+  <%= will_paginate %>
+<%= link_to 'Add New Issue', new_qmr_issue_path, class: "btn btn-large btn-primary" %>

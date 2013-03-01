@@ -15,6 +15,9 @@
             <% if current_user.admin? %>
               <li><%= link_to "Control Panel", admin_path %></li>
             <% end %> 
+            <% if current_user.type_id==4 %>
+              <li><%= link_to "QMR", qmr_path %></li>
+            <% end %> 
             <li><%= link_to "Issues", issues_path %></li>
             <li><%= link_to "Action Plans", action_plans_path %></li> 
             <!--temporary, remove this later-->
