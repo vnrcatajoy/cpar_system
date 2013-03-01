@@ -1,5 +1,7 @@
 CparSystem::Application.routes.draw do
 
+  get "users/index"
+
   get "static_pages/home"
 
   root to: 'static_pages#home'
@@ -17,6 +19,11 @@ CparSystem::Application.routes.draw do
 
   resources :action_plans do
     resources :activities
+  end
+
+  namespace :admin do
+    get '', to: 'dashboard#index', as: '/'
+    resources :users
   end
 
   get "sessions/new"
