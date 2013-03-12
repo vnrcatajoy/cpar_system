@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.paginate(page: params[:page],  per_page: 15)
+    @users = User.where("department_id = " + current_user.department_id.to_s).paginate(page: params[:page],  per_page: 15)
   end
 
   def edit
