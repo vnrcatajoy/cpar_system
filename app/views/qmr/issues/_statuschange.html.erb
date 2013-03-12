@@ -1,0 +1,4 @@
+<%= form_for [:qmr, issue] do |f| %>
+  <%= f.hidden_field :status_id, value: status_change(issue.status_id) %>
+  <%= f.submit "Change Status to #{status_display(issue.status_id)}", confirm: 'Are you sure you want to change this Issue\'s status?', class: "btn btn-link" %>
+<% end %>

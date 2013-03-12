@@ -43,6 +43,8 @@
   <%= f.label :status_id %>
   <%= f.select :status_id, IssueStatus.all.collect { |s| [s.name, s.id] } %>
   <br/>
+  <!--Change to this below later; for testing purposes, use above first-->
+  <!-- <%= f.hidden_field :status_id, value: @issue.status_id %>-->
 <% end %>
 
 <%= f.label :iso_nc_id, "ISO Reference ID" %>
