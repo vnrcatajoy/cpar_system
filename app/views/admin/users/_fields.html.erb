@@ -4,11 +4,13 @@
 <%= f.label :email %>
 <%= f.text_field :email %>
 
-<%= f.label :password %>
-<%= f.password_field :password %>
+<% if @user.id == nil %> 
+	<%= f.label :password %>
+	<%= f.password_field :password %>
 
-<%= f.label :password_confirmation, "Confirmation" %>
-<%= f.password_field :password_confirmation %>
+	<%= f.label :password_confirmation, "Confirmation" %>
+	<%= f.password_field :password_confirmation %>
+<% end %>
 
 <%= f.label :mobile %>
 <%= f.text_field :mobile %>

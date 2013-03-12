@@ -4,11 +4,13 @@
 <%= f.label :email %>
 <%= f.text_field :email %>
 
-<%= f.label :password %>
-<%= f.password_field :password %>
+<% if @user.id == nil %> 
+	<%= f.label :password %>
+	<%= f.password_field :password %>
 
-<%= f.label :password_confirmation, "Confirmation" %>
-<%= f.password_field :password_confirmation %>
+	<%= f.label :password_confirmation, "Confirmation" %>
+	<%= f.password_field :password_confirmation %>
+<% end %>
 
 <%= f.label :mobile %>
 <%= f.text_field :mobile %>
@@ -17,9 +19,13 @@
 <%= f.text_field :phone %>
 
 <%= f.label 'Department' %>
-<%= f.select :department_id, Department.all.collect { |d| [d.name, d.id] } %>
-      <!--Temporary, use f.collection_select next time, putting the choices and their maps to integers (department_id, type_id) in an hash-->
+      
+<% if @user.id == nil %>
+	<%= f.select :department_id, Department.all.collect { |d| [d.name, d.id] } %>
+	<%= f.hidden_field :type_id, value: 6 %>
+<% else %>
+	<input type="text" id="department_id" value= "<%= Department.where(id: @user.department_id).first.name %>" disabled>
 
-<%= f.label 'User Type' %>
-<%= f.select :type_id, UserType.all.collect { |t| [t.name, t.id] } %>
-      <!--Temporary, I think user type (CPAR Originator, QMR, etc) should be admin-assigned and not assigned here-->
+	<%= f.label 'User Type' %>
+	<input type="text" id="type_id" value= "<%= UserType.where(id: @user.type_id).first.name %>" disabled>
+<% end %>
