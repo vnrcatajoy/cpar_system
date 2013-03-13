@@ -5,6 +5,11 @@
   <div class="span6">
 		<p> <strong>Description:</strong> </p>
 		<p><%= @action_plan.description %> </p>
+		<% if @action_plan.ap_reviewer_id == nil %>
+			<strong>This Action plan has not yet been reviewed.</strong>
+		<% else %>
+			<strong><%= "This Action plan has been reviewed by #{User.find(@action_plan.ap_reviewer_id).name}." %></strong>
+		<% end %>
 	</div>
 		<div class="span9">
 		<!--Show Activities under this Action Plan-->

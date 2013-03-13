@@ -29,7 +29,9 @@ CparSystem::Application.routes.draw do
 
   namespace :auditor do
     get '', to: 'dashboard#index', as: '/'
-    resources :action_plans
+    resources :action_plans do
+      get 'review', :on => :member
+    end
   end
 
   get "sessions/new"
