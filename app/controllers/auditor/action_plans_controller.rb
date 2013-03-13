@@ -8,6 +8,8 @@ class Auditor::ActionPlansController < ApplicationController
 
   def create
   	@action_plan = ActionPlan.new(params[:action_plan])
+    @action_plan.responsible_officer_id = current_user.id
+    #since those who make action plans are responsible officers
   	if @action_plan.save
   		flash[:success] = "Successfully added Action Plan!" 
   	    redirect_to auditor_action_plan_path(@action_plan)
@@ -39,6 +41,7 @@ class Auditor::ActionPlansController < ApplicationController
   def review
     @action_plan = ActionPlan.find params[:id]
     @action_plan.ap_reviewer_id = current_user.id
+    @action_plan.toggle!(:approved)
     if @action_plan.save
       flash[:success] = "Action Plan successfully reviewed."
       redirect_to auditor_action_plan_path

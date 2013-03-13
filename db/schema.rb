@@ -11,16 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130228162857) do
+ActiveRecord::Schema.define(:version => 20130313114753) do
 
   create_table "action_plans", :force => true do |t|
     t.text     "description"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at",                                          :null => false
+    t.datetime "updated_at",                                          :null => false
     t.integer  "ap_reviewer_id"
     t.date     "final_review_date"
     t.integer  "implementation_reviewer_id"
     t.date     "final_implementation_review_date"
+    t.integer  "issue_id"
+    t.integer  "responsible_officer_id"
+    t.boolean  "approved",                         :default => false
+    t.boolean  "implemented",                      :default => false
   end
 
   create_table "activities", :force => true do |t|
