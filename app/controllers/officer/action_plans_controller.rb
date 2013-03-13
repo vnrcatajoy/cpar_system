@@ -46,6 +46,6 @@ before_filter :responsibleofficer_user
   private
 
   def responsibleofficer_user
-      redirect_to(root_path) unless current_user.type_id=3
+      redirect_to(root_path) unless current_user.type_id==3
   end
 end

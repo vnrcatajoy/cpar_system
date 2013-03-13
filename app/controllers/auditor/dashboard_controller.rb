@@ -8,6 +8,6 @@ class Auditor::DashboardController < ApplicationController
   private
 
   def auditor_user
-      redirect_to(root_path) unless current_user.type_id=5
+      redirect_to(root_path) unless current_user.type_id==5
   end
 end

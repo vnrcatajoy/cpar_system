@@ -8,6 +8,6 @@ class Qmr::DashboardController < ApplicationController
   private
 
   def qmr_user
-      redirect_to(root_path) unless current_user.type_id=4
+      redirect_to(root_path) unless current_user.type_id==4
   end
 end
