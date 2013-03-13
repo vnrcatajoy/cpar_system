@@ -19,6 +19,8 @@
               <li><%= link_to "QMR", qmr_path %></li>
             <% elsif current_user.type_id==5 %>
               <li><%= link_to "Auditor", auditor_path %></li>
+            <% elsif current_user.type_id==3 %>
+              <li><%= link_to "Officer", officer_path %></li>
             <% end %> 
             <li><%= link_to "Issues", issues_path %></li>
             <li><%= link_to "Action Plans", action_plans_path %></li> 

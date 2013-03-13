@@ -1,0 +1,14 @@
+<% provide(:title, 'Officer: All Action Plans') %>
+<h1>Officer: All Action Plans</h1>
+
+<ul class="action_plans">
+	<% @action_plans.each do |action_plan| %>
+  		<li>
+  			<%= link_to "Action Plan # #{action_plan.id}", [:officer, action_plan] %>
+  			<p><%= action_plan.description%></p>
+  		</li>
+  	<% end %>
+
+</ul>
+<%= link_to 'Add New Action Plan', new_officer_action_plan_path, class: "btn btn-large btn-primary" %>
+<%= will_paginate %>

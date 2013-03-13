@@ -1,0 +1,18 @@
+<% provide(:title, "Showing Activity") %>
+<div class="row">
+  <div class="span6">
+    	<h2>Activity # <%= @activity.id %> under Action Plan # <%= @activity.action_plan_id %></h2>
+		<p> <strong>Description:</strong> </p>
+		<p><%= @activity.result %> </p>
+		<p><strong>Author:</strong></p>
+		<p><%= User.find(@activity.user_id).name %></p>
+		<p> <strong>Target Date:</strong></p>
+		<p><%= @activity.target_date %></p>
+		<p> <strong>Actual Date:</strong></p>
+		<p><%= @activity.actual_date %></p>
+		<% if current_user?(User.find(@activity.user_id)) %>
+    		<%= link_to "Edit Activity", [:edit, :officer, ActionPlan.find(@activity.action_plan_id), @activity], class: "btn btn-small btn-primary" %>
+		<% end %>
+		<%= link_to "Back", [:officer, @action_plan], class: "btn btn-small btn-primary" %>
+	</div>
+</div>

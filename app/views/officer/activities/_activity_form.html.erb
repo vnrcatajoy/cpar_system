@@ -1,4 +1,4 @@
-<%= form_for [@action_plan, @activity] do |f2| %>
+<%= form_for [:officer, @action_plan, @activity] do |f2| %>
     <%= f2.label :description %>
     <!--Use :result field as description field for Action Plan while not yet finished-->
     <%= f2.text_area :result %>

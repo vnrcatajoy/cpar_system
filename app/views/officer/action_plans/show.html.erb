@@ -1,0 +1,22 @@
+<% provide(:title, "Showing Action Plan") %>
+<h1>Auditor: Showing Action Plan</h1>
+
+<div class="row">
+  <div class="span6">
+		<p> <strong>Description:</strong> </p>
+		<p><%= @action_plan.description %> </p>
+		<% if @action_plan.ap_reviewer_id == nil %>
+			<strong>This Action plan has not yet been reviewed.</strong>
+		<% else %>
+			<strong><%= "This Action plan has been reviewed by #{User.find(@action_plan.ap_reviewer_id).name}." %></strong>
+		<% end %>
+	</div>
+		<div class="span9">
+		<!--Show Activities under this Action Plan-->
+		<%= render 'activities_show', action_plan: @action_plan  %>
+		<p><%= link_to 'Add Activity', new_officer_action_plan_activity_path(@action_plan) , class: "btn btn-small btn-primary" %>
+			<%= link_to 'Edit Action Plan', edit_officer_action_plan_path(@action_plan) , class: "btn btn-small btn-primary" %>
+		   <%= link_to 'Back', officer_action_plans_path , class: "btn btn-small btn-primary"%></p>
+	
+		</div>
+</div>
