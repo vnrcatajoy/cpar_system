@@ -1,0 +1,17 @@
+<% provide(:title, "Showing Action Plan") %>
+<h1>Auditor: Showing Action Plan</h1>
+
+<div class="row">
+  <div class="span6">
+		<p> <strong>Description:</strong> </p>
+		<p><%= @action_plan.description %> </p>
+	</div>
+		<div class="span9">
+		<!--Show Activities under this Action Plan-->
+		<%= render 'shared/activities_show', action_plan: @action_plan  %>
+		<p><%= link_to 'Add Activity', new_action_plan_activity_path(@action_plan) , class: "btn btn-small btn-primary" %>
+			<%= link_to 'Edit Action Plan', edit_auditor_action_plan_path(@action_plan) , class: "btn btn-small btn-primary" %>
+		   <%= link_to 'Back', auditor_action_plans_path , class: "btn btn-small btn-primary"%></p>
+	
+		</div>
+</div>

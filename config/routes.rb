@@ -1,7 +1,5 @@
 CparSystem::Application.routes.draw do
 
-  get "static_pages/home"
-
   root to: 'static_pages#home'
   get 'issues/index' #just 'issues' does this too, default issues_path is to display all
   
@@ -27,6 +25,11 @@ CparSystem::Application.routes.draw do
   namespace :qmr do
     get '', to: 'dashboard#index', as: '/'
     resources :issues
+  end
+
+  namespace :auditor do
+    get '', to: 'dashboard#index', as: '/'
+    resources :action_plans
   end
 
   get "sessions/new"

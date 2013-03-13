@@ -9,9 +9,6 @@
 		<div class="span9">
 		<!--Show Activities under this Action Plan-->
 		<%= render 'shared/activities_show', action_plan: @action_plan  %>
-		<p><%= link_to 'Add Activity', new_action_plan_activity_path(@action_plan) , class: "btn btn-small btn-primary" %>
-			<%= link_to 'Edit Action Plan', edit_action_plan_path(@action_plan) , class: "btn btn-small btn-primary" %>
-		   <%= link_to 'Back', action_plans_path , class: "btn btn-small btn-primary"%></p>
-	
+		<p><%= link_to 'Back', action_plans_path , class: "btn btn-small btn-primary"%></p>
 		</div>
 </div>

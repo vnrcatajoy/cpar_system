@@ -1,0 +1,16 @@
+<% provide(:title, 'Auditor: All Action Plans') %>
+<h1>Auditor: All Action Plans</h1>
+
+<ul class="action_plans">
+	<% @action_plans.each do |action_plan| %>
+  		<li>
+  			<%= link_to "Action Plan # #{action_plan.id}", [:auditor, action_plan] %>
+  			<p><%= action_plan.description%></p>
+ 		   | <%= link_to "delete", [:auditor, action_plan] , method: :delete,
+        	                          data: { confirm: "Are you sure you want to delete this Action Plan?" } %>
+  		</li>
+  	<% end %>
+
+</ul>
+<%= link_to 'Add New Action Plan', new_auditor_action_plan_path, class: "btn btn-large btn-primary" %>
+<%= will_paginate %>

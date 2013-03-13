@@ -11,7 +11,7 @@ namespace :db do
     #add sample User Types
     UserType.create!(name: 'System Administrator')
     UserType.create!(name: 'Department Head')
-    UserType.create!(name: 'Employee')
+    UserType.create!(name: 'Responsible Officer') #changed from Employee to this
     UserType.create!(name: 'Incident Manager')
     UserType.create!(name: 'Auditor')
     UserType.create!(name: 'Customer')
