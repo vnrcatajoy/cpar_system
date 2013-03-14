@@ -1,14 +1,29 @@
 <% provide(:title, 'All Action Plans') %>
 <h1>All Action Plans</h1>
 
-<ul class="action_plans">
-	<% @action_plans.each do |action_plan| %>
-  		<li>
-  			<%= link_to "Action Plan # #{action_plan.id}", action_plan %>
-  			<p><%= action_plan.description%></p>
-  		</li>
-  	<% end %>
+<table class="table table-striped table-bordered">
+    <tr>
+      <th>Belongs to Issue</th>
+      <th>Description</th>
+      <th>Submitted by</th>
+      <th>Final Review Date</th>
+      <th>Final Implementation Date</th>
+      <th></th>
 
-</ul>
+    </tr>
+
+    <% @action_plans.each do |ap| %>
+    	<tr>
+	    	<td><%= "Issue Title Here" %></td>
+	    	<td><%= ap.description %></td>
+	    	<td><%= "User Name here" %></td>
+	    	<td><%= ap.final_review_date %></td>
+	    	<td><%= ap.final_implementation_review_date %></td>
+	    	<td> 
+	    		<%= link_to "View", ap, class: "btn btn-link" %>
+	    	</td>
+	    </tr>
+    <% end %>
+</table>
 
 <%= will_paginate %>
