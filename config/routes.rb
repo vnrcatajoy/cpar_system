@@ -1,7 +1,6 @@
 CparSystem::Application.routes.draw do
 
   root to: 'static_pages#home'
-  get 'issues/index' #just 'issues' does this too, default issues_path is to display all
   
   get "users/new"
   match '/signup',  to: 'users#new'
@@ -38,6 +37,9 @@ CparSystem::Application.routes.draw do
     get '', to: 'dashboard#index', as: '/'
     resources :action_plans do
       resources :activities
+    end
+    resources :issues do
+      resources :causes
     end
   end
 

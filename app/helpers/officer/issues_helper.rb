@@ -1,0 +1,2 @@
+module Officer::IssuesHelper
+end
