@@ -6,30 +6,24 @@
       <th>Originator</th>
       <th>Impact</th>
       <th>Status</th>
-      <th></th>
-
+      <% if current_user.admin? %>
+        <th>Department</th>
+      <% end %>
+      <!--Since Admin can view all Issues, even outside of Department,
+          they should have a Departments column-->
     </tr>
 
     <% @issues.each do |issue| %>
     	<tr>
-        <td> <%= issue.title %> </td>
+        <td> <%= link_to issue.title, issue %> </td>
         <td> <%= issue.user.name %> </td>
         <td> <%= issue.issue_impact.name %> </td>
         <td> <%= issue.issue_status.name %> </td>
-        <td>
-          <div id="command_container">
-            <ul>
-              <li id="issue_<%= issue.id %>">
-                <%= link_to 'Show', issue, class: "btn btn-link" %> |
-                <%= link_to 'Edit', edit_issue_path(issue), class: "btn btn-link" %>
-                <% if current_user.admin? %>
-                  | <%= link_to 'Delete', issue, :confirm => 'Are you sure?', :method => :delete , class: "btn btn-link" %>
-                <% end %>
-              </li>
-            </ul>
-          </div>
-        </td>
-        
+        <% if current_user.admin? %>
+          <td><%= issue.department.name %></td>
+        <% end %>
+        <!--Since Admin can view all Issues, even outside of Department,
+          they should have a Departments column-->
     	</tr>
 
     <% end %>

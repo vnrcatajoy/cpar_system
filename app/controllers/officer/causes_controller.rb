@@ -20,9 +20,6 @@ class Officer::CausesController < ApplicationController
     end
   end
 
-  def index
-  end
-
   def show
     @cause=Cause.find(params[:id])
   end

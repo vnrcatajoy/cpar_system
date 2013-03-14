@@ -48,8 +48,6 @@
       <%= @issue.iso_nc.title %>
     </p>
 
-    <%= link_to 'Edit', edit_issue_path(@issue) %>
-    <%= link_to 'Delete', @issue, :confirm => 'Are you sure?', :method => :delete , class: "btn btn-link" %>
     <%= link_to 'Back', issues_path %>
   </div>
 
