@@ -1,6 +1,6 @@
 <% provide(:title, 'Show Issue') %>
 <div class="row">
-  <div class="span6 offset3">
+  <div class="span6">
     <p id="notice"> <%= notice %> </p>
  
     <h3>
@@ -47,8 +47,6 @@
       <b>ISO Reference ID:</b>
       <%= @issue.iso_nc.title %>
     </p>
-
-    <%= link_to 'Back', auditor_issues_path, class: "btn btn-link" %>
   </div>
 
   <div class="span9">

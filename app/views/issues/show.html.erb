@@ -1,6 +1,6 @@
 <% provide(:title, 'Show Issue') %>
 <div class="row">
-  <div class="span6 offset3">
+  <div class="span6">
     <p id="notice"> <%= notice %> </p>
  
     <h3>
@@ -50,10 +50,9 @@
 
   </div>
 
-  </div>
   <div class="span9">
     <%= render 'causes_show' %>
     <%= render 'actionplans_show' %>
-    <%= link_to 'Back', issues_path %>
+    <%= link_to 'Back', issues_path, class: "btn btn-link" %>
   </div>
 </div>
