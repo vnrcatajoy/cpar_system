@@ -21,7 +21,12 @@
           <% end %>
         </td>
 	    	<td><%= ap.description %></td>
-	    	<td><%= "User Name here" %></td>
+	    	<td><% if ap.responsible_officer_id == nil %>
+            User name
+          <% else %>
+            <%= User.find(ap.responsible_officer_id).name %>
+          <% end %>
+        </td>
 	    	<td><%= ap.final_review_date %></td>
 	    	<td><%= ap.final_implementation_review_date %></td>
 	    	<td> 

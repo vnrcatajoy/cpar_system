@@ -48,11 +48,12 @@
       <%= @issue.iso_nc.title %>
     </p>
 
-    <%= link_to 'Back', issues_path %>
   </div>
 
   </div>
   <div class="span9">
-    <%= render 'causes_show', issue: @issue %>
+    <%= render 'causes_show' %>
+    <%= render 'actionplans_show' %>
+    <%= link_to 'Back', issues_path %>
   </div>
 </div>
