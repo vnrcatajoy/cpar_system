@@ -4,6 +4,9 @@ before_filter :responsibleofficer_user
 
   def new
   	@action_plan = ActionPlan.new
+    @issues = Issue.where("status_id = 1").paginate(page: params[:page], per_page: 5)
+    #change later to all issue where responsible_officer_id = this
+    #Naturally, Responsible officer can only be assigned to Issue in his department
   end
 
   def create

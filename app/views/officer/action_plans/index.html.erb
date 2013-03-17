@@ -14,7 +14,12 @@
 
     <% @action_plans.each do |ap| %>
     	<tr>
-	    	<td><%= "Issue Title" %></td>
+	    	<td><% if ap.issue_id == nil %>
+            Issue Title
+          <% else %>
+            <%= Issue.find(ap.issue_id).title %>
+          <% end %>
+        </td>
 	    	<td><%= ap.description %></td>
 	    	<td><%= "Reviewer" %></td>
 	    	<td><%= ap.final_review_date %></td>

@@ -50,4 +50,18 @@ module SessionsHelper
   def admin_user
     redirect_to(root_path) unless current_user.admin?
   end
+
+  def role_control_panel
+    if current_user.admin?
+      admin_path    
+    elsif current_user.type_id==3
+      officer_path
+    elsif current_user.type_id==4
+      qmr_path
+    elsif current_user.type_id==5
+      auditor_path
+    else
+      root_path
+    end
+  end
 end

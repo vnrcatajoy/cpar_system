@@ -3,13 +3,22 @@
 
 <div class="row">
   <div class="span6">
-		<p> <strong>Description:</strong> </p>
-		<p><%= @action_plan.description %> </p>
-		<% if @action_plan.ap_reviewer_id == nil %>
+  		<% if @action_plan.ap_reviewer_id == nil %>
 			<strong>This Action plan has not yet been reviewed.</strong>
 		<% else %>
 			<strong><%= "This Action plan has been reviewed by #{User.find(@action_plan.ap_reviewer_id).name}." %></strong>
 		<% end %>
+		<p> <strong>Description:</strong> </p>
+		<p><%= @action_plan.description %> </p>
+		<p><strong>Issue:</strong></p>
+		<p><% if @action_plan.issue_id == nil %>
+            	Issue Title
+          	<% else %>
+            	<%= Issue.find(@action_plan.issue_id).title %>
+          	<% end %>
+      	</p>
+      	<p><strong>Final Review Date: <%= @action_plan.final_review_date %></strong></p>
+      	<p><strong>Final Implementation Review Date: <%= @action_plan.final_implementation_review_date %></strong></p>
 	</div>
 		<div class="span9">
 		<!--Show Activities under this Action Plan-->
