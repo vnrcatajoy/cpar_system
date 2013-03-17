@@ -7,8 +7,6 @@
       <!--<b>Title:</b> Use this instead for header-->
       <%= @issue.title %>
     </h3>
-
-    <%= render 'statuschange', issue: @issue %>
  
     <p>
       <b>Description:</b>
@@ -50,12 +48,12 @@
       <%= @issue.iso_nc.title %>
     </p>
 
-    <%= link_to 'Edit', edit_qmr_issue_path(@issue), class: "btn btn-link" %>
-    <%= link_to 'Delete', [:qmr, @issue], :confirm => 'Are you sure?', :method => :delete , class: "btn btn-link" %>
-    <%= link_to 'Back', qmr_issues_path, class: "btn btn-link" %>
+    <%= link_to 'Back', auditor_issues_path, class: "btn btn-link" %>
   </div>
-  
+
   <div class="span9">
     <%= render 'causes_show', issue: @issue %>
+
+    <%= link_to 'Back', auditor_issues_path, class: "btn btn-link" %>
   </div>
 </div>

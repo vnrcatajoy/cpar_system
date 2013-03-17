@@ -23,6 +23,7 @@ class Qmr::IssuesController < ApplicationController
 
   def show
     @issue = Issue.find params[:id]
+    @causes= @issue.causes.paginate(page: params[:page],  per_page: 5)
   end
 
   def edit

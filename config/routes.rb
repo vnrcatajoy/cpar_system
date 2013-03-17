@@ -31,6 +31,7 @@ CparSystem::Application.routes.draw do
     resources :action_plans do
       get 'review', :on => :member
     end
+    resources :issues
   end
 
   namespace :officer do
