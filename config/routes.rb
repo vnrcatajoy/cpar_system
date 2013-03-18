@@ -47,6 +47,7 @@ CparSystem::Application.routes.draw do
   namespace :dept do
     get '', to: 'dashboard#index', as: '/'
     resources :users
+    resources :issues
   end
 
   get "sessions/new"

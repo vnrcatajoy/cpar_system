@@ -1,0 +1,57 @@
+<% provide(:title, 'Show Issue') %>
+<div class="row">
+  <div class="span6">
+    <p id="notice"> <%= notice %> </p>
+ 
+    <h3>
+      <!--<b>Title:</b> Use this instead for header-->
+      <%= @issue.title %>
+    </h3>
+
+    <p>
+      <b>Description:</b>
+      <%= @issue.description %>
+    </p>
+ 
+    <p>
+      <b>Originator:</b>
+      <%= @issue.user.name %>
+    </p>
+
+    <p>
+      <b>Originator Email:</b>
+      <%= @issue.user.email %>
+    </p>
+
+    <p>
+      <b>Department:</b>
+      <%= @issue.department.name %>
+    </p>
+
+    <p>
+      <b>Type:</b>
+      <%= @issue.issue_type.name %>
+    </p>
+ 
+    <p>
+      <b>Impact:</b>
+      <%= @issue.issue_impact.name %>
+    </p>
+
+    <p>
+      <b>Status:</b>
+      <%= @issue.issue_status.name %>
+    </p>
+
+    <p>
+      <b>ISO Reference ID:</b>
+      <%= @issue.iso_nc.title %>
+    </p>
+
+  </div>
+  <div class="span9">
+    <%= render 'causes_show' %>
+    <%= render 'actionplans_show' %>
+    <%= link_to 'Back', dept_issues_path, class: "btn btn-link" %>
+  </div>
+</div>
