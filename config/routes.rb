@@ -44,6 +44,11 @@ CparSystem::Application.routes.draw do
     end
   end
 
+  namespace :dept do
+    get '', to: 'dashboard#index', as: '/'
+    resources :users
+  end
+
   get "sessions/new"
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete

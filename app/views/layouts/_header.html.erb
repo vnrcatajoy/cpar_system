@@ -21,6 +21,8 @@
               <li><%= link_to "Auditor", auditor_path %></li>
             <% elsif current_user.type_id==3 %>
               <li><%= link_to "Officer", officer_path %></li>
+            <% elsif current_user.type_id==2 %>
+              <li><%= link_to "Dept", dept_path %></li>
             <% end %> 
             <li><%= link_to "Issues", issues_path %></li>
             <li><%= link_to "Action Plans", action_plans_path %></li> 

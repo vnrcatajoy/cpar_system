@@ -54,6 +54,8 @@ module SessionsHelper
   def role_control_panel
     if current_user.admin?
       admin_path    
+    elsif current_user.type_id==2
+      dept_path
     elsif current_user.type_id==3
       officer_path
     elsif current_user.type_id==4
