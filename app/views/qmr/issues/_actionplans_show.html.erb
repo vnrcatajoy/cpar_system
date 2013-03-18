@@ -15,7 +15,12 @@
     <% @action_plans.each do |ap| %>
       <tr>
         <td><%= ap.description %></td>
-        <td><%= User.find(ap.responsible_officer_id).name %></td>
+        <td><% if ap.responsible_officer_id == nil %> 
+              User Name
+            <% else %>
+              <%= User.find(ap.responsible_officer_id).name %>
+            <% end %>
+        </td>
         <td><%= ap.final_review_date %></td>
         <td><%= ap.final_implementation_review_date %></td>
         <td> 

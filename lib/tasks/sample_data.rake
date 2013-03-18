@@ -11,7 +11,7 @@ namespace :db do
     #add sample User Types
     UserType.create!(name: 'System Administrator')
     UserType.create!(name: 'Department Head')
-    UserType.create!(name: 'Responsible Officer') #changed from Employee to this
+    UserType.create!(name: 'Responsible Officer')
     UserType.create!(name: 'Incident Manager')
     UserType.create!(name: 'Auditor')
     UserType.create!(name: 'Customer')
@@ -60,6 +60,7 @@ namespace :db do
 
     #add sample IssueStatus
     IssueStatus.create!(name: 'New')
+    IssueStatus.create!(name: 'Verified')
     IssueStatus.create!(name: 'Investigating')
     IssueStatus.create!(name: 'Correcting')
     IssueStatus.create!(name: 'Tested')
@@ -91,8 +92,8 @@ namespace :db do
                     iso_nc_id: 1)
 
     5.times do |i|
-      title = "Sample Title#{i}"
-      description = "Sample Description#{i}"
+      title = "Sample Title#{i+1}"
+      description = "Sample Description#{i+1}"
       user_id = i + 1 
       impact_id = (i%3) + 1
       status_id = (i%5) + 1
@@ -112,9 +113,9 @@ namespace :db do
 
     5.times do |a|
       
-      description = "This is the #{a}th Action Plan. Edit this #{a}th description later on."
+      description = "This is the #{a}th Action Plan for the #{a}th Issue. Edit this #{a}th description later on."
 
-      actplan = ActionPlan.create!(description: description)
+      actplan = ActionPlan.create!(description: description, issue_id: a+1)
 
       # Can't populate-generate Activities under Action Plan because one way or the
       # other, either action_plan_id or user_id of the Activity will be left blank,
