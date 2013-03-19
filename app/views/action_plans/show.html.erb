@@ -3,6 +3,7 @@
 
 <div class="row">
   <div class="span6">
+  		<p><strong>Action Plan Status: </strong><i><%= ActionPlanStatus.find(@action_plan.ap_status_id).name %></i></p>
 		<% if @action_plan.ap_reviewer_id == nil %>
 			<strong>This Action plan has not yet been reviewed.</strong>
 		<% else %>

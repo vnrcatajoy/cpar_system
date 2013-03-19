@@ -7,6 +7,7 @@
       <th>Issue</th>
       <th>Description</th>
       <th>Submitted by</th>
+      <th>Status</th>
       <th>Final Review Date</th>
       <th>Final Implementation Date</th>
       <th></th>
@@ -28,6 +29,7 @@
             <%= User.find(ap.responsible_officer_id).name %>
           <% end %>
         </td>
+        <td><%= ActionPlanStatus.find(ap.ap_status_id).name %></td>
 	    	<td><%= ap.final_review_date %></td>
 	    	<td><%= ap.final_implementation_review_date %></td>
 	    	<td> 

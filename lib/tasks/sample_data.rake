@@ -71,6 +71,13 @@ namespace :db do
     IssueImpact.create!(name: '2-Major')
     IssueImpact.create!(name: '3-Minor')
 
+    #add Action Plan Statuses
+    ActionPlanStatus.create!(name: 'New')
+    ActionPlanStatus.create!(name: 'Verified')
+    ActionPlanStatus.create!(name: 'Implemented')
+    ActionPlanStatus.create!(name: 'Closed')
+    ActionPlanStatus.create!(name: 'Rejected')
+
     #add sample IssueType
     5.times do |n|
       IssueType.create!(name: "Issue#{n}")
@@ -115,7 +122,8 @@ namespace :db do
       
       description = "This is the #{a}th Action Plan for the #{a}th Issue. Edit this #{a}th description later on."
 
-      actplan = ActionPlan.create!(description: description, issue_id: a+1)
+      actplan = ActionPlan.create!(description: description, 
+                  issue_id: a+1, ap_status_id: a+1)
 
       # Can't populate-generate Activities under Action Plan because one way or the
       # other, either action_plan_id or user_id of the Activity will be left blank,
