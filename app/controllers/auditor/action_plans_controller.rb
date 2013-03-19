@@ -10,6 +10,7 @@ class Auditor::ActionPlansController < ApplicationController
     @action_plan = ActionPlan.find params[:id]
     @action_plan.ap_reviewer_id = current_user.id
     @action_plan.toggle!(:approved)
+    @action_plan.ap_status_id = 2
     if @action_plan.save
       flash[:success] = "Action Plan successfully reviewed."
       redirect_to auditor_action_plan_path

@@ -38,6 +38,7 @@ CparSystem::Application.routes.draw do
     get '', to: 'dashboard#index', as: '/'
     resources :action_plans do
       resources :activities
+      get 'implemented', :on => :member
     end
     resources :issues do
       resources :causes

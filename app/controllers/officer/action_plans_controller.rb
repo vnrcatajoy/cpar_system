@@ -22,6 +22,16 @@ before_filter :responsibleofficer_user
   	end
   end
 
+  def implemented
+    @action_plan = ActionPlan.find params[:id]
+    @action_plan.toggle!(:implemented)
+    if @action_plan.save
+      flash[:success] = "Action Plan successfully marked as implemented. 
+      Status now pending to be changed to Implemented."
+      redirect_to officer_action_plan_path
+    end
+  end
+
   def edit
   	@action_plan = ActionPlan.find params[:id]
   end
