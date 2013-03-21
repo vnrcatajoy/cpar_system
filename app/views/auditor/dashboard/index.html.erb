@@ -1,6 +1,14 @@
 <% provide(:title, 'Auditor Dashboard') %>
 <h1>Auditor Dashboard</h1> 
-<ul> 
-	<li><%= link_to 'View All Action Plans', auditor_action_plans_path %></li> 
-	<li><%= link_to 'View Issues', auditor_issues_path %></li> 
-</ul>
+
+<h4>Action Plans Summary</h4>
+<p><b>All Action Plans: </b><%= @action_plans.count %></p>
+<p><b>New Action Plans: </b><%= @action_plans_new.count %></p>
+<p><b>Action Plans for Implementation review: </b><%= @action_plans_review.count %></p>
+<%= link_to 'View All Action Plans', auditor_action_plans_path, class: "btn btn-link" %>
+
+<br>
+<h4>Issues Summary</h4>
+<p><b>All Issues: </b><%= @issues.count %></p>
+<p><b>Verified Issues: </b><%= @issues_verified.count %></p>
+<%= link_to 'View All Issues Assigned to you', auditor_issues_path, class: "btn btn-link" %>

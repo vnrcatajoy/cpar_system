@@ -3,6 +3,12 @@ class Auditor::DashboardController < ApplicationController
   before_filter :auditor_user
 
   def index
+  	@action_plans = ActionPlan.all
+  	@action_plans_new = ActionPlan.where("ap_status_id = 1")
+  	@action_plans_review = ActionPlan.where("ap_status_id = 2")
+  	# For reviewing if ACtion Plan properly implemented
+  	@issues = Issue.all
+  	@issues_verified = Issue.where("status_id = 2")
   end
 
   private

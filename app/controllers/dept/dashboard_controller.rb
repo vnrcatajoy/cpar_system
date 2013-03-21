@@ -3,6 +3,10 @@ class Dept::DashboardController < ApplicationController
   before_filter :dept_user
 
   def index
+  	@users = User.where("department_id = " + current_user.department_id.to_s)
+    @users_officers = User.where("department_id = " + current_user.department_id.to_s + " AND type_id = 3")
+  	@issues = Issue.where("department_id = " + current_user.department_id.to_s)
+  	@issues_new = Issue.where("department_id = " + current_user.department_id.to_s + " AND status_id = 1")
   end
 
   private

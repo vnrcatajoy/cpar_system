@@ -3,7 +3,7 @@ class Dept::UsersController < ApplicationController
   before_filter :dept_user
 
   def index
-  	@users = User.where("department_id = " + current_user.department_id.to_s).paginate(page: params[:page], per_page: 5)
+  	@users = User.where("department_id = " + current_user.department_id.to_s).paginate(page: params[:page], per_page: 10)
   end
 
   def show

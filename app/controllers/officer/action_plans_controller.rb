@@ -14,8 +14,8 @@ before_filter :responsibleofficer_user
     @action_plan.responsible_officer_id = current_user.id
     #since those who make action plans are responsible officers
   	if @action_plan.save
-  		flash[:success] = "Successfully added Action Plan!" 
-  	    redirect_to officer_action_plan_path(@action_plan)
+  		flash[:success] = "Successfully added Action Plan! Next, add an Activity for this Action Plan." 
+  	  redirect_to new_officer_action_plan_activity_path(@action_plan)
   	else
   		flash.now[:error] = "Please fill in the fields properly." 
   		render 'new'

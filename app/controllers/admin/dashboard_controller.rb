@@ -3,6 +3,11 @@ class Admin::DashboardController < ApplicationController
   before_filter :admin_user
 
   def index
+  	@users = User.all
+  	@users_dept = User.where("type_id = 2")
+  	@users_officer = User.where("type_id = 3")
+  	@users_qmr = User.where("type_id = 4")
+  	@users_auditor = User.where("type_id = 5")
   end
 
   private

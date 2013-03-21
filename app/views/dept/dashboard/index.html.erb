@@ -1,6 +1,15 @@
 <% provide(:title, 'Department Head Dashboard') %>
 <h1>Department Head Dashboard</h1> 
-<ul> 
-	<li><%= link_to 'View Users under Department', dept_users_path %></li> 
-	<li><%= link_to 'View All Issues under Department', dept_issues_path %></li> 
-</ul>
+<h2><%= "Department: #{Department.where(id: current_user.department_id).first.name}" %></h2>
+
+<h4>Users Summary</h4>
+<p><b>All Users Under Department: </b><%= @users.count %></p>
+<p><b>Designated Responsible Officers: </b><%= @users_officers.count %></p>
+<%= link_to 'View All Users', dept_users_path, class: "btn btn-link" %>
+
+<br>
+
+<h4>Issues Summary</h4>
+<p><b>All Issues Under Department: </b><%= @issues.count %></p>
+<p><b>All New Issues Under Department: </b><%= @issues_new.count %></p>
+<%= link_to 'View All Issues', dept_issues_path, class: "btn btn-link" %>
