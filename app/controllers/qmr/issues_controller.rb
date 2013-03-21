@@ -3,8 +3,8 @@ class Qmr::IssuesController < ApplicationController
   before_filter :qmr_user
 
   def index
-     @issues = Issue.paginate(page: params[:page], per_page: 3)
-     @issues_new = Issue.where("status_id = 1").paginate(page: params[:page], per_page: 2)
+     @issues = Issue.paginate(page: params[:page], per_page: 5)
+     @issues_new = Issue.where("status_id = 1").paginate(page: params[:page], per_page: 5)
   end
 
   def new

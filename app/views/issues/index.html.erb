@@ -11,6 +11,7 @@
       <% end %>
       <!--Since Admin can view all Issues, even outside of Department,
           they should have a Departments column-->
+      <th>Assigned To</th>
     </tr>
 
     <% @issues.each do |issue| %>
@@ -24,6 +25,12 @@
         <% end %>
         <!--Since Admin can view all Issues, even outside of Department,
           they should have a Departments column-->
+        <td><% if issue.responsible_officer_id == nil %>
+                None
+             <% else %>
+                <%= User.find(issue.responsible_officer_id).name %>
+             <% end %>
+        </td>
     	</tr>
 
     <% end %>

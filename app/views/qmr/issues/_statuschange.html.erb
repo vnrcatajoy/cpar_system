@@ -1,4 +1,14 @@
-<%= form_for [:qmr, issue] do |f| %>
-  <%= f.hidden_field :status_id, value: status_change(issue.status_id) %>
-  <%= f.submit "Change Status to #{status_display(issue.status_id)}", confirm: 'Are you sure you want to change this Issue\'s status?', class: "btn btn-link" %>
+<% if issue.status_id < 7 %>
+	<%= form_for [:qmr, issue] do |f| %>
+  		<%= f.hidden_field :status_id, value: status_change(issue.status_id) %>
+  		<%= f.submit "Change Status to #{status_display(issue.status_id)}", confirm: 'Are you sure you want to change this Issue\'s status?', class: "btn btn-link" %>
+	<% end %>
+
+	<% if issue.status_id == 1 %>
+		<%= form_for [:qmr, issue] do |f| %>
+    		<%= f.hidden_field :status_id, value: 7 %>
+    		<%= f.submit "Reject", confirm: 'Are you sure you want to Reject this Issue?', class: "btn btn-link" %>
+		<% end %>
+	<% end %>
+	<!--Rejectable only while still New-->
 <% end %>

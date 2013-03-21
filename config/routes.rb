@@ -30,6 +30,7 @@ CparSystem::Application.routes.draw do
     get '', to: 'dashboard#index', as: '/'
     resources :action_plans do
       get 'review', :on => :member
+      get 'reject', on: :member
     end
     resources :issues
   end

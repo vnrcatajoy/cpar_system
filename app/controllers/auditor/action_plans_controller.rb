@@ -17,6 +17,16 @@ class Auditor::ActionPlansController < ApplicationController
     end
   end
 
+  def reject
+    @action_plan = ActionPlan.find params[:id]
+    @action_plan.ap_reviewer_id = current_user.id
+    @action_plan.ap_status_id = 5
+    if @action_plan.save
+      flash[:success] = "Action Plan Rejected. It will now be closed for edits."
+      redirect_to auditor_action_plan_path
+    end
+  end
+
   def show
   	@action_plan = ActionPlan.find params[:id]
     @activities = @action_plan.activities.paginate(page: params[:page],  per_page: 5)

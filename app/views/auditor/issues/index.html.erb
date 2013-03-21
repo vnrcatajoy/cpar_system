@@ -6,6 +6,7 @@
       <th>Originator</th>
       <th>Impact</th>
       <th>Status</th>
+      <th>Assigned Officer</th>
 
     </tr>
 
@@ -15,6 +16,12 @@
         <td> <%= issue.user.name %> </td>
         <td> <%= issue.issue_impact.name %> </td>
         <td> <%= issue.issue_status.name %> </td>
+        <td> <% if issue.responsible_officer_id == nil %>
+                None
+             <% else %>
+                <%= User.find(issue.responsible_officer_id).name %>
+             <% end %>
+        </td>
     	</tr>
     <% end %>
 

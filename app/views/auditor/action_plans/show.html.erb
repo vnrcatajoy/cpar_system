@@ -8,7 +8,8 @@
 			<strong>This Action plan has not yet been reviewed.</strong>
 			<!--insert button to Review this as an Auditor-->
 			<p><%= "Signed in as: #{current_user.name}" %>
-				<%= render 'review' , action_plan: @action_plan %> 
+				<%= render 'review' , action_plan: @action_plan %>
+				<%= render 'reject', action_plan: @action_plan %>
 			</p>
 		<% else %>
 			<strong>This Action plan has been reviewed by:</strong>

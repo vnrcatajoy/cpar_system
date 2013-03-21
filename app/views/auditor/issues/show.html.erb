@@ -47,11 +47,21 @@
       <b>ISO Reference ID:</b>
       <%= @issue.iso_nc.title %>
     </p>
+
+    <p>
+        <b>Assigned Officer: </b> 
+        <% if @issue.responsible_officer_id != nil %>
+          <%= User.find(@issue.responsible_officer_id).name %>
+        <% else %>
+          None
+        <% end %>
+    </p>
+    <%= link_to 'Back', auditor_issues_path, class: "btn btn-link" %>
   </div>
 
   <div class="span9">
     <%= render 'causes_show' %>
     <%= render 'actionplans_show' %>
-    <%= link_to 'Back', auditor_issues_path, class: "btn btn-link" %>
+    
   </div>
 </div>

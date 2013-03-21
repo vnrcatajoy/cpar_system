@@ -1,6 +1,6 @@
 <% provide(:title, 'Show Issue') %>
 <div class="row">
-  <div class="span6 offset3">
+  <div class="span6">
     <p id="notice"> <%= notice %> </p>
  
     <h3>
@@ -50,13 +50,21 @@
       <%= @issue.iso_nc.title %>
     </p>
 
+    <p>
+        <b>Assigned Officer: </b> 
+        <% if @issue.responsible_officer_id != nil %>
+          <%= User.find(@issue.responsible_officer_id).name %>
+        <% else %>
+          None
+        <% end %>
+    </p>
+
     <%= link_to 'Edit', edit_qmr_issue_path(@issue), class: "btn btn-link" %>
-    <%= link_to 'Delete', [:qmr, @issue], :confirm => 'Are you sure?', :method => :delete , class: "btn btn-link" %>
+    <%= link_to 'Back', qmr_issues_path, class: "btn btn-link" %>
   </div>
   
   <div class="span9">
     <%= render 'causes_show' %>
     <%= render 'actionplans_show' %>
-    <%= link_to 'Back', qmr_issues_path, class: "btn btn-link" %>
   </div>
 </div>

@@ -33,8 +33,6 @@
 	    	<td><%= ap.final_implementation_review_date %></td>
 	    	<td> 
 	    		<%= link_to "View", [:auditor, ap], class: "btn btn-link" %>
-	    		<%= link_to "Delete", [:auditor, ap] , method: :delete,
-        	                          data: { confirm: "Are you sure you want to delete this Action Plan?" }, class: "btn btn-link" %>
 	    	</td>
 	    </tr>
     <% end %>

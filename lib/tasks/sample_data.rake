@@ -65,6 +65,7 @@ namespace :db do
     IssueStatus.create!(name: 'Correcting')
     IssueStatus.create!(name: 'Tested')
     IssueStatus.create!(name: 'Closed')
+    IssueStatus.create!(name: 'Rejected')
 
     #add sample IssueImpact
     IssueImpact.create!(name: '1-Critical')

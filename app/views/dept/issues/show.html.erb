@@ -48,10 +48,18 @@
       <%= @issue.iso_nc.title %>
     </p>
 
+    <% if @issue.responsible_officer_id == nil %>
+      <%= render 'assign' %>
+    <% else %>
+      <p>
+        <b>Assigned Officer:</b> <%= User.find(@issue.responsible_officer_id).name %>
+      </p>
+    <% end %>
+    <%= link_to 'Back', dept_issues_path, class: "btn btn-link" %>
+
   </div>
   <div class="span9">
     <%= render 'causes_show' %>
     <%= render 'actionplans_show' %>
-    <%= link_to 'Back', dept_issues_path, class: "btn btn-link" %>
   </div>
 </div>

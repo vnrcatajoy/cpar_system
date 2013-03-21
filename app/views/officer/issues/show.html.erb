@@ -48,12 +48,22 @@
       <%= @issue.iso_nc.title %>
     </p>
 
+    <p>
+        <b>Assigned Officer: </b> 
+        <% if @issue.responsible_officer_id != nil %>
+          <%= User.find(@issue.responsible_officer_id).name %>
+        <% else %>
+          None
+        <% end %>
+    </p>
+    <%= link_to 'Back', officer_issues_path, class: "btn btn-link" %>
+
   </div>
   <div class="span9">
     <%= render 'causes_show' %>
     <%= link_to 'Add Cause', new_officer_issue_cause_path(@issue) , class: "btn btn-small btn-primary" %>
     <%= render 'actionplans_show' %>
     <%= link_to 'Add New Action Plan', new_officer_action_plan_path, class: "btn btn-small btn-primary" %>
-    <%= link_to 'Back', officer_issues_path, class: "btn btn-link" %>
+    
   </div>
 </div>

@@ -9,6 +9,7 @@
       <th>Status</th> <!--replaced Department in favor of Status-->
       <th>Type</th>
       <th>ISO Id</th>
+      <th>Assigned To</th>
 
     </tr>
 
@@ -20,6 +21,12 @@
         <td> <%= issue.issue_status.name %> </td>
         <td> <%= issue.issue_type.name %></td>
         <td> <%= issue.iso_nc.title %></td>
+        <td><% if issue.responsible_officer_id == nil %>
+                None
+             <% else %>
+                <%= User.find(issue.responsible_officer_id).name %>
+             <% end %>
+        </td>
       </tr>
     <% end %>
 
