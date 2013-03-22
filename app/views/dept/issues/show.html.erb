@@ -48,12 +48,18 @@
       <%= @issue.iso_nc.title %>
     </p>
 
-    <% if @issue.responsible_officer_id == nil %>
+    <p>
+      <b>Assigned Officer: </b> 
+        <% if @issue.responsible_officer_id != nil %>
+          <%= User.find(@issue.responsible_officer_id).name %>
+        <% else %>
+          None
+        <% end %>
+    </p>
+
+    <% if @issue.status_id != 7 && @issue.responsible_officer_id == nil %>
+      <%= render 'reject_issue' %>
       <%= render 'assign' %>
-    <% else %>
-      <p>
-        <b>Assigned Officer:</b> <%= User.find(@issue.responsible_officer_id).name %>
-      </p>
     <% end %>
     <%= link_to 'Back', dept_issues_path, class: "btn btn-link" %>
 

@@ -5,6 +5,7 @@ class Qmr::IssuesController < ApplicationController
   def index
      @issues = Issue.paginate(page: params[:page], per_page: 5)
      @issues_new = Issue.where("status_id = 1").paginate(page: params[:page], per_page: 5)
+     @issues_rejected = Issue.where("status_id = 7").paginate(page: params[:page], per_page: 5)
   end
 
   def new

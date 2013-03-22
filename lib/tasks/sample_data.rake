@@ -14,7 +14,7 @@ namespace :db do
     UserType.create!(name: 'Responsible Officer')
     UserType.create!(name: 'Incident Manager')
     UserType.create!(name: 'Auditor')
-    UserType.create!(name: 'Customer')
+    UserType.create!(name: 'Employee')
 
     #add sample Users
     admin1 = User.create!(name: 'Nico Catajoy', 
@@ -39,8 +39,9 @@ namespace :db do
     admin2.toggle!(:admin)
     admin2.toggle!(:with_role)
 
+    #Note: it accepted email like qmr@.a.com before, with extra misplaced dot
     User.create!(name: 'Isi QMR', 
-                  email: 'qmr@.a.com',
+                  email: 'qmr@a.com',
                   phone: '1234567',
                   mobile: '09123456789',
                   type_id: 4,
@@ -49,7 +50,7 @@ namespace :db do
                   password_confirmation: 'password')
 
     User.create!(name: 'Dept Head', 
-                  email: 'dept@.a.com',
+                  email: 'dept@a.com',
                   phone: '1234567',
                   mobile: '09123456789',
                   type_id: 2,
@@ -58,7 +59,7 @@ namespace :db do
                   password_confirmation: 'password')
 
     User.create!(name: 'Off Icer', 
-                  email: 'officer@.a.com',
+                  email: 'officer@a.com',
                   phone: '1234567',
                   mobile: '09123456789',
                   type_id: 3,
@@ -67,7 +68,7 @@ namespace :db do
                   password_confirmation: 'password')
 
     User.create!(name: 'Audi Thor', 
-                  email: 'auditor@.a.com',
+                  email: 'auditor@a.com',
                   phone: '1234567',
                   mobile: '09123456789',
                   type_id: 5,

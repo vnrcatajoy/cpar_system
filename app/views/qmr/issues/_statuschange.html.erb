@@ -11,4 +11,10 @@
 		<% end %>
 	<% end %>
 	<!--Rejectable only while still New-->
+<% else %>
+	<!-- Status=7 is Rejected, either Close Rejected Issues or set them back to New or Verified Status-->
+	<%= form_for [:qmr, issue] do |f| %>
+    	<%= f.hidden_field :status_id, value: 6 %>
+    	<%= f.submit "Close Issue", confirm: 'Are you sure you want to Close this Issue? If Issue is improperly Rejected, set it back to Verified instead.', class: "btn btn-link" %>
+	<% end %>
 <% end %>

@@ -1,0 +1,6 @@
+<%= form_for [:dept, @issue] do |f| %>
+	<%= f.hidden_field :status_id, value: 7 %>
+
+	<%= f.submit "Reject Issue", confirm: 'Are you sure you want to mark this Issue as Unwarranted for CPAR? This is still subject to review by Incident Manager.', class: "btn btn-small btn-primary" %>
+<% end %>
+<!--Later on, when comments model added, specify reason why Unwarranted, maybe String Text field-->

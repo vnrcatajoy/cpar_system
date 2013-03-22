@@ -5,6 +5,8 @@ class Dept::UsersController < ApplicationController
   def index
   	@users = User.where("department_id = " + current_user.department_id.to_s).paginate(page: params[:page], per_page: 10)
   end
+  #Add - Designate user for Changing to Responsible Officer
+  #       *Must be Employee
 
   def show
   	@user = User.find(params[:id])
