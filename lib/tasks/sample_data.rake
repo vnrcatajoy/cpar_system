@@ -32,12 +32,48 @@ namespace :db do
                   email: 'homer.isidro@gmail.com',
                   phone: '1234567',
                   mobile: '09123456789',
-                  type_id: 2,
+                  type_id: 1,
                   department_id: 1,
                   password: 'password',
                   password_confirmation: 'password')
     admin2.toggle!(:admin)
     admin2.toggle!(:with_role)
+
+    User.create!(name: 'Isi QMR', 
+                  email: 'qmr@.a.com',
+                  phone: '1234567',
+                  mobile: '09123456789',
+                  type_id: 4,
+                  department_id: 2,
+                  password: 'password',
+                  password_confirmation: 'password')
+
+    User.create!(name: 'Dept Head', 
+                  email: 'dept@.a.com',
+                  phone: '1234567',
+                  mobile: '09123456789',
+                  type_id: 2,
+                  department_id: 1,
+                  password: 'password',
+                  password_confirmation: 'password')
+
+    User.create!(name: 'Off Icer', 
+                  email: 'officer@.a.com',
+                  phone: '1234567',
+                  mobile: '09123456789',
+                  type_id: 3,
+                  department_id: 1,
+                  password: 'password',
+                  password_confirmation: 'password')
+
+    User.create!(name: 'Audi Thor', 
+                  email: 'auditor@.a.com',
+                  phone: '1234567',
+                  mobile: '09123456789',
+                  type_id: 5,
+                  department_id: 2,
+                  password: 'password',
+                  password_confirmation: 'password')
 
     20.times do |n|
       name = Faker::Name.name
@@ -99,7 +135,7 @@ namespace :db do
                     type_id: 1,
                     iso_nc_id: 1)
 
-    5.times do |i|
+    10.times do |i|
       title = "Sample Title#{i+1}"
       description = "Sample Description#{i+1}"
       user_id = i + 1 
@@ -119,12 +155,13 @@ namespace :db do
                       iso_nc_id: iso_nc_id)
     end
 
-    5.times do |a|
+    10.times do |a|
       
       description = "This is the #{a}th Action Plan for the #{a}th Issue. Edit this #{a}th description later on."
+      stat_id = (a%5) + 1
 
       actplan = ActionPlan.create!(description: description, 
-                  issue_id: a+1, ap_status_id: a+1)
+                  issue_id: a+1, ap_status_id: stat_id)
 
       # Can't populate-generate Activities under Action Plan because one way or the
       # other, either action_plan_id or user_id of the Activity will be left blank,
