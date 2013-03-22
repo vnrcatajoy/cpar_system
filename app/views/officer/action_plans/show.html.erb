@@ -4,6 +4,7 @@
 <div class="row">
   <div class="span6">
   		<p><strong>Action Plan Status: </strong><i><%= ActionPlanStatus.find(@action_plan.ap_status_id).name %></i></p>
+  		<p>
   		<% if @action_plan.ap_status_id == 1 %>
 			<strong>This Action plan has not yet been reviewed.</strong>
 		<% else %>
@@ -15,10 +16,15 @@
 					<%= User.find(@action_plan.ap_reviewer_id).name %>
 				<% end %>
 		<% end %>
+		</p>
 		<p><strong>Assigned Officer:</strong>
 		<% if @action_plan.responsible_officer_id != nil %>
 			<%= User.find(@action_plan.responsible_officer_id).name %>
 		<% end %></p>
+		<% if @action_plan.implementation_reviewer_id != nil %>
+			<p><b>Action Plan Implementation reviewed by: </b>
+			<%= User.find(@action_plan.implementation_reviewer_id).name %></p>
+		<% end %>
 		<br/>
 		<h4>Details</h4>
 		<p> <strong>Description:</strong> </p>

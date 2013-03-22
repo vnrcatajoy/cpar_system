@@ -3,7 +3,8 @@ class Auditor::ActionPlansController < ApplicationController
   before_filter :auditor_user
 
   def index
-    @action_plans = ActionPlan.paginate(page: params[:page],  per_page: 15)
+    @action_plans = ActionPlan.paginate(page: params[:page],  per_page: 10)
+    @action_plans_markasimplement = ActionPlan.where(ap_status_id: 2, implemented: 't').paginate(page: params[:page],  per_page: 5)
   end
 
   def review
@@ -23,6 +24,16 @@ class Auditor::ActionPlansController < ApplicationController
     @action_plan.ap_status_id = 5
     if @action_plan.save
       flash[:success] = "Action Plan Rejected. It will now be closed for edits."
+      redirect_to auditor_action_plan_path
+    end
+  end
+
+  def implemented
+    @action_plan = ActionPlan.find params[:id]
+    @action_plan.ap_status_id = 3
+    @action_plan.implementation_reviewer_id = current_user.id
+    if @action_plan.save
+      flash[:success] = "Action Plan Marked as Implemented."
       redirect_to auditor_action_plan_path
     end
   end

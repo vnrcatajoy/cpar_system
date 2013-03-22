@@ -6,6 +6,7 @@ class Auditor::DashboardController < ApplicationController
   	@action_plans = ActionPlan.all
   	@action_plans_new = ActionPlan.where("ap_status_id = 1")
   	@action_plans_review = ActionPlan.where("ap_status_id = 2")
+    @action_plans_markasimplement = ActionPlan.where(ap_status_id: 2, implemented: 't')
   	# For reviewing if ACtion Plan properly implemented
   	@issues = Issue.all
   	@issues_verified = Issue.where("status_id = 2")
