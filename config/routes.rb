@@ -23,7 +23,9 @@ CparSystem::Application.routes.draw do
 
   namespace :qmr do
     get '', to: 'dashboard#index', as: '/'
-    resources :issues
+    resources :issues do 
+      get 'statuschange', on: :member
+    end
   end
 
   namespace :auditor do

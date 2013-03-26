@@ -36,8 +36,12 @@ class IssuesController < ApplicationController
     if current_user.department_id != @issue.department_id
       if !current_user.admin? 
       #remove this condition if admin mustn't be allowed to view all Issues in public
-        flash[:error] = "You cannot view that Issue."
-        redirect_to issues_path
+        if current_user.id == @issue.user_id
+          flash[:success] = "Viewing your submitted Issue."
+        else
+          flash[:error] = "You cannot view that Issue."
+          redirect_to issues_path
+        end
       end 
     end
   end

@@ -32,6 +32,15 @@ class Qmr::IssuesController < ApplicationController
     @issue = Issue.find params[:id]
   end
 
+  def statuschange
+    issue = Issue.find params[:id]
+    issue.status_id = params[:stat_id]
+    if issue.save
+      flash[:success] = "Issue Status updated."
+      redirect_to qmr_issue_path
+    end
+  end
+
   def update
     issue = Issue.find params[:id]
 

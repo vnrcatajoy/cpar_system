@@ -6,7 +6,7 @@ class Officer::DashboardController < ApplicationController
   	@action_plans = ActionPlan.all
   	@action_plans_yours = ActionPlan.where("responsible_officer_id = " + current_user.id.to_s)
   	@issues = Issue.where("department_id = " + current_user.department_id.to_s)
-  	@issues_yours = Issue.where("responsible_officer_id = " + current_user.id.to_s)
+  	@issues_yours = Issue.where("department_id = " + current_user.department_id.to_s + " AND responsible_officer_id = " + current_user.id.to_s)
   end
 
   private

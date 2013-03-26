@@ -8,7 +8,7 @@
 		<% if @action_plan.ap_status_id == 1 %>
 			<strong>This Action plan has not yet been reviewed.</strong>
 			<!--insert button to Review this as an Auditor-->
-			<p><%= "Signed in as: #{current_user.name}" %>
+			<p>
 				<%= render 'review' , action_plan: @action_plan %>
 				<%= render 'reject', action_plan: @action_plan %>
 			</p>
@@ -47,7 +47,7 @@
 		<div class="span9">
 		<!--Show Activities under this Action Plan-->
 		<%= render 'shared/activities_show', action_plan: @action_plan  %>
-	    <%= link_to 'Back', auditor_action_plans_path , class: "btn btn-small btn-primary"%></p>
+	    <%= link_to 'Back', auditor_action_plans_path , class: "btn btn-link"%></p>
 	
 		</div>
 </div>
