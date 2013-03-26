@@ -14,6 +14,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     #change code later so Admin will still need to approve User registration
     if @user.save
+      UserMailer.welcome_email(@user).deliver 
       sign_in @user
       flash[:success] = "Registration Success!" 
       redirect_to @user
