@@ -8,10 +8,11 @@ class Admin::UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
-    #change code later so Admin will still need to approve User registration
     if @user.save
-      flash[:success] = "Successfully added new User: #{@user.name}!" 
-      redirect_to admin_user_path(@user)
+      @user.send_verification_email
+      flash[:success] = "Successfully added new User: #{@user.name}! 
+        Please ask User to verify his or her email account next from their email." 
+      redirect_to admin_users_path
     else
       render 'new'
     end
@@ -19,6 +20,17 @@ class Admin::UsersController < ApplicationController
 
   def index
   	@users = User.paginate(page: params[:page],  per_page: 10)
+    @users_enable = User.where(verified: 't', account_enabled: 'f').paginate(page: params[:page],  per_page: 5)
+  end
+
+  def activate
+    @user = User.find(params[:id])
+    @user.account_enabled = true
+    if @user.save
+      UserMailer.welcome_email(@user).deliver
+      flash[:success] = "Successfully activated this User's account and sent Welcome Email."
+      redirect_to admin_users_path
+    end
   end
 
   def edit

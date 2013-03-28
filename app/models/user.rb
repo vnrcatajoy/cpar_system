@@ -27,6 +27,13 @@ class User < ActiveRecord::Base
     UserMailer.password_reset(self).deliver
   end
 
+  def send_verification_email
+    create_verification_token
+    self.verification_sent_at = Time.zone.now
+    save!
+    UserMailer.verify_email(self).deliver
+  end
+
   private
 
     def create_remember_token
@@ -35,5 +42,9 @@ class User < ActiveRecord::Base
 
     def create_password_reset_token
       self.password_reset_token = SecureRandom.urlsafe_base64
+    end
+
+    def create_verification_token
+      self.verification_token = SecureRandom.urlsafe_base64
     end
 end

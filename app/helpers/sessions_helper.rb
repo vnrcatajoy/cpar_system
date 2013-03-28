@@ -63,7 +63,7 @@ module SessionsHelper
     elsif current_user.type_id==5
       auditor_path
     else
-      root_path
+      issues_path
     end
   end
 end

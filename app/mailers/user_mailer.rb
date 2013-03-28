@@ -10,4 +10,9 @@ class UserMailer < ActionMailer::Base
     @user = user
     mail(:to => "#{user.name} <#{user.email}>", :subject => "[Web CPAR] Password Reset Request")
   end
+
+  def verify_email(user)
+    @user = user
+    mail(:to => "#{user.name} <#{user.email}>", :subject => "[Web CPAR] Verify Your Email")
+  end
 end

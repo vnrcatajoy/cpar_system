@@ -6,6 +6,7 @@ class SessionsController < ApplicationController
   def create
   	user = User.find_by_email(params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
+      # Add condition here later - User account must be verified and enabled to signin
       flash[:success] = 'Successfully loggged in!'
       sign_in user
       redirect_back_or role_control_panel

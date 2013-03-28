@@ -4,6 +4,7 @@ class Admin::DashboardController < ApplicationController
 
   def index
   	@users = User.all
+    @users_enable = User.where(verified: 't', account_enabled: 'f')
   	@users_dept = User.where("type_id = 2")
   	@users_officer = User.where("type_id = 3")
   	@users_qmr = User.where("type_id = 4")

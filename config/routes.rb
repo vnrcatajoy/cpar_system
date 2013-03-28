@@ -8,6 +8,7 @@ CparSystem::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :password_resets
+  resources :email_verifications
   
   resources :issues do
     resources :causes
@@ -19,7 +20,9 @@ CparSystem::Application.routes.draw do
 
   namespace :admin do
     get '', to: 'dashboard#index', as: '/'
-    resources :users
+    resources :users do
+      get 'activate', on: :member
+    end
   end
 
   namespace :qmr do
