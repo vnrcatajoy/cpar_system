@@ -9,6 +9,9 @@ gem 'sqlite3'
 gem 'bootstrap-sass', '2.1'
 gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.6'
+# Using gem mailcatcher, mailcatcher site itself suggested not to add to gemfile
+# but to use gem install mailcatcher instead. Just run mailcatcher at command line
+
 
 # Gems used only for assets and not required
 # in production environments by default.
