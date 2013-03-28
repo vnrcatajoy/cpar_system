@@ -7,6 +7,7 @@ CparSystem::Application.routes.draw do
 
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
+  resources :password_resets
   
   resources :issues do
     resources :causes
