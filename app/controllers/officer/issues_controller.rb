@@ -13,6 +13,13 @@ class Officer::IssuesController < ApplicationController
   	@issue = Issue.find params[:id]
     @causes= @issue.causes.paginate(page: params[:page],  per_page: 5)
     @action_plans = ActionPlan.where("issue_id = " + @issue.id.to_s).paginate(page: params[:page], per_page: 5)
+    # Decide if will move Causes and ActionPlans to details view for Officer controls
+  end
+
+  def details
+    @issue = Issue.find params[:id]
+    @causes= @issue.causes.paginate(page: params[:page],  per_page: 5)
+    @action_plans = ActionPlan.where("issue_id = " + @issue.id.to_s).paginate(page: params[:page], per_page: 5)
   end
 
   private

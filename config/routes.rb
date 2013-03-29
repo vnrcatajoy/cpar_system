@@ -11,6 +11,7 @@ CparSystem::Application.routes.draw do
   resources :email_verifications
   
   resources :issues do
+    get 'details', on: :member
     resources :causes
   end
 
@@ -29,6 +30,7 @@ CparSystem::Application.routes.draw do
     get '', to: 'dashboard#index', as: '/'
     resources :issues do 
       get 'statuschange', on: :member
+      get 'details', on: :member
     end
   end
 
@@ -39,7 +41,9 @@ CparSystem::Application.routes.draw do
       get 'reject', on: :member
       get 'implemented', on: :member
     end
-    resources :issues
+    resources :issues do
+      get 'details', on: :member
+    end
   end
 
   namespace :officer do
@@ -49,6 +53,7 @@ CparSystem::Application.routes.draw do
       get 'implemented', :on => :member
     end
     resources :issues do
+      get 'details', on: :member
       resources :causes
     end
   end
@@ -56,7 +61,9 @@ CparSystem::Application.routes.draw do
   namespace :dept do
     get '', to: 'dashboard#index', as: '/'
     resources :users
-    resources :issues
+    resources :issues do
+      get 'details', on: :member
+    end
   end
 
   get "sessions/new"

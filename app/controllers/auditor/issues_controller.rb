@@ -4,14 +4,19 @@ class Auditor::IssuesController < ApplicationController
 
   def show
   	@issue = Issue.find params[:id]
-    @causes= @issue.causes.paginate(page: params[:page],  per_page: 5)
-    @action_plans = ActionPlan.where("issue_id = " + @issue.id.to_s).paginate(page: params[:page], per_page: 5)
+    # moved Causes and ActionPlans to details view
   end
 
   def index
   	@issues = Issue.paginate(page: params[:page], per_page: 5)
     @issues_new = Issue.where("status_id = 1").paginate(page: params[:page], per_page: 5)
      #change to what Status/es for Issues Auditors need to see
+  end
+
+  def details
+    @issue = Issue.find params[:id]
+    @causes= @issue.causes.paginate(page: params[:page],  per_page: 5)
+    @action_plans = ActionPlan.where("issue_id = " + @issue.id.to_s).paginate(page: params[:page], per_page: 5)
   end
 
   private

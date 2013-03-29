@@ -66,13 +66,8 @@
           None
         <% end %>
     </p>
+    <%= link_to 'Show Details', details_auditor_issue_path, class: "btn btn-link" %>
     <%= link_to 'Back', auditor_issues_path, class: "btn btn-link" %>
   </div>
 
-  <div class="span9">
-    <hr>
-    <%= render 'causes_show' %>
-    <%= render 'actionplans_show' %>
-    
-  </div>
 </div>
