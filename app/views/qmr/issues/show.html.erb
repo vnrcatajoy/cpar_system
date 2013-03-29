@@ -8,8 +8,16 @@
       <%= @issue.title %>
     </h3>
 
+    <p>
+      <b>Status:</b>
+      <%= @issue.issue_status.name %>
+    </p>
+
     <%= render 'statuschange', issue: @issue %>
- 
+    
+    <hr>
+
+    <h4>Issue Details</h4>
     <p>
       <b>Description:</b>
       <%= @issue.description %>
@@ -47,11 +55,6 @@
     </p>
 
     <p>
-      <b>Status:</b>
-      <%= @issue.issue_status.name %>
-    </p>
-
-    <p>
       <b>ISO Reference ID:</b>
       <%= @issue.iso_nc.title %>
     </p>
@@ -70,6 +73,7 @@
   </div>
   
   <div class="span9">
+    <hr>
     <%= render 'causes_show' %>
     <%= render 'actionplans_show' %>
   </div>
