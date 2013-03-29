@@ -75,7 +75,11 @@
     <%= render 'causes_show' %>
     <%= link_to 'Add Cause', new_officer_issue_cause_path(@issue) , class: "btn btn-small btn-primary" %>
     <%= render 'actionplans_show' %>
-    <%= link_to 'Add New Action Plan', new_officer_action_plan_path, class: "btn btn-small btn-primary" %>
+    <% if @issue.causes.empty? %>
+      Add a Cause above first before adding an Action Plan
+    <% else %>
+      <%= link_to 'Add New Action Plan', new_officer_action_plan_path, class: "btn btn-small btn-primary" %>
+    <% end %>
     
   </div>
 </div>

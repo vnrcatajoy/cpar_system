@@ -3,6 +3,7 @@ class Officer::CausesController < ApplicationController
   before_filter :responsibleofficer_user
   before_filter :issue_notnil
   before_filter :set_user
+  before_filter :assigned_officer, only: [:new, :edit, :destroy]
 
   def new
   	@cause = Cause.new(params[:cause])
@@ -12,8 +13,16 @@ class Officer::CausesController < ApplicationController
     @cause = @issue.causes.build(params[:cause])
     @cause.user_id = @user.id
     if @cause.save
-      flash[:success] = "Successfully added new Cause!" 
-      redirect_to [:officer, @issue]
+      if @issue.status_id == 3
+        @issue.status_id = 4 
+        if @issue.save
+          flash[:success] = "Successfully added new Cause! Updated Issue status to \'Correcting\'." 
+          redirect_to [:officer, @issue]
+        end
+      else
+        flash[:success] = "Successfully added new Cause!." 
+        redirect_to [:officer, @issue]
+      end
     else
       flash.now[:error] = "Please fill in the fields properly." 
       render 'new'
@@ -60,5 +69,12 @@ class Officer::CausesController < ApplicationController
 
   def responsibleofficer_user
     redirect_to(root_path) unless current_user.type_id==3
+  end
+
+  def assigned_officer 
+    if @issue.responsible_officer_id != current_user.id
+      flash[:error] = "You're not allowed to Add or Edit Causes for Issues not assigned to you."
+      redirect_to officer_issues_path
+    end
   end
 end
