@@ -9,6 +9,8 @@ CparSystem::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :password_resets
   resources :email_verifications
+
+  resources :issue_attachments, only: [:create, :destroy]
   
   resources :issues do
     get 'details', on: :member

@@ -7,6 +7,7 @@ class Issue < ActiveRecord::Base
   belongs_to :iso_nc, :foreign_key => 'iso_nc_id', :class_name => 'IsoNc'
 
   has_many :causes, dependent: :destroy
+  has_many :issue_attachments, dependent: :destroy
 
   attr_accessible :action_plan_id, :cause_id, :department_id, :description, :impact_id, :iso_nc_id, :user_id, :status_id, :title, :type_id, :responsible_officer_id
 

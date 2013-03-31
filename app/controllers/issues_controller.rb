@@ -40,6 +40,7 @@ class IssuesController < ApplicationController
 
   def edit
     @issue = Issue.find params[:id]
+    @issue_attachment = IssueAttachment.new
   end
 
   def update

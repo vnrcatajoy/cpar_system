@@ -30,6 +30,19 @@
 
 	 <%= f.submit "Update", class: "btn btn-link" %>
 	 <% end %>
+	 <hr>
+	 <%= form_for(@issue_attachment) do |f| %>
+  	    <%= f.label "Choose File" %>
+  	    <%= f.file_field :myfile %>
+
+  	    <%= f.label :description %>
+  	    <%= f.text_field :description %>
+
+  	    <%= f.hidden_field :user_id, value: current_user.id %>
+  	    <%= f.hidden_field :issue_id, value: @issue.id %>
+
+  	    <%= f.submit "Attach File", issue_id: @issue.id, class: "btn btn-link" %>
+      <% end %>
       <%= link_to 'Back', issues_path, class: "btn btn-link" %>
   </div>
 </div>

@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   belongs_to :user_type, :foreign_key => 'type_id'
   belongs_to :department
 
+  has_many :issue_attachments
+
   attr_accessible :department_id, :email, :mobile, :name, :phone, :type_id, 
   						:password, :password_confirmation
   has_secure_password
