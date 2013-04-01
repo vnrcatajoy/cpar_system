@@ -8,6 +8,7 @@ class Issue < ActiveRecord::Base
 
   has_many :causes, dependent: :destroy
   has_many :issue_attachments, dependent: :destroy
+  has_many :next_responsible_departments, dependent: :destroy
 
   attr_accessible :action_plan_id, :cause_id, :department_id, :description, :impact_id, :iso_nc_id, :user_id, :status_id, :title, :type_id, :responsible_officer_id
 

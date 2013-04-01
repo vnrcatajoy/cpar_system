@@ -30,9 +30,11 @@ CparSystem::Application.routes.draw do
 
   namespace :qmr do
     get '', to: 'dashboard#index', as: '/'
+    resources :next_responsible_departments, only: [:create, :update, :destroy]
     resources :issues do 
       get 'statuschange', on: :member
       get 'details', on: :member
+      get 'edit_departments', on: :member
     end
   end
 

@@ -34,8 +34,15 @@
     </p>
 
     <p>
-      <b>Department:</b>
+      <b>Departments:</b>
       <%= @issue.department.name %>
+      <% if @issue.next_responsible_departments.any? %>
+        <% @issue.next_responsible_departments.each do |nrd| %>
+          <%= ", "+ Department.where(id: nrd.department_id).first.name %>
+          <!--+ " (" + nrd.responsibility_level.to_s + ")"-->
+          <%= link_to "(remove)", qmr_next_responsible_department_path(nrd, issue_id: @issue.id), confirm: "Are You sure you want to remove this Department?", method: :delete  %>
+        <% end %>
+      <% end %>
     </p>
 
     <p>
@@ -70,6 +77,7 @@
 
     <%= link_to 'Show Details', details_qmr_issue_path, class: "btn btn-link" %>
     <%= link_to 'Edit', edit_qmr_issue_path(@issue), class: "btn btn-link" %>
+    <%= link_to 'Edit Departments', edit_departments_qmr_issue_path(@issue), class: "btn btn-link" %>
     <%= link_to 'Back', qmr_issues_path, class: "btn btn-link" %>
   </div>
   

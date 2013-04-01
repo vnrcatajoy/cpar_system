@@ -25,9 +25,14 @@
   
 <br/>
 
-<%= f.label :department_id %> 
-<%= f.select :department_id, Department.all.collect { |d| [d.name, d.id] } %>
-<br/> 
+<% if @issue.id == nil %>  
+  <%= f.label :department_id %> 
+  <%= f.select :department_id, Department.all.collect { |d| [d.name, d.id] } %>
+  <br/>
+<% else %> 
+  <label for="department">Issue under Department:</label>
+  <input type="text" id="department" value= "<%= Department.where(id: @issue.department_id).first.name %>" disabled>
+<% end %>
 
 <%= f.label :type_id %>
 <%= f.select :type_id, IssueType.all.collect { |t| [t.name, t.id] } %>
@@ -51,5 +56,5 @@
 <%= f.select :iso_nc_id, IsoNc.all.collect { |i| [i.title, i.id] } %>
 <br/>
 
-<%= f.submit %>
+<%= f.submit "Update issue", class: "btn btn-link" %>
 <% end %>

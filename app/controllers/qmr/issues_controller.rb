@@ -37,6 +37,12 @@ class Qmr::IssuesController < ApplicationController
     @issue = Issue.find params[:id]
   end
 
+  def edit_departments
+    @issue = Issue.find params[:id]
+    @nrds = depts_added_to_issue(@issue)
+    @next_responsible_department = NextResponsibleDepartment.new
+  end
+
   def statuschange
     issue = Issue.find params[:id]
     issue.status_id = params[:stat_id]
@@ -48,7 +54,10 @@ class Qmr::IssuesController < ApplicationController
 
   def update
     issue = Issue.find params[:id]
-
+    if issue.department_id != params[:issue][:department_id]
+      # Department has been changed; Only changeable in edit_departments
+      new_department1_is_in_depts(issue, params[:issue][:department_id])
+    end
     if issue.update_attributes params[:issue]
       redirect_to qmr_issue_path, :notice => 'The issue has been updated successfuly!'  
     else
@@ -65,5 +74,43 @@ class Qmr::IssuesController < ApplicationController
 
   def qmr_user
       redirect_to(root_path) unless current_user.type_id==4
+  end
+
+  def new_department1_is_in_depts(issue, new_dept_id)
+    # Use: Pop Department in issue.NRD if it's to be Assigned to issue.Department1
+    # If it's not already in issue.NRD, just save the new addition to NRD
+    # (Push the PREVIOUS Department1 pushed off Top1 to issue.NRD)
+    #depts_under_issue = Array.new #Array of department ids already added
+    #outmessage=""
+    nrds= NextResponsibleDepartment.where(issue_id: issue.id)
+    destroyed=false
+    #testmessage=""
+    nrds.each do |nrd|
+      #testmessage += "["+ nrd.department_id.to_s + ", " + new_dept_id.to_s + "] "
+       if nrd.department_id.to_s == new_dept_id.to_s
+          #outmessage += "Successfully Popped Department with id of " + new_dept_id + " off NRD. "
+          nrd.destroy
+          destroyed=true
+       end
+    end
+    if destroyed
+      @nrd_new = issue.next_responsible_departments.build({issue_id: issue.id, department_id: issue.department_id, dept_status_id: issue.status_id, responsibility_level: 2 })
+      # Add previous 1st Department under Issue to issue.NextResponsibleDepartment
+      if @nrd_new.save
+        #outmessage += "Successfully Pushed previous Department1 into NRD instead."
+      end
+    end
+    #flash[:success]= outmessage+" || "+testmessage
+  end
+
+  def depts_added_to_issue(issue)
+    depts_under_issue = Array.new #Array of department ids already added
+    depts_under_issue << issue.department_id
+    found_dept = true
+    nrds= NextResponsibleDepartment.where(issue_id: @issue.id)
+    nrds.each do |nrd|
+       depts_under_issue << nrd.department_id
+    end
+    depts_under_issue
   end
 end
