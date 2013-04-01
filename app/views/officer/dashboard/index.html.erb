@@ -11,4 +11,5 @@
 <h4>Issues Summary</h4>
 <p><b>All Issues Under Department: </b><%= @issues.count %></p>
 <p><b>Issues Assigned to You: </b><%= @issues_yours.count %></p>
+<p><b>Issues Secondarily Assigned to You: </b><%= @issues_secondary.count %></p>
 <%= link_to 'View All Issues', officer_issues_path, class: "btn btn-link" %>

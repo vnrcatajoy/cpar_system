@@ -12,15 +12,25 @@ class Officer::CausesController < ApplicationController
   def create
     @cause = @issue.causes.build(params[:cause])
     @cause.user_id = @user.id
+    @nrd = NextResponsibleDepartment.find_by_issue_id(@issue.id)
+    addstring = ""
     if @cause.save
-      if @issue.status_id == 3
-        @issue.status_id = 4 
+      if @nrd != nil && @nrd.dept_status_id < 4
+        @nrd.dept_status_id = 4
+        if @nrd.save
+          addstring = "Updated Issue status under secondary Department to \'Correcting\'."
+          flash[:success] = "Successfully added new Cause! " + addstring
+          redirect_to [:officer, @issue]
+        end
+      elsif @issue.status_id == 3
+        @issue.status_id = 4
+        addstring = "Updated Issue status to \'Correcting\'."
         if @issue.save
-          flash[:success] = "Successfully added new Cause! Updated Issue status to \'Correcting\'." 
+          flash[:success] = "Successfully added new Cause! " + addstring
           redirect_to [:officer, @issue]
         end
       else
-        flash[:success] = "Successfully added new Cause!." 
+        flash[:success] = "Successfully added new Cause!"
         redirect_to [:officer, @issue]
       end
     else
@@ -72,7 +82,17 @@ class Officer::CausesController < ApplicationController
   end
 
   def assigned_officer 
-    if @issue.responsible_officer_id != current_user.id
+    #@issue = Issue.find(params[:id])
+    @nrds = NextResponsibleDepartment.where("issue_id = ?", @issue.id)
+    found_nrds = false
+    @nrds.each do |n|
+      if n.responsible_officer_id == current_user.id
+        found_nrds = true
+      end
+    end
+    if found_nrds
+      flash[:success] = "Root Cause Adding/Editing by Secondary Officer" 
+    elsif @issue.responsible_officer_id != current_user.id
       flash[:error] = "You're not allowed to Add or Edit Causes for Issues not assigned to you."
       redirect_to officer_issues_path
     end

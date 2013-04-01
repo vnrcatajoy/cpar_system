@@ -4,7 +4,11 @@ before_filter :responsibleofficer_user
 
   def new
   	@action_plan = ActionPlan.new
-    @issues = Issue.where("department_id = " + current_user.department_id.to_s).paginate(page: params[:page], per_page: 5)
+    #@issues = Issue.where("department_id = ?", current_user.department_id).paginate(page: params[:page], per_page: 5)
+    #@nrds = NextResponsibleDepartment.where("responsible_officer_id =  " + current_user.id.to_s)
+    #@nrds.each do |n|
+     # @issues << Issue.find_by_id(n.issue_id)
+    #end
     #change later to all issue where responsible_officer_id = this
     #Naturally, Responsible officer can only be assigned to Issue in his department
   end

@@ -30,7 +30,7 @@ CparSystem::Application.routes.draw do
 
   namespace :qmr do
     get '', to: 'dashboard#index', as: '/'
-    resources :next_responsible_departments, only: [:create, :update, :destroy]
+    resources :next_responsible_departments, only: [:create, :destroy]
     resources :issues do 
       get 'statuschange', on: :member
       get 'details', on: :member
@@ -68,6 +68,7 @@ CparSystem::Application.routes.draw do
     resources :issues do
       get 'details', on: :member
     end
+    resources :next_responsible_departments, only: :update
   end
 
   get "sessions/new"

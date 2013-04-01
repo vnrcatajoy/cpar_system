@@ -1,10 +1,16 @@
 class Dept::IssuesController < ApplicationController
   before_filter :signed_in_user
   before_filter :dept_user
+  before_filter :correct_department, only: :show
 
   def index
   	@issues = Issue.where("department_id = " + current_user.department_id.to_s).paginate(page: params[:page], per_page: 5)
-    @issues_verified = Issue.where("department_id = " + current_user.department_id.to_s + " AND status_id = 2").paginate(page: params[:page], per_page: 5)  	
+    @issues_verified = Issue.where("department_id = " + current_user.department_id.to_s + " AND status_id = 2").paginate(page: params[:page], per_page: 5)
+    @nrds = NextResponsibleDepartment.where("department_id = " + current_user.department_id.to_s)
+    @issues_secondary = Array.new
+    @nrds.each do |nrd|
+      @issues_secondary << Issue.find(nrd.issue_id)
+    end
   end
 
   def details
@@ -30,10 +36,28 @@ class Dept::IssuesController < ApplicationController
   	@issue = Issue.find params[:id]
     @users = User.where("department_id = " + current_user.department_id.to_s + " AND type_id = 3")
     # moved Causes and ActionPlans to details view
+    @nrd= NextResponsibleDepartment.find_by_issue_id(@issue.id)
   end
 
   private
   def dept_user
       redirect_to(root_path) unless current_user.type_id==2
+  end
+
+  def correct_department
+    @issue = Issue.find params[:id]
+    @nrds = NextResponsibleDepartment.where("issue_id = ?", @issue.id)
+    found_nrds = false
+    @nrds.each do |n|
+      if n.department_id == current_user.department_id
+        found_nrds = true
+      end
+    end
+    if found_nrds
+      flash[:success] = "Viewing Issue Secondarily assigned to your Department" 
+    elsif current_user.department_id != @issue.department_id
+      flash[:error] = "You cannot view an Issue not assigned to your Department."
+      redirect_to dept_issues_path
+    end
   end
 end
