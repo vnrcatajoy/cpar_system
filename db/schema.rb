@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130401011749) do
+ActiveRecord::Schema.define(:version => 20130401134547) do
 
   create_table "action_plan_statuses", :force => true do |t|
     t.string   "name"
@@ -52,6 +52,17 @@ ActiveRecord::Schema.define(:version => 20130401011749) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.integer  "issue_id"
+  end
+
+  create_table "closeout_forms", :force => true do |t|
+    t.integer  "auditor_id"
+    t.integer  "issue_id"
+    t.integer  "qmr_id"
+    t.boolean  "completed",     :default => false
+    t.boolean  "boolean",       :default => false
+    t.date     "closeout_date"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
   create_table "departments", :force => true do |t|

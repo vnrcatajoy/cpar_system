@@ -36,6 +36,7 @@ CparSystem::Application.routes.draw do
       get 'details', on: :member
       get 'edit_departments', on: :member
     end
+    resource :closeout_form
   end
 
   namespace :auditor do
@@ -48,6 +49,7 @@ CparSystem::Application.routes.draw do
     resources :issues do
       get 'details', on: :member
     end
+    resource :closeout_form
   end
 
   namespace :officer do
@@ -60,6 +62,7 @@ CparSystem::Application.routes.draw do
       get 'details', on: :member
       resources :causes
     end
+    resource :closeout_form
   end
 
   namespace :dept do
@@ -69,6 +72,7 @@ CparSystem::Application.routes.draw do
       get 'details', on: :member
     end
     resources :next_responsible_departments, only: :update
+    resource :closeout_form
   end
 
   get "sessions/new"
