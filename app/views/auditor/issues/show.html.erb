@@ -33,8 +33,14 @@
     </p>
 
     <p>
-      <b>Department:</b>
+      <b>Departments:</b>
       <%= @issue.department.name %>
+      <% if @issue.next_responsible_departments.any? %>
+        <% @issue.next_responsible_departments.each do |nrd| %>
+          <%= ", "+ Department.where(id: nrd.department_id).first.name %>
+          <!--+ " (" + nrd.responsibility_level.to_s + ")"-->
+        <% end %>
+      <% end %>
     </p>
 
     <p>

@@ -9,7 +9,7 @@ class Auditor::IssuesController < ApplicationController
 
   def index
   	@issues = Issue.paginate(page: params[:page], per_page: 5)
-    @issues_new = Issue.where("status_id = 1").paginate(page: params[:page], per_page: 5)
+    @issues_correcting = Issue.where("status_id = 4").paginate(page: params[:page], per_page: 5)
      #change to what Status/es for Issues Auditors need to see
   end
 

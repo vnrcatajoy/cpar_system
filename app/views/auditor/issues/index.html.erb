@@ -35,7 +35,7 @@
   </table>
   <%= will_paginate %>
 
-<h2>New Issues for Approval</h2>
+<h2>Issues currently Correcting (For Action Plan review)</h2>
 <table class="table table-striped table-bordered">
     <tr>
       <th>Title</th>
@@ -47,7 +47,7 @@
 
     </tr>
 
-    <% @issues_new.each do |issue| %>
+    <% @issues_correcting.each do |issue| %>
       <tr>
         <td> <%= link_to issue.title, auditor_issue_path(issue) %> </td>
         <td> <%= issue.user.name %> </td>

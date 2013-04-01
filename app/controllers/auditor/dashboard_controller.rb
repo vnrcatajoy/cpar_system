@@ -9,7 +9,7 @@ class Auditor::DashboardController < ApplicationController
     @action_plans_markasimplement = ActionPlan.where(ap_status_id: 2, implemented: 't')
   	# For reviewing if ACtion Plan properly implemented
   	@issues = Issue.all
-  	@issues_verified = Issue.where("status_id = 2")
+  	@issues_correcting = Issue.where("status_id = 4")
   end
 
   private

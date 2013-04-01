@@ -11,5 +11,5 @@
 <br>
 <h4>Issues Summary</h4>
 <p><b>All Issues: </b><%= @issues.count %></p>
-<p><b>Verified Issues: </b><%= @issues_verified.count %></p>
+<p><b>Issues currently undergoing Correcting: </b><%= @issues_correcting.count %></p>
 <%= link_to 'View All Issues', auditor_issues_path, class: "btn btn-link" %>
