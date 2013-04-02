@@ -13,6 +13,13 @@
       <%= @issue.issue_status.name %>
     </p>
 
+    <% if @action_plans.any? && @closeoutforms.count == 0 %>
+      <!--<%= @action_plans.count.to_s + " APs found implemented" %>-->
+      <%= render 'start_closeout', cof: @cof %>
+    <% else %>
+      Closeout form started, View it in details. 
+    <% end %>
+
     <hr>
 
     <h4>Issue Details</h4>

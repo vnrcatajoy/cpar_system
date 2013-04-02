@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130401134547) do
+ActiveRecord::Schema.define(:version => 20130402071243) do
 
   create_table "action_plan_statuses", :force => true do |t|
     t.string   "name"
@@ -52,6 +52,15 @@ ActiveRecord::Schema.define(:version => 20130401134547) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.integer  "issue_id"
+  end
+
+  create_table "closeout_form_depts", :force => true do |t|
+    t.integer  "dept_id"
+    t.integer  "dept_head_id"
+    t.integer  "officer_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "closeout_form_id"
   end
 
   create_table "closeout_forms", :force => true do |t|

@@ -5,6 +5,10 @@ class Auditor::IssuesController < ApplicationController
   def show
   	@issue = Issue.find params[:id]
     # moved Causes and ActionPlans to details view
+    @action_plans = ActionPlan.where(issue_id: @issue.id, implemented: 't')
+    @closeoutforms= CloseoutForm.where(issue_id: @issue.id)
+    @closeoutform = CloseoutForm.new
+    #@cof = CloseoutForm.find_by_issue_id(@issue.id) #should be in details
   end
 
   def index
@@ -17,6 +21,10 @@ class Auditor::IssuesController < ApplicationController
     @issue = Issue.find params[:id]
     @causes= @issue.causes.paginate(page: params[:page],  per_page: 5)
     @action_plans = ActionPlan.where("issue_id = " + @issue.id.to_s).paginate(page: params[:page], per_page: 5)
+    @cof = CloseoutForm.find_by_issue_id(@issue.id)
+    if @cof.closeout_form_depts.empty?
+      generate_closeoutform_depts
+    end
   end
 
   private
@@ -24,4 +32,16 @@ class Auditor::IssuesController < ApplicationController
   def auditor_user
       redirect_to(root_path) unless current_user.type_id==5
   end
+
+  def generate_closeoutform_depts
+    issue = Issue.find params[:id]
+    cof= CloseoutForm.find_by_issue_id(@issue.id)
+    @cof_dept = cof.closeout_form_depts.build({dept_id: issue.department_id, closeout_form_id: cof.id})
+    @cof_dept.save
+    issue.next_responsible_departments.each do |nrd|
+      @cof_dept=cof.closeout_form_depts.build({dept_id: nrd.department_id, closeout_form_id: cof.id})
+      @cof_dept.save
+    end
+  end
+  # Check for uniqueness later of Dept_id inside one COF before generating
 end
