@@ -31,6 +31,7 @@ class Qmr::IssuesController < ApplicationController
     @issue = Issue.find params[:id]
     @causes= @issue.causes.paginate(page: params[:page],  per_page: 5)
     @action_plans = ActionPlan.where("issue_id = " + @issue.id.to_s).paginate(page: params[:page], per_page: 5)
+    @cof = CloseoutForm.find_by_issue_id(@issue.id)
   end
 
   def edit

@@ -22,7 +22,7 @@ class Auditor::IssuesController < ApplicationController
     @causes= @issue.causes.paginate(page: params[:page],  per_page: 5)
     @action_plans = ActionPlan.where("issue_id = " + @issue.id.to_s).paginate(page: params[:page], per_page: 5)
     @cof = CloseoutForm.find_by_issue_id(@issue.id)
-    if @cof.closeout_form_depts.empty?
+    if @cof && @cof.closeout_form_depts.empty?
       generate_closeoutform_depts
     end
   end

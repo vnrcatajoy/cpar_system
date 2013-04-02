@@ -1,5 +1,6 @@
   <div class="span6 offset3">
     <% if @issue.issue_attachments.any? %>
+      <%= @issue.issue_attachments.count %> files attached to this Issue:
       <% @issue.issue_attachments.each do |issue_attachment| %>
         <p><b><i><%= issue_attachment.description %></i></b>
           <% if issue_attachment.myfile.file.extension == 'pdf' || issue_attachment.myfile.file.extension == 'doc' || issue_attachment.myfile.file.extension == 'docx'%>
@@ -8,7 +9,7 @@
           <% else %>
             <%= image_tag preview_or_default_image(issue_attachment) if issue_attachment.myfile? %>
           <% end %>
-          <%= link_to "Download file", issue_attachment.myfile.url, confirm: "Are you sure?" %>
+          <%= link_to "View file", issue_attachment.myfile.url %>
           <% if current_user.id == issue_attachment.user_id %>
             | <%= link_to "delete", issue_attachment_path(issue_attachment, issue_id: @issue.id), confirm: "Are You sure you want to delete this File?", method: :delete  %>
           <% end %>
