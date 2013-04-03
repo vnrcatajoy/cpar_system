@@ -1,2 +1,0 @@
-module Dept::CloseoutFormsHelper
-end

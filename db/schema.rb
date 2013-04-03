@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130402071243) do
+ActiveRecord::Schema.define(:version => 20130403082512) do
+
+  create_table "action_plan_comments", :force => true do |t|
+    t.integer  "action_plan_id"
+    t.text     "content"
+    t.integer  "user_id"
+    t.boolean  "log_comment",    :default => false
+    t.boolean  "boolean",        :default => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+  end
 
   create_table "action_plan_statuses", :force => true do |t|
     t.string   "name"
@@ -42,6 +52,16 @@ ActiveRecord::Schema.define(:version => 20130402071243) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.integer  "action_plan_id"
+  end
+
+  create_table "cause_comments", :force => true do |t|
+    t.integer  "cause_id"
+    t.text     "content"
+    t.integer  "user_id"
+    t.boolean  "log_comment", :default => false
+    t.boolean  "boolean",     :default => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "causes", :force => true do |t|
@@ -94,6 +114,16 @@ ActiveRecord::Schema.define(:version => 20130402071243) do
     t.integer  "issue_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "issue_comments", :force => true do |t|
+    t.integer  "issue_id"
+    t.text     "content"
+    t.integer  "user_id"
+    t.boolean  "log_comment", :default => false
+    t.boolean  "boolean",     :default => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "issue_impacts", :force => true do |t|

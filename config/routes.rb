@@ -37,7 +37,6 @@ CparSystem::Application.routes.draw do
       get 'edit_departments', on: :member
       get 'sign_closeout', on: :member
     end
-    resources :closeout_forms
   end
 
   namespace :auditor do
@@ -50,7 +49,7 @@ CparSystem::Application.routes.draw do
     resources :issues do
       get 'details', on: :member
     end
-    resources :closeout_forms
+    resources :closeout_forms, only: :create
   end
 
   namespace :officer do
@@ -64,7 +63,6 @@ CparSystem::Application.routes.draw do
       get 'sign_closeout', on: :member
       resources :causes
     end
-    resources :closeout_forms
   end
 
   namespace :dept do
@@ -75,7 +73,6 @@ CparSystem::Application.routes.draw do
       get 'sign_closeout', on: :member
     end
     resources :next_responsible_departments, only: :update
-    resources :closeout_forms
   end
 
   get "sessions/new"
