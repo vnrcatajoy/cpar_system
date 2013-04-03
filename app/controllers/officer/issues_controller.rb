@@ -30,6 +30,10 @@ class Officer::IssuesController < ApplicationController
     if @cofd.officer_id == nil 
       @cofd.officer_id = current_user.id
       if @cofd.save
+        @ic= @issue.issue_comments.build({content: "Officer signed Closeout Form.",
+            user_id: current_user.id, issue_id: @issue.id })
+        @ic.toggle!(:log_comment)
+        @ic.save
         flash[:success] = "Successfully signed Closeout form of Issue!"
         redirect_to details_officer_issue_path(@issue)
       end

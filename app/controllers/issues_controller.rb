@@ -20,9 +20,15 @@ class IssuesController < ApplicationController
   def create
     @issue = Issue.new params[:issue]
     if @issue.save
-      redirect_to issues_path, notice: 'The issue has been created!'
+      @ic= issue.issue_comments.build({content: "User submitted Issue.",
+            user_id: current_user.id, issue_id: issue.id })
+      @ic.toggle!(:log_comment)
+      @ic.save
+      flash[:success] = 'The issue has been created!'
+      redirect_to issues_path
     else
-      redirect_to :back, notice: 'There was an error in creating your issue.'
+      flash[:error]='There was an error in creating your issue.'
+      redirect_to :back
     end
   end
 
@@ -50,6 +56,10 @@ class IssuesController < ApplicationController
   def update
     issue = Issue.find params[:id]
     if issue.update_attributes params[:issue]
+      @ic= issue.issue_comments.build({content: "User updated their submitted Issue's details.",
+            user_id: current_user.id, issue_id: issue.id })
+      @ic.toggle!(:log_comment)
+      @ic.save
       flash[:success] = "The issue has been updated successfully!"
       redirect_to issue_path  
     else

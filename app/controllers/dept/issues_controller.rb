@@ -19,6 +19,10 @@ class Dept::IssuesController < ApplicationController
     if @cofd.dept_head_id == nil 
       @cofd.dept_head_id = current_user.id
       if @cofd.save
+        @ic= @issue.issue_comments.build({content: "Dept Head signed Closeout Form.",
+            user_id: current_user.id, issue_id: @issue.id })
+        @ic.toggle!(:log_comment)
+        @ic.save
         flash[:success] = "Successfully signed Closeout form of Issue!"
         redirect_to details_dept_issue_path(@issue)
       end
@@ -38,6 +42,10 @@ class Dept::IssuesController < ApplicationController
     @issue.status_id = 3 # Change from Verified to Investigating
     # Sure Verified first because of Assign form condition
     if @issue.update_attributes params[:issue]
+      @ic= @issue.issue_comments.build({content: "Dept Head assigned an Officer to Issue.",
+            user_id: current_user.id, issue_id: @issue.id })
+      @ic.toggle!(:log_comment)
+      @ic.save
       flash[:success] = 'Successfully Assigned Officer to Issue. Issue is now Investigating.'
       redirect_to dept_issues_path
     else

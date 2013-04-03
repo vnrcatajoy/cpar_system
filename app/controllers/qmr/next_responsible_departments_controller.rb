@@ -7,6 +7,10 @@ class Qmr::NextResponsibleDepartmentsController < ApplicationController
   	@next_responsible_department = @issue.next_responsible_departments.build(params[:next_responsible_department])
 #    if department_notexist(@issue, params[:next_responsible_department][:department_id])
       if @next_responsible_department.save
+        @ic= @issue.issue_comments.build({content: "QMR added a Department to Issue.",
+            user_id: current_user.id, issue_id: @issue.id })
+        @ic.toggle!(:log_comment)
+        @ic.save
         flash[:success] = "Department Successfully Added!"
         redirect_to qmr_issue_path(@issue)
       else
@@ -23,6 +27,10 @@ class Qmr::NextResponsibleDepartmentsController < ApplicationController
     @issue= Issue.find(params[:issue_id])
     @next_responsible_department = @issue.next_responsible_departments.find_by_id(params[:id])
     @next_responsible_department.destroy
+    @ic= @issue.issue_comments.build({content: "QMR removed Department from Issue.",
+            user_id: current_user.id, issue_id: @issue.id })
+      @ic.toggle!(:log_comment)
+      @ic.save
     flash[:success] = "Department removed!"
     redirect_to qmr_issue_path(@issue)
   end

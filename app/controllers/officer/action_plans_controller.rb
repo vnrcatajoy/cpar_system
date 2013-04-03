@@ -17,7 +17,12 @@ before_filter :responsibleofficer_user
   	@action_plan = ActionPlan.new(params[:action_plan])
     @action_plan.responsible_officer_id = current_user.id
     #since those who make action plans are responsible officers
+    @issue = Issue.find(params[:action_plan][:issue_id])
   	if @action_plan.save
+      @ic= @issue.issue_comments.build({content: "Officer added an Action Plan to Issue.",
+            user_id: current_user.id, issue_id: @issue.id })
+      @ic.toggle!(:log_comment)
+      @ic.save
   		flash[:success] = "Successfully added Action Plan! Next, add an Activity for this Action Plan." 
   	  redirect_to new_officer_action_plan_activity_path(@action_plan)
   	else

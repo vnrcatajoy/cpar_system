@@ -15,6 +15,10 @@ class Officer::CausesController < ApplicationController
     @nrd = NextResponsibleDepartment.find_by_issue_id(@issue.id)
     addstring = ""
     if @cause.save
+      @ic= @issue.issue_comments.build({content: "Officer submitted Cause for Issue.",
+            user_id: current_user.id, issue_id: @issue.id })
+      @ic.toggle!(:log_comment)
+      @ic.save
       if @nrd != nil && @nrd.dept_status_id < 4
         @nrd.dept_status_id = 4
         if @nrd.save

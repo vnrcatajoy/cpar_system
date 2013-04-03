@@ -16,6 +16,10 @@ class Qmr::IssuesController < ApplicationController
     @issue = Issue.new params[:issue]
 
     if @issue.save
+      @ic= @issue.issue_comments.build({content: "User submitted an Issue.",
+            user_id: current_user.id, issue_id: @issue.id })
+      @ic.toggle!(:log_comment)
+      @ic.save
       flash[:success] = 'The issue has been created!'
       redirect_to qmr_issues_path
     else
@@ -53,6 +57,11 @@ class Qmr::IssuesController < ApplicationController
     issue = Issue.find params[:id]
     issue.status_id = params[:stat_id]
     if issue.save
+      longtext= "QMR updated Issue status to " + IssueStatus.find(issue.status_id).name + "."
+      @ic= issue.issue_comments.build({content: longtext,
+            user_id: current_user.id, issue_id: issue.id })
+      @ic.toggle!(:log_comment)
+      @ic.save
       flash[:success] = "Issue Status updated."
       redirect_to qmr_issue_path
     end
@@ -67,6 +76,10 @@ class Qmr::IssuesController < ApplicationController
       if @cof.save
         @issue.status_id = 6 #Closed
         if @issue.save
+          @ic= @issue.issue_comments.build({content: "QMR signed Closeout Form and closed Issue.",
+            user_id: current_user.id, issue_id: @issue.id })
+          @ic.toggle!(:log_comment)
+          @ic.save
           flash[:success] = 'Successfully signed Closeout Form and Closed Issue!'
           redirect_to details_qmr_issue_path(@issue)
         end
@@ -81,6 +94,10 @@ class Qmr::IssuesController < ApplicationController
       new_department1_is_in_depts(issue, params[:issue][:department_id])
     end
     if issue.update_attributes params[:issue]
+      @ic= issue.issue_comments.build({content: "QMR updated Issue's details.",
+            user_id: current_user.id, issue_id: issue.id })
+      @ic.toggle!(:log_comment)
+      @ic.save
       flash[:success] = 'The issue has been updated successfuly!'  
       redirect_to qmr_issue_path
     else

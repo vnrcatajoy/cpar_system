@@ -14,6 +14,10 @@ class Auditor::CloseoutFormsController < ApplicationController
           outstring = " Issue Status has been updated to \"Implemented!\"."
         end
       end
+      @ic= @issue.issue_comments.build({content: "Auditor started Closeout Form for Issue.",
+            user_id: current_user.id, issue_id: @issue.id })
+      @ic.toggle!(:log_comment)
+      @ic.save
   		flash[:success] = "Closeout Form successfully started!" + outstring
       redirect_to details_auditor_issue_path(@issue)
         #don't change yet - this actually generates the COF departments under one COF, in Issues Details view

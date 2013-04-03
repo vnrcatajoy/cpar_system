@@ -6,6 +6,10 @@ class IssueAttachmentsController < ApplicationController
     @issue = Issue.find_by_id(params[:issue_attachment][:issue_id])
     @issue_attachment = @issue.issue_attachments.build(params[:issue_attachment])
     if @issue_attachment.save
+      @ic= @issue.issue_comments.build({content: "User attached a file to Issue.",
+            user_id: current_user.id, issue_id: @issue.id })
+      @ic.toggle!(:log_comment)
+      @ic.save
       flash[:success] = "File successfully Attached!"
       redirect_to issue_path(@issue)
     else
@@ -16,6 +20,10 @@ class IssueAttachmentsController < ApplicationController
 
   def destroy
     @issue_attachment.destroy
+    @ic= @issue.issue_comments.build({content: "User deleted an attached file from Issue.",
+            user_id: current_user.id, issue_id: @issue.id })
+    @ic.toggle!(:log_comment)
+    @ic.save
     redirect_to issue_path(@issue)
   end
 
