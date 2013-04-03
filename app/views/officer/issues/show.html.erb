@@ -80,12 +80,12 @@
   <div class="span9">
     <hr>
     <%= render 'causes_show' %>
-    <%= link_to 'Add Cause', new_officer_issue_cause_path(@issue) , class: "btn btn-small btn-primary" %>
+    <%= link_to 'Add Cause', new_officer_issue_cause_path(@issue) , class: "btn btn-small btn-link" %>
     <%= render 'actionplans_show' %>
     <% if @issue.causes.where("user_id = ?", current_user.id).empty? %>
       Add a Cause above first before adding an Action Plan
     <% else %>
-      <%= link_to 'Add New Action Plan', new_officer_action_plan_path(issue_id: @issue.id), class: "btn btn-small btn-primary" %>
+      <%= link_to 'Add New Action Plan', new_officer_action_plan_path(issue_id: @issue.id), class: "btn btn-small btn-link" %>
     <% end %>
     
   </div>

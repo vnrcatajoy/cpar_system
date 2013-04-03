@@ -2,13 +2,15 @@
 <h1>Showing Cause</h1>
 <div class="row">
   	<div class="span6">
+  		<p><strong>For Issue:</strong></p>
+  		<p><%= link_to Issue.find(@cause.issue_id).title, Issue.find(@cause.issue_id) %></p>
 		<p> <strong>Description:</strong> </p>
 		<p><%= @cause.description %> </p>
-		<p><strong>Author:</strong></p>
+		<p><strong>Investigated by:</strong></p>
 		<p><%= User.find(@cause.user_id).name %></p>
 		<p> <strong>Date Issued:</strong></p>
 		<p><%= @cause.date_issued %></p>
-		<%= link_to "Back", Issue.find(@cause.issue_id), class: "btn btn-small btn-link" %>	
+		<%= link_to "Back to Issue", Issue.find(@cause.issue_id), class: "btn btn-small btn-link" %>	
 	</div>
 	<%= render 'causecomments_show' %>
 </div>

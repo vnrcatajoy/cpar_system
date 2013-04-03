@@ -24,13 +24,17 @@ class Officer::CausesController < ApplicationController
             user_id: current_user.id, cause_id: @cause.id })
       @cc.toggle!(:log_comment)
       @cc.save
-      if @nrd != nil && @nrd.dept_status_id < 4
+      if @nrd != nil && @nrd.dept_status_id < 4 
         @nrd.dept_status_id = 4
         if @nrd.save
           addstring = "Updated Issue status under secondary Department to \'Correcting\'."
           flash[:success] = "Successfully added new Cause! " + addstring
           redirect_to [:officer, @issue]
         end
+        # Fail so far, since these conditions only means the first Cause that gets submitted
+        # changes the NRD's status to Correcting (If there is an NRD), then 2nd Cause
+        # to get added updates Main's Issue status to Correcting; A 2nd NRD/3rd Department
+        # would mean its NRD wouldn't ever get updated to Correcting
       elsif @issue.status_id == 3
         @issue.status_id = 4
         addstring = "Updated Issue status to \'Correcting\'."

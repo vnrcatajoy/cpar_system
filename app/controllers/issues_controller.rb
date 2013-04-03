@@ -20,8 +20,8 @@ class IssuesController < ApplicationController
   def create
     @issue = Issue.new params[:issue]
     if @issue.save
-      @ic= issue.issue_comments.build({content: "User submitted Issue.",
-            user_id: current_user.id, issue_id: issue.id })
+      @ic= @issue.issue_comments.build({content: "User submitted Issue.",
+            user_id: current_user.id, issue_id: @issue.id })
       @ic.toggle!(:log_comment)
       @ic.save
       flash[:success] = 'The issue has been created!'

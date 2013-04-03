@@ -12,7 +12,7 @@
 		<hr>
 		<% if @cause_updates.any? %>
 			<% @cause_updates.each do |cu| %>
-				<%= cu.created_at.to_s %>
+				<%= cu.created_at.strftime("%b %d, %Y | %H:%M") %>
 				<p>	<%= cu.content %>
 				</p>
 			<% end %>

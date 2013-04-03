@@ -12,7 +12,7 @@
 		<hr>
 		<% if @ap_updates.any? %>
 			<% @ap_updates.each do |au| %>
-				<%= au.created_at.to_s %>
+				<%= au.created_at.strftime("%b %d, %Y | %H:%M") %>
 				<p>	<%= au.content %>
 				</p>
 			<% end %>

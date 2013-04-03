@@ -36,8 +36,8 @@
             	<%= link_to Issue.find(@action_plan.issue_id).title, officer_issue_path(Issue.find(@action_plan.issue_id)) %>
           	<% end %>
       	</p>
-      	<p><strong>Final Review Date: <%= @action_plan.final_review_date %></strong></p>
-      	<p><strong>Final Implementation Review Date: <%= @action_plan.final_implementation_review_date %></strong></p>
+      	<p><strong>Final Review Date: </strong><%= @action_plan.final_review_date %></p>
+      	<p><strong>Final Implementation Review Date:</strong> <%= @action_plan.final_implementation_review_date %></p>
 	</div>
 		<%= render 'actionplancomments_show' %>
 		<div class="span9">

@@ -12,7 +12,7 @@
 		<hr>
 		<% if @issueupdates.any? %>
 			<% @issueupdates.each do |iu| %>
-				<%= iu.created_at.to_s %>
+				<%= iu.created_at.strftime("%b %d, %Y | %H:%M") %>
 				<p>	<%= iu.content %>
 				</p>
 			<% end %>
