@@ -39,6 +39,7 @@
       	<p><strong>Final Review Date: <%= @action_plan.final_review_date %></strong></p>
       	<p><strong>Final Implementation Review Date: <%= @action_plan.final_implementation_review_date %></strong></p>
 	</div>
+		<%= render 'actionplancomments_show' %>
 		<div class="span9">
 		<!--Show Activities under this Action Plan-->
 		<%= render 'activities_show', action_plan: @action_plan  %>
