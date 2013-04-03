@@ -1,5 +1,5 @@
 class Cause < ActiveRecord::Base
-  attr_accessible :closeout_date, :date_issued, :description
+  attr_accessible :date_issued, :description
   has_many :cause_comments, dependent: :destroy
   belongs_to :issue
   belongs_to :user

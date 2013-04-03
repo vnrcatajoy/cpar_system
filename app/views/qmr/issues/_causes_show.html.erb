@@ -6,7 +6,6 @@
       <th>Submitter</th>
       <th>Description</th>
       <th>Date Issued</th>
-      <th>Closeout Date</th>
       <th></th>
     </tr>
 
@@ -15,7 +14,6 @@
         <td> <%= User.find(cause.user_id).name %> </td>
         <td> <%= cause.description %> </td>
         <td> <%= cause.date_issued %> </td>
-        <td> <%= cause.closeout_date %> </td>
         <td>
           <%= link_to "View", [@issue, cause], class: "btn btn-small btn-link" %>
         </td>

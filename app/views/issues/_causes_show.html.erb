@@ -3,22 +3,20 @@
 <p>Causes found for this Issue: <%= @issue.causes.count %></p>
 <table class="table table-striped table-bordered">
     <tr>
-      <th></th>
       <th>Submitter</th>
       <th>Description</th>
       <th>Date Issued</th>
-      <th>Closeout Date</th>
+      <th></th>
     </tr>
 
     <% @causes.each do |cause| %>
     	<tr>
-        <td>
-          <%= link_to "View this Cause", [Issue.find(cause.issue_id), cause], class: "btn btn-small btn-link" %>
-        </td>
         <td> <%= User.find(cause.user_id).name %> </td>
         <td> <%= cause.description %> </td>
         <td> <%= cause.date_issued %> </td>
-        <td> <%= cause.closeout_date %> </td>
+        <td>
+          <%= link_to "View", [Issue.find(cause.issue_id), cause], class: "btn btn-small btn-link" %>
+        </td>
     	</tr>
     <% end %>
 

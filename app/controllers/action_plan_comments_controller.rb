@@ -16,6 +16,7 @@ class ActionPlanCommentsController < ApplicationController
 
 	def destroy
 	  @apcomment.destroy
+	  flash[:success] = "Successfully deleted comment."
 	  redirect_to @action_plan
 	end
 

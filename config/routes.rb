@@ -13,6 +13,8 @@ CparSystem::Application.routes.draw do
   resources :issue_attachments, only: [:create, :destroy]
   resources :issue_comments, only: [:create, :destroy]
   resources :action_plan_comments, only: [:create, :destroy]
+  resources :issue_comments, only: [:create, :destroy]
+  resources :cause_comments, only: [:create, :destroy]
 
   resources :issues do
     get 'details', on: :member
@@ -70,6 +72,7 @@ CparSystem::Application.routes.draw do
     end
     resources :issue_comments, only: :create
     resources :action_plan_comments, only: :create
+    resources :cause_comments, only: :create
   end
 
   namespace :dept do

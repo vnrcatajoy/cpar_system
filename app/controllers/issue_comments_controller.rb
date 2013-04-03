@@ -16,6 +16,7 @@ class IssueCommentsController < ApplicationController
 
 	def destroy
 	  @issuecomment.destroy
+	  flash[:success] = "Successfully deleted comment."
 	  redirect_to @issue
 	end
 

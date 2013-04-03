@@ -1,15 +1,14 @@
 <% provide(:title, "Showing Cause") %>
+<h1>Showing Cause</h1>
 <div class="row">
   	<div class="span6">
-    	<h2>Cause # <%= @cause.id %> under Issue # <%= @cause.issue_id %></h2>
 		<p> <strong>Description:</strong> </p>
 		<p><%= @cause.description %> </p>
 		<p><strong>Author:</strong></p>
 		<p><%= User.find(@cause.user_id).name %></p>
 		<p> <strong>Date Issued:</strong></p>
 		<p><%= @cause.date_issued %></p>
-		<p> <strong>Close Out Date:</strong></p>
-		<p><%= @cause.closeout_date %></p>
 		<%= link_to "Back", Issue.find(@cause.issue_id), class: "btn btn-small btn-link" %>	
 	</div>
+	<%= render 'causecomments_show' %>
 </div>
