@@ -9,6 +9,7 @@
 			<%= f.submit "Add Comment", class: "btn btn-small btn-link" %>
 		<% end %>
 		<h4>Action Plan Updates:</h4>
+		<hr>
 		<% if @ap_updates.any? %>
 			<% @ap_updates.each do |au| %>
 				<%= au.created_at.to_s %>
@@ -20,10 +21,16 @@
 		</div>
 		<div class="span3">
 		<h4>Comments:</h4>
+		<hr>
 		<% if @ap_comments.any? %>
 			<% @ap_comments.each do |ac| %>
-				<%= ac.created_at.to_s %>
-				<p><b><%= User.find(ac.user_id).name + ":" %></b><p>
+				<%= ac.created_at.strftime("%b %d, %Y | %H:%M") %>
+				<% ac_user=User.find(ac.user_id) %>
+				<p><b><%= ac_user.name + ":" %></b>
+				  <% if ac_user.type_id != 6 %>
+				  	<%= "("+UserType.find(ac_user.type_id).name + ")" %>
+				  <% end %>
+				</p>
 				<p>	<%= ac.content %>
 				</p>
 				<% if current_user.admin %>
