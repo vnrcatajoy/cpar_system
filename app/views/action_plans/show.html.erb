@@ -30,7 +30,7 @@
 		<p><% if @action_plan.issue_id == nil %>
             	Issue Title
           	<% else %>
-            	<%= Issue.find(@action_plan.issue_id).title %>
+            	<%= link_to Issue.find(@action_plan.issue_id).title, issue_path(Issue.find(@action_plan.issue_id)) %>
           	<% end %>
       	</p>
       	<p><strong>Final Review Date: <%= @action_plan.final_review_date %></strong></p>
@@ -39,6 +39,8 @@
 		<div class="span9">
 		<!--Show Activities under this Action Plan-->
 		<%= render 'shared/activities_show', action_plan: @action_plan  %>
-		<p><%= link_to 'Back', action_plans_path , class: "btn btn-link"%></p>
+		<p>
+			<%= link_to 'Back to Issue', issue_path(Issue.find(@action_plan.issue_id)) , class: "btn btn-link"%>
+		</p>
 		</div>
 </div>

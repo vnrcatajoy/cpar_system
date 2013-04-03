@@ -6,9 +6,16 @@ class Auditor::CloseoutFormsController < ApplicationController
   	@issue = Issue.find_by_id(params[:closeout_form][:issue_id])
   	redirect_to auditor_issues_path if @issue == nil
   	@closeout_form = @issue.closeout_forms.build(params[:closeout_form])
+    outstring = ""
   	if @closeout_form.save
-  		flash[:success] = "Closeout Form successfully started!"
-        redirect_to details_auditor_issue_path(@issue)
+      if @issue.status_id == 4
+        @issue.status_id = 5
+        if @issue.save
+          outstring = " Issue Status has been updated to \"Implemented!\"."
+        end
+      end
+  		flash[:success] = "Closeout Form successfully started!" + outstring
+      redirect_to details_auditor_issue_path(@issue)
         #don't change yet - this actually generates the COF departments under one COF, in Issues Details view
       else
         flash[:error]  = "There was an error creating the form."

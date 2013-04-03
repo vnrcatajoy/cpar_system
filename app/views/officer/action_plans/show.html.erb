@@ -8,7 +8,7 @@
   		<% if @action_plan.ap_status_id == 1 %>
 			<strong>This Action plan has not yet been reviewed.</strong>
 		<% else %>
-			<% if @action_plan.ap_status_id == 2 && !@action_plan.implemented? %>
+			<% if @action_plan.ap_status_id == 2 && !@action_plan.implemented? && @action_plan.responsible_officer_id && @action_plan.responsible_officer_id == current_user.id %>
 				<p><%= render 'implemented', action_plan: @action_plan %></p>
 			<% end %>
 			<strong>This Action plan has been reviewed by:</strong>
@@ -33,7 +33,7 @@
 		<p><% if @action_plan.issue_id == nil %>
             	Issue Title
           	<% else %>
-            	<%= Issue.find(@action_plan.issue_id).title %>
+            	<%= link_to Issue.find(@action_plan.issue_id).title, officer_issue_path(Issue.find(@action_plan.issue_id)) %>
           	<% end %>
       	</p>
       	<p><strong>Final Review Date: <%= @action_plan.final_review_date %></strong></p>
@@ -44,7 +44,9 @@
 		<%= render 'activities_show', action_plan: @action_plan  %>
 		<p><%= link_to 'Add Activity', new_officer_action_plan_activity_path(@action_plan) , class: "btn btn-link" %>
 			<%= link_to 'Edit Action Plan', edit_officer_action_plan_path(@action_plan) , class: "btn btn-link" %>
-		   <%= link_to 'Back', officer_action_plans_path , class: "btn btn-link"%></p>
+			<%= link_to 'Back to Issue', officer_issue_path(Issue.find(@action_plan.issue_id)) , class: "btn btn-link"%>
+			<%= link_to 'Back to Action Plans', officer_action_plans_path , class: "btn btn-link"%>   
+		</p>
 	
 		</div>
 </div>

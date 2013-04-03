@@ -54,5 +54,9 @@
         </tr>
       <% end %>
   </table>
-  <p>"Pending" means officer still has yet to Approve Closeout of this Issue. If "Sign Closeout" appears under QMR section of Closeout Form, Click to Sign closeout and Close Issue. </p>
+  <% if @cof.closeout_date == nil %>
+    <p>"Pending" means officer still has yet to Approve Closeout of this Issue. If "Sign Closeout" appears under QMR section of Closeout Form, Click to Sign closeout and Close Issue. </p>
+  <% else %>
+    <h4>This Issue has been properly Closed.</h4>
+  <% end %>
 <% end %>

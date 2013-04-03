@@ -13,7 +13,7 @@
     <% @causes.each do |cause| %>
     	<tr>
         <td>
-          <%= link_to "View this Cause", [Issue.find(cause.issue_id), cause], class: "btn btn-small btn-primary" %>
+          <%= link_to "View this Cause", [Issue.find(cause.issue_id), cause], class: "btn btn-small btn-link" %>
         </td>
         <td> <%= User.find(cause.user_id).name %> </td>
         <td> <%= cause.description %> </td>
