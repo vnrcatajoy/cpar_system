@@ -79,7 +79,9 @@
     <%= link_to 'Edit', edit_qmr_issue_path(@issue), class: "btn btn-link" %>
     <%= link_to 'Edit Departments', edit_departments_qmr_issue_path(@issue), class: "btn btn-link" %>
     <%= link_to 'Back', qmr_issues_path, class: "btn btn-link" %>
+    <hr>
+    <%= render 'attachedfiles_show' %>
   </div>
   <%= render 'comments_show' %>
-  <%= render 'attachedfiles_show' %>
+  
 </div>

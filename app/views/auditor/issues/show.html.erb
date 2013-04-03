@@ -81,7 +81,9 @@
     </p>
     <%= link_to 'Show Details', details_auditor_issue_path, class: "btn btn-link" %>
     <%= link_to 'Back', auditor_issues_path, class: "btn btn-link" %>
+    <hr>
+    <%= render 'attachedfiles_show' %>
   </div>
   <%= render 'comments_show' %>
-  <%= render 'attachedfiles_show' %>
+  
 </div>

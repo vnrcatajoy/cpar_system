@@ -74,7 +74,8 @@
     </p>
     <%= link_to 'Show Details', details_officer_issue_path, class: "btn btn-link" %>
     <%= link_to 'Back', officer_issues_path, class: "btn btn-link" %>
-
+    <hr>
+    <%= render 'attachedfiles_show' %>
   </div>
   <%= render 'comments_show' %>
   <div class="span9">
@@ -90,5 +91,4 @@
     
   </div>
 
-  <%= render 'attachedfiles_show' %>
 </div>
