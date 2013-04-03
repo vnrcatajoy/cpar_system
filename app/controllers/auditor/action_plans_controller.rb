@@ -12,7 +12,12 @@ class Auditor::ActionPlansController < ApplicationController
     @action_plan.ap_reviewer_id = current_user.id
     @action_plan.toggle!(:approved)
     @action_plan.ap_status_id = 2
+    @action_plan.final_review_date = Date.today
     if @action_plan.save
+      @ac= @action_plan.action_plan_comments.build({content: "Auditor reviewed Action Plan.",
+            user_id: current_user.id, action_plan_id: @action_plan.id })
+      @ac.toggle!(:log_comment)
+      @ac.save
       flash[:success] = "Action Plan successfully reviewed."
       redirect_to auditor_action_plan_path
     end
@@ -23,6 +28,10 @@ class Auditor::ActionPlansController < ApplicationController
     @action_plan.ap_reviewer_id = current_user.id
     @action_plan.ap_status_id = 5
     if @action_plan.save
+      @ac= @action_plan.action_plan_comments.build({content: "Auditor rejected Action Plan.",
+            user_id: current_user.id, action_plan_id: @action_plan.id })
+      @ac.toggle!(:log_comment)
+      @ac.save
       flash[:success] = "Action Plan Rejected. It will now be closed for edits."
       redirect_to auditor_action_plan_path
     end
@@ -32,7 +41,12 @@ class Auditor::ActionPlansController < ApplicationController
     @action_plan = ActionPlan.find params[:id]
     @action_plan.ap_status_id = 3
     @action_plan.implementation_reviewer_id = current_user.id
+    @action_plan.final_implementation_review_date = Date.today
     if @action_plan.save
+      @ac= @action_plan.action_plan_comments.build({content: "Auditor reviewed and approved Action Plan Implementation.",
+            user_id: current_user.id, action_plan_id: @action_plan.id })
+      @ac.toggle!(:log_comment)
+      @ac.save
       flash[:success] = "Action Plan Marked as Implemented."
       redirect_to auditor_action_plan_path
     end

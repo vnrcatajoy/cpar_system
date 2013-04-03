@@ -23,6 +23,10 @@ before_filter :responsibleofficer_user
             user_id: current_user.id, issue_id: @issue.id })
       @ic.toggle!(:log_comment)
       @ic.save
+      @ac= @action_plan.action_plan_comments.build({content: "Officer submitted Action Plan.",
+            user_id: current_user.id, action_plan_id: @action_plan.id })
+      @ac.toggle!(:log_comment)
+      @ac.save
   		flash[:success] = "Successfully added Action Plan! Next, add an Activity for this Action Plan." 
   	  redirect_to new_officer_action_plan_activity_path(@action_plan)
   	else
@@ -35,6 +39,10 @@ before_filter :responsibleofficer_user
     @action_plan = ActionPlan.find params[:id]
     @action_plan.toggle!(:implemented)
     if @action_plan.save
+      @ac= @action_plan.action_plan_comments.build({content: "Officer marked Action Plan as Implemented.",
+            user_id: current_user.id, action_plan_id: @action_plan.id })
+      @ac.toggle!(:log_comment)
+      @ac.save
       flash[:success] = "Action Plan successfully marked as implemented. 
       Status now pending to be changed to Implemented."
       redirect_to officer_action_plan_path
@@ -52,6 +60,10 @@ before_filter :responsibleofficer_user
   def update
     @action_plan = ActionPlan.find params[:id]
     if @action_plan.update_attributes(params[:action_plan])
+      @ac= @action_plan.action_plan_comments.build({content: "Officer updated Action Plan details.",
+            user_id: current_user.id, action_plan_id: @action_plan.id })
+      @ac.toggle!(:log_comment)
+      @ac.save
       flash[:success] = "Action Plan updated."
       redirect_to officer_action_plan_path
     else

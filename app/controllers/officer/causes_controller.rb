@@ -19,6 +19,11 @@ class Officer::CausesController < ApplicationController
             user_id: current_user.id, issue_id: @issue.id })
       @ic.toggle!(:log_comment)
       @ic.save
+      # -------------------------------
+      @cc= @cause.cause_comments.build({content: "Officer submitted Cause.",
+            user_id: current_user.id, cause_id: @cause.id })
+      @cc.toggle!(:log_comment)
+      @cc.save
       if @nrd != nil && @nrd.dept_status_id < 4
         @nrd.dept_status_id = 4
         if @nrd.save
@@ -60,6 +65,10 @@ class Officer::CausesController < ApplicationController
     #@cause = Cause.find(params[:id])
     @cause = @issue.causes.find(params[:id])
     if @cause.update_attributes(params[:cause])
+      @cc= @cause.cause_comments.build({content: "Officer updated Cause details.",
+            user_id: current_user.id, cause_id: @cause.id })
+      @cc.toggle!(:log_comment)
+      @cc.save
       flash[:success] = "Cause updated."
       redirect_to [:officer, @issue]
     else
