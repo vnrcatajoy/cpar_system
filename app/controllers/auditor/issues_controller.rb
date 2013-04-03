@@ -9,6 +9,9 @@ class Auditor::IssuesController < ApplicationController
     @closeoutforms= CloseoutForm.where(issue_id: @issue.id)
     @closeoutform = CloseoutForm.new
     #@cof = CloseoutForm.find_by_issue_id(@issue.id) #should be in details
+    @issue_comment = IssueComment.new
+    @issuecomments = @issue.issue_comments.where(log_comment: 'f').paginate(page: params[:page],  per_page: 3)
+    @issueupdates = @issue.issue_comments.where(log_comment: 't').paginate(page: params[:page],  per_page: 5)
   end
 
   def index

@@ -51,6 +51,9 @@ class Dept::IssuesController < ApplicationController
     @users = User.where("department_id = " + current_user.department_id.to_s + " AND type_id = 3")
     # moved Causes and ActionPlans to details view
     @nrd= NextResponsibleDepartment.find_by_issue_id(@issue.id)
+    @issue_comment = IssueComment.new
+    @issuecomments = @issue.issue_comments.where(log_comment: 'f').paginate(page: params[:page],  per_page: 3)
+    @issueupdates = @issue.issue_comments.where(log_comment: 't').paginate(page: params[:page],  per_page: 5)
   end
 
   private

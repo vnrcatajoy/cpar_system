@@ -11,7 +11,8 @@ CparSystem::Application.routes.draw do
   resources :email_verifications
 
   resources :issue_attachments, only: [:create, :destroy]
-  
+  resources :issue_comments, only: [:create, :destroy]
+
   resources :issues do
     get 'details', on: :member
     resources :causes
@@ -37,6 +38,7 @@ CparSystem::Application.routes.draw do
       get 'edit_departments', on: :member
       get 'sign_closeout', on: :member
     end
+    resources :issue_comments, only: :create
   end
 
   namespace :auditor do
@@ -50,6 +52,7 @@ CparSystem::Application.routes.draw do
       get 'details', on: :member
     end
     resources :closeout_forms, only: :create
+    resources :issue_comments, only: :create
   end
 
   namespace :officer do
@@ -63,6 +66,7 @@ CparSystem::Application.routes.draw do
       get 'sign_closeout', on: :member
       resources :causes
     end
+    resources :issue_comments, only: :create
   end
 
   namespace :dept do
@@ -73,6 +77,7 @@ CparSystem::Application.routes.draw do
       get 'sign_closeout', on: :member
     end
     resources :next_responsible_departments, only: :update
+    resources :issue_comments, only: :create
   end
 
   get "sessions/new"

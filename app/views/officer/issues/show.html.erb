@@ -76,6 +76,7 @@
     <%= link_to 'Back', officer_issues_path, class: "btn btn-link" %>
 
   </div>
+  <%= render 'comments_show' %>
   <div class="span9">
     <hr>
     <%= render 'causes_show' %>
@@ -88,5 +89,6 @@
     <% end %>
     
   </div>
+
   <%= render 'attachedfiles_show' %>
 </div>
