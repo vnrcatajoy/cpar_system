@@ -16,9 +16,11 @@ class Qmr::IssuesController < ApplicationController
     @issue = Issue.new params[:issue]
 
     if @issue.save
-      redirect_to qmr_issues_path, notice: 'The issue has been created!'
+      flash[:success] = 'The issue has been created!'
+      redirect_to qmr_issues_path
     else
-      redirect_to :back, notice: 'There was an error in creating your issue.'
+      flash[:success] = 'There was an error in creating your issue.'
+      redirect_to :back
     end
   end
 
@@ -53,6 +55,22 @@ class Qmr::IssuesController < ApplicationController
     end
   end
 
+  def sign_closeout
+    @issue = Issue.find params[:id]
+    @cof = CloseoutForm.find_by_id(params[:cof])
+    if @cof.qmr_id == nil 
+      @cof.qmr_id = current_user.id
+      @cof.closeout_date = Date.today
+      if @cof.save
+        @issue.status_id = 6 #Closed
+        if @issue.save
+          flash[:success] = 'Successfully signed Closeout Form and Closed Issue!'
+          redirect_to details_qmr_issue_path(@issue)
+        end
+      end
+    end
+  end
+
   def update
     issue = Issue.find params[:id]
     if issue.department_id != params[:issue][:department_id]
@@ -60,9 +78,11 @@ class Qmr::IssuesController < ApplicationController
       new_department1_is_in_depts(issue, params[:issue][:department_id])
     end
     if issue.update_attributes params[:issue]
-      redirect_to qmr_issue_path, :notice => 'The issue has been updated successfuly!'  
+      flash[:success] = 'The issue has been updated successfuly!'  
+      redirect_to qmr_issue_path
     else
-      redirect_to :back, :notice => 'There was an error in updating your issue.'
+      flash[:error]='There was an error in updating your issue.'
+      redirect_to :back
     end
   end
 

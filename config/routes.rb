@@ -35,6 +35,7 @@ CparSystem::Application.routes.draw do
       get 'statuschange', on: :member
       get 'details', on: :member
       get 'edit_departments', on: :member
+      get 'sign_closeout', on: :member
     end
     resources :closeout_forms
   end
@@ -60,6 +61,7 @@ CparSystem::Application.routes.draw do
     end
     resources :issues do
       get 'details', on: :member
+      get 'sign_closeout', on: :member
       resources :causes
     end
     resources :closeout_forms
@@ -70,6 +72,7 @@ CparSystem::Application.routes.draw do
     resources :users
     resources :issues do
       get 'details', on: :member
+      get 'sign_closeout', on: :member
     end
     resources :next_responsible_departments, only: :update
     resources :closeout_forms

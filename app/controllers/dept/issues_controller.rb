@@ -13,6 +13,18 @@ class Dept::IssuesController < ApplicationController
     end
   end
 
+  def sign_closeout
+    @issue = Issue.find params[:id]
+    @cofd = CloseoutFormDept.find_by_id(params[:cofd])
+    if @cofd.dept_head_id == nil 
+      @cofd.dept_head_id = current_user.id
+      if @cofd.save
+        flash[:success] = "Successfully signed Closeout form of Issue!"
+        redirect_to details_dept_issue_path(@issue)
+      end
+    end
+  end
+
   def details
     @issue = Issue.find params[:id]
     @causes= @issue.causes.paginate(page: params[:page],  per_page: 5)
@@ -29,7 +41,8 @@ class Dept::IssuesController < ApplicationController
       flash[:success] = 'Successfully Assigned Officer to Issue. Issue is now Investigating.'
       redirect_to dept_issues_path
     else
-      redirect_to :back, notice: 'There was an error in assigning.'
+      flash[:error] = 'There was an error in assigning.'
+      redirect_to :back
     end
   end
 

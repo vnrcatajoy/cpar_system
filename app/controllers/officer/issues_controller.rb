@@ -21,6 +21,18 @@ class Officer::IssuesController < ApplicationController
     # Decide if will move Causes and ActionPlans to details view for Officer controls
   end
 
+  def sign_closeout
+    @issue = Issue.find params[:id]
+    @cofd = CloseoutFormDept.find_by_id(params[:cofd])
+    if @cofd.officer_id == nil 
+      @cofd.officer_id = current_user.id
+      if @cofd.save
+        flash[:success] = "Successfully signed Closeout form of Issue!"
+        redirect_to details_officer_issue_path(@issue)
+      end
+    end
+  end
+
   def details
     @issue = Issue.find params[:id]
     @causes= @issue.causes.paginate(page: params[:page],  per_page: 5)
@@ -29,7 +41,6 @@ class Officer::IssuesController < ApplicationController
   end
 
   private
-
   def responsibleofficer_user
     redirect_to(root_path) unless current_user.type_id==3
   end

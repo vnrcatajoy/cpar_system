@@ -30,10 +30,24 @@
       <% @cof.closeout_form_depts.each do |cofd| %>
         <tr>
           <td><%= Department.where(id: cofd.dept_id).first.name %></td>
-          <td>Pending</td>
-          <td>Pending</td>
+          <td><% if cofd.dept_head_id == nil %>
+                <% if cofd.dept_id == current_user.department_id && current_user.type_id == 2 %>
+                  <%= link_to "Sign Closeout", sign_closeout_dept_issue_path(@issue, cofd: cofd.id), confirm: "Are you sure you want to sign close out form?" %>
+                <% else %>
+                  Pending
+                <% end %>
+              <% else %>
+                <%= User.find(cofd.dept_head_id).name %>
+              <% end %>
+          </td>
+          <td><% if cofd.officer_id == nil %>
+                Pending
+              <% else %>
+                <%= User.find(cofd.officer_id).name %>
+              <% end %>
+          </td>
         </tr>
       <% end %>
   </table>
-  <p>"Pending" means officer still has yet to Approve Closeout of this Issue.</p>
+  <p>"Pending" means officer still has yet to Approve Closeout of this Issue. If you're an officer assigned to this Issue, please click on "Sign Closeout" to Sign Close out form. </p>
 <% end %>
