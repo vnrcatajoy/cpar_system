@@ -5,7 +5,7 @@ gem 'rails', '3.2.11'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem 'bcrypt-ruby', '3.0.1'
-gem 'sqlite3'
+
 gem 'bootstrap-sass', '2.1'
 gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.6'
@@ -38,6 +38,7 @@ group :test, :development do
   gem 'launchy'
   gem 'faker'
   gem 'factory_girl_rails', :require => false #don't Use anymore
+  gem 'sqlite3'
 end
 
 group :production do
