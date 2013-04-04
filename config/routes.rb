@@ -72,7 +72,9 @@ CparSystem::Application.routes.draw do
     resources :issues do
       get 'details', on: :member
       get 'sign_closeout', on: :member
-      resources :causes
+      resources :causes do
+        post 'create_nrd', on: :collection
+      end
     end
     resources :issue_comments, only: :create
     resources :action_plan_comments, only: :create
@@ -86,6 +88,7 @@ CparSystem::Application.routes.draw do
     resources :issues do
       get 'details', on: :member
       get 'sign_closeout', on: :member
+      put 'update_date', on: :member
     end
     resources :next_responsible_departments, only: :update
     resources :issue_comments, only: :create

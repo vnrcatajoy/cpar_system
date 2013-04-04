@@ -12,8 +12,6 @@ class Officer::CausesController < ApplicationController
   def create
     @cause = @issue.causes.build(params[:cause])
     @cause.user_id = @user.id
-    @nrd = NextResponsibleDepartment.find_by_issue_id(@issue.id)
-    addstring = ""
     if @cause.save
       @ic= @issue.issue_comments.build({content: "Officer submitted Cause for Issue.",
             user_id: current_user.id, issue_id: @issue.id })
@@ -24,18 +22,11 @@ class Officer::CausesController < ApplicationController
             user_id: current_user.id, cause_id: @cause.id })
       @cc.toggle!(:log_comment)
       @cc.save
-      if @nrd != nil && @nrd.dept_status_id < 4 
-        @nrd.dept_status_id = 4
-        if @nrd.save
-          addstring = "Updated Issue status under secondary Department to \'Correcting\'."
-          flash[:success] = "Successfully added new Cause! " + addstring
-          redirect_to [:officer, @issue]
-        end
         # Fail so far, since these conditions only means the first Cause that gets submitted
         # changes the NRD's status to Correcting (If there is an NRD), then 2nd Cause
         # to get added updates Main's Issue status to Correcting; A 2nd NRD/3rd Department
         # would mean its NRD wouldn't ever get updated to Correcting
-      elsif @issue.status_id == 3
+      if @issue.status_id == 3
         @issue.status_id = 4
         addstring = "Updated Issue status to \'Correcting\'."
         if @issue.save
@@ -49,6 +40,34 @@ class Officer::CausesController < ApplicationController
     else
       flash.now[:error] = "Please fill in the fields properly." 
       render 'new'
+    end
+  end
+
+  def create_nrd
+    @cause = @issue.causes.build(params[:cause])
+    @cause.user_id = @user.id
+    @nrds = NextResponsibleDepartment.where(issue_id: @issue.id)
+    if @cause.save
+      @ic= @issue.issue_comments.build({content: "Officer submitted Cause for Issue.",
+            user_id: current_user.id, issue_id: @issue.id })
+      @ic.toggle!(:log_comment)
+      @ic.save
+      # -------------------------------
+      @cc= @cause.cause_comments.build({content: "Officer submitted Cause.",
+            user_id: current_user.id, cause_id: @cause.id })
+      @cc.toggle!(:log_comment)
+      @cc.save
+
+      @nrds.each do |nrd|
+        if nrd != nil && nrd.responsible_officer_id == current_user.id && nrd.dept_status_id < 4 
+          nrd.dept_status_id = 4
+          if nrd.save
+            addstring = "Updated Issue status under secondary Department to \'Correcting\'."
+            flash[:success] = "Successfully added new Cause! " + addstring
+            redirect_to [:officer, @issue]
+          end  
+        end
+      end
     end
   end
 

@@ -13,10 +13,14 @@
       <%= @issue.issue_status.name %>
     </p>
 
-    <% if @action_plans.any? && @closeoutforms.count == 0 %>
-      <!--<%= @action_plans.count.to_s + " APs found implemented" %>-->
+    <p>
+      <b>Estimated Closeout Date:</b>
+      <%= @issue.estimated_closeout_date %>
+    </p>
+
+    <% if @action_plans_implemented.any? && @closeoutforms.count == 0 %>
       <%= render 'start_closeout', cof: @cof %>
-    <% else %>
+    <% elsif @closeoutforms.count == 1 %>
       Closeout form started, View it in details. 
     <% end %>
 

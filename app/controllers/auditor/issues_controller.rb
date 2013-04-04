@@ -5,7 +5,7 @@ class Auditor::IssuesController < ApplicationController
   def show
   	@issue = Issue.find params[:id]
     # moved Causes and ActionPlans to details view
-    @action_plans = ActionPlan.where(issue_id: @issue.id, implemented: 't')
+    @action_plans_implemented = ActionPlan.where(issue_id: @issue.id, ap_status_id: 3)
     @closeoutforms= CloseoutForm.where(issue_id: @issue.id)
     @closeoutform = CloseoutForm.new
     #@cof = CloseoutForm.find_by_issue_id(@issue.id) #should be in details

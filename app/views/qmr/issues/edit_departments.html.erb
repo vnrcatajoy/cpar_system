@@ -2,7 +2,7 @@
 <h1>QMR: Edit Departments</h1>
 <div class="row">
   <div class="span6 offset3">
-	<% if @issue.status_id < 3 %>
+	<% if @issue.status_id < 5 %>
     	<!--This, or just make QMR editing of Issue restricted while Status = 3 onwards?-->
     	<%= form_for [:qmr, @issue] do |f| %>
    		  	<%= f.label "Main Department" %> 

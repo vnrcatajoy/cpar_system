@@ -58,11 +58,27 @@ class Dept::IssuesController < ApplicationController
     end
   end
 
+  def update_date
+    @issue = Issue.find params[:id]
+    #@issue.estimated_closeout_date = params[:issue][:estimated_closeout_date]
+    if @issue.update_attributes params[:issue]
+      @ic= @issue.issue_comments.build({content: "Dept Head updated Closeout Date for Issue.",
+            user_id: current_user.id, issue_id: @issue.id })
+      @ic.toggle!(:log_comment)
+      @ic.save
+      flash[:success] = "Successfully updated Issue Closeout date!"
+      redirect_to [:dept, @issue]
+    else
+      flash[:error] = "There was an error saving your chosen date."
+      redirect_to :back
+    end
+  end
+
   def show
   	@issue = Issue.find params[:id]
     @users = User.where("department_id = " + current_user.department_id.to_s + " AND type_id = 3")
     # moved Causes and ActionPlans to details view
-    @nrd= NextResponsibleDepartment.find_by_issue_id(@issue.id)
+    @nrd= nrd_for_this(@issue)
     @issue_comment = IssueComment.new
     @issuecomments = @issue.issue_comments.where(log_comment: 'f').paginate(page: params[:page],  per_page: 3)
     @issueupdates = @issue.issue_comments.where(log_comment: 't').paginate(page: params[:page],  per_page: 5)
@@ -71,6 +87,17 @@ class Dept::IssuesController < ApplicationController
   private
   def dept_user
       redirect_to(root_path) unless current_user.type_id==2
+  end
+
+  def nrd_for_this(issue)
+    @nrds = NextResponsibleDepartment.where("issue_id = ?", issue.id)
+    my_nrd = NextResponsibleDepartment.new
+    @nrds.each do |n|
+      if n.department_id == current_user.department_id
+        my_nrd=n
+      end
+    end
+    my_nrd
   end
 
   def correct_department
@@ -83,7 +110,7 @@ class Dept::IssuesController < ApplicationController
       end
     end
     if found_nrds
-      flash[:success] = "Viewing Issue Secondarily assigned to your Department" 
+      #flash[:success] = "Viewing Issue Secondarily assigned to your Department" 
     elsif current_user.department_id != @issue.department_id
       flash[:error] = "You cannot view an Issue not assigned to your Department."
       redirect_to dept_issues_path

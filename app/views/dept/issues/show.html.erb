@@ -18,6 +18,13 @@
       <%= @issue.estimated_closeout_date %>
     </p>
 
+    <% if @issue.status_id > 1 && @issue.status_id < 5 && found_dept(@issue) %>
+      <%= form_for [:dept, @issue], url: {action: "update_date", method: "put"} do |f| %>
+        <%= f.date_select(:estimated_closeout_date, start_year: 2013) %>
+        <%= f.submit "Update Closeout Date", class: "btn btn-link" %>
+      <% end %>
+    <% end %>
+
     <hr>
 
     <h4>Issue Details</h4>
