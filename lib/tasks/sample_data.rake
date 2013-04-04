@@ -76,7 +76,25 @@ namespace :db do
                   password: 'password',
                   password_confirmation: 'password')
 
-    20.times do |n|
+    User.create!(name: 'Foo Dept', 
+                  email: 'foo@dept.com',
+                  phone: '1234567',
+                  mobile: '09123456789',
+                  type_id: 2,
+                  department_id: 2,
+                  password: 'foobar',
+                  password_confirmation: 'foobar')
+
+    User.create!(name: 'Foo Officer', 
+                  email: 'foo@officer.com',
+                  phone: '1234567',
+                  mobile: '09123456789',
+                  type_id: 3,
+                  department_id: 2,
+                  password: 'foobar',
+                  password_confirmation: 'foobar')
+
+    10.times do |n|
       name = Faker::Name.name
       email = Faker::Internet.email
       type_id = (n%6) + 1
@@ -148,7 +166,7 @@ namespace :db do
       description = "Sample Description#{i+1}"
       user_id = i + 1 
       impact_id = (i%3) + 1
-      status_id = (i%5) + 1
+      status_id = 1
       department_id = (i%4) + 1
       type_id = (i%6) + 1
       iso_nc_id = (i%5) + 1
@@ -165,8 +183,8 @@ namespace :db do
 
     10.times do |a|
       
-      description = "This is the #{a}th Action Plan for the #{a}th Issue. Edit this #{a}th description later on."
-      stat_id = (a%5) + 1
+      description = "This is the #{a+1}th Action Plan for the #{a+1}th Issue. Edit this #{a+1}th description later on."
+      stat_id = 1
 
       actplan = ActionPlan.create!(description: description, 
                   issue_id: a+1, ap_status_id: stat_id)
