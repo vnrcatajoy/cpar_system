@@ -2,6 +2,7 @@ namespace :db do
   desc "Fill database with sample data"
 
   task populate: :environment do
+    require 'faker'
     #add sample Departments
     Department.create!(name: 'Administration')
     Department.create!(name: 'Maintainance')
