@@ -15,7 +15,12 @@
         <td> <%= User.find(activity.user_id).name %> </td>
         <td> <%= activity.result %> </td>
         <td> <%= activity.target_date %> </td>
-        <td> <%= activity.actual_date %> </td>
+        <td> <% if activity.actual_date == nil && current_user?(User.find(activity.user_id)) %>
+            <%= link_to "Mark as Done", mark_done_officer_action_plan_activity_path(activity, id: activity.id ,action_plan: @action_plan), confirm: "Are you sure you want to mark Activity as Done?" %>
+          <% else %>
+            <%= activity.actual_date %> 
+          <% end %>
+        </td>
         <td>
           <%= link_to "View", officer_action_plan_activity_path(ActionPlan.find(activity.action_plan_id), activity), class: "btn btn-small btn-link" %>
           <% if current_user?(User.find(activity.user_id)) %>

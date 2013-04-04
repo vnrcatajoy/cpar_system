@@ -24,6 +24,19 @@ class Officer::ActivitiesController < ApplicationController
     end
   end
 
+  def mark_done
+    @action_plan=ActionPlan.find(params[:action_plan])
+    @activity = Activity.find(params[:id])
+    @activity.actual_date = Date.today
+    if @activity.save
+      flash[:success] = "Activity marked as Done!"
+      redirect_to [:officer, @action_plan]
+    else
+      flash[:error] = "Error while marking Activity as Done"
+      redirect_to :back
+    end
+  end
+
   def show
     @activity=Activity.find(params[:id])
   end

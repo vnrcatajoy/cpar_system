@@ -4,6 +4,7 @@ class Auditor::ActionPlansController < ApplicationController
 
   def index
     @action_plans = ActionPlan.paginate(page: params[:page],  per_page: 10)
+    @action_plans_new = ActionPlan.where("ap_status_id = 1").paginate(page: params[:page],  per_page: 5)
     @action_plans_markasimplement = ActionPlan.where(ap_status_id: 2, implemented: 't').paginate(page: params[:page],  per_page: 5)
   end
 
@@ -48,6 +49,19 @@ class Auditor::ActionPlansController < ApplicationController
       @ac.toggle!(:log_comment)
       @ac.save
       flash[:success] = "Action Plan Marked as Implemented."
+      redirect_to auditor_action_plan_path
+    end
+  end
+
+  def not_implemented
+    @action_plan = ActionPlan.find params[:id]
+    @action_plan.toggle!(:implemented)
+    if @action_plan.save
+      @ac= @action_plan.action_plan_comments.build({content: "Auditor marked Action Plan as not yet Implemented fully.",
+            user_id: current_user.id, action_plan_id: @action_plan.id })
+      @ac.toggle!(:log_comment)
+      @ac.save
+      flash[:success] = "Action Plan Marked as not yet fully Implemented. Officer will receive a notification about this."
       redirect_to auditor_action_plan_path
     end
   end

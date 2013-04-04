@@ -50,6 +50,7 @@ CparSystem::Application.routes.draw do
       get 'review', :on => :member
       get 'reject', on: :member
       get 'implemented', on: :member
+      get 'not_implemented', on: :member
     end
     resources :issues do
       get 'details', on: :member
@@ -62,7 +63,9 @@ CparSystem::Application.routes.draw do
   namespace :officer do
     get '', to: 'dashboard#index', as: '/'
     resources :action_plans do
-      resources :activities
+      resources :activities do
+        get 'mark_done', on: :member
+      end
       get 'implemented', :on => :member
     end
     resources :issues do
