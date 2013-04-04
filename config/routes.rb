@@ -77,6 +77,7 @@ CparSystem::Application.routes.draw do
     resources :issue_comments, only: :create
     resources :action_plan_comments, only: :create
     resources :cause_comments, only: :create
+    resources :cause_attachments, only: [:create, :destroy]
   end
 
   namespace :dept do

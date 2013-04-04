@@ -13,7 +13,7 @@ class IssueAttachmentsController < ApplicationController
       flash[:success] = "File successfully Attached!"
       redirect_to issue_path(@issue)
     else
-      flash[:error]  = "There was an error saving your image."
+      flash[:error]  = "There was an error saving your file."
       redirect_to :back
     end
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130403114939) do
+ActiveRecord::Schema.define(:version => 20130404054124) do
 
   create_table "action_plan_comments", :force => true do |t|
     t.integer  "action_plan_id"
@@ -52,6 +52,15 @@ ActiveRecord::Schema.define(:version => 20130403114939) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.integer  "action_plan_id"
+  end
+
+  create_table "cause_attachments", :force => true do |t|
+    t.string   "description"
+    t.integer  "cause_id"
+    t.string   "myfile"
+    t.integer  "user_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "cause_comments", :force => true do |t|
@@ -156,9 +165,10 @@ ActiveRecord::Schema.define(:version => 20130403114939) do
     t.integer  "status_id"
     t.integer  "cause_id"
     t.integer  "action_plan_id"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
     t.integer  "responsible_officer_id"
+    t.date     "estimated_closeout_date"
   end
 
   create_table "next_responsible_departments", :force => true do |t|

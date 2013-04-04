@@ -57,6 +57,7 @@ class Officer::CausesController < ApplicationController
     @cause_comment = CauseComment.new
     @cause_comments = @cause.cause_comments.where(log_comment: 'f').paginate(page: params[:page],  per_page: 3)
     @cause_updates = @cause.cause_comments.where(log_comment: 't').paginate(page: params[:page],  per_page: 5)
+    @cause_attachment = CauseAttachment.new
   end
 
   def edit
