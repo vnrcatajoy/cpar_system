@@ -36,6 +36,10 @@ class User < ActiveRecord::Base
     UserMailer.verify_email(self).deliver
   end
 
+  def send_notification_email(title, content)
+    UserMailer.notify_email(self, title, content).deliver
+  end
+
   private
 
     def create_remember_token

@@ -15,4 +15,11 @@ class UserMailer < ActionMailer::Base
     @user = user
     mail(:to => "#{user.name} <#{user.email}>", :subject => "[Web CPAR] Verify Your Email")
   end
+
+  def notify_email(user, msgtitle, content)
+    @user = user
+    @msgtitle = "[Web CPAR] " + msgtitle
+    @content = content
+    mail(:to => "#{user.name} <#{user.email}>", :subject => @msgtitle)
+  end
 end

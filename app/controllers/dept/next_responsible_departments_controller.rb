@@ -6,9 +6,13 @@ class Dept::NextResponsibleDepartmentsController < ApplicationController
   	@issue = Issue.find_by_id(params[:next_responsible_department][:issue_id])
   	@nrd = NextResponsibleDepartment.find params[:id]
   	@nrd.dept_status_id = 3
+    @officer = User.find(params[:next_responsible_department][:responsible_officer_id])
   	if @nrd.update_attributes params[:next_responsible_department]
       flash[:success] = 'Successfully Assigned Officer to Issue. Issue is now Investigating Status (under Department).'
       redirect_to dept_issues_path
+      title = "Assigned Officer to an Issue"
+      content = "You have been assigned by your Department Head as a Responsible Officer for an Issue. Please check back into the site for the Issue details."
+      @officer.send_notification_email(title, content)
     else
       redirect_to :back, notice: 'There was an error in assigning.'
     end

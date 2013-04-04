@@ -56,6 +56,7 @@ class Auditor::ActionPlansController < ApplicationController
   def not_implemented
     @action_plan = ActionPlan.find params[:id]
     @action_plan.toggle!(:implemented)
+    @officer = User.find(@action_plan.responsible_officer_id)
     if @action_plan.save
       @ac= @action_plan.action_plan_comments.build({content: "Auditor marked Action Plan as not yet Implemented fully.",
             user_id: current_user.id, action_plan_id: @action_plan.id })
@@ -63,6 +64,9 @@ class Auditor::ActionPlansController < ApplicationController
       @ac.save
       flash[:success] = "Action Plan Marked as not yet fully Implemented. Officer will receive a notification about this."
       redirect_to auditor_action_plan_path
+      title = "Submitted Action Plan was marked as not yet Implemented"
+      content = "Your Submitted Action Plan was deemed not yet fully Implemented by Auditor, please redo your Implementation or finish more Activities for this Action Plan."
+      @officer.send_notification_email(title, content)
     end
   end
 
