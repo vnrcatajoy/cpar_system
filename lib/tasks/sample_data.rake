@@ -117,9 +117,16 @@ namespace :db do
     ActionPlanStatus.create!(name: 'Rejected')
 
     #add sample IssueType
-    5.times do |n|
-      IssueType.create!(name: "Issue#{n}")
-    end
+    # 5.times do |n|
+    #   IssueType.create!(name: "Issue#{n}")
+    # end
+
+    IssueType.create!(name: "IQA-Related")
+    IssueType.create!(name: "Client Complaint")
+    IssueType.create!(name: "Partner/Supplier-Related")
+    IssueType.create!(name: "3rd Party Audit Related")
+    IssueType.create!(name: "Related to KPI/Quality Objective Review")
+    IssueType.create!(name: "HRD-Related")
 
     #add sample ISO NC Types
     5.times do |n|
@@ -143,7 +150,7 @@ namespace :db do
       impact_id = (i%3) + 1
       status_id = (i%5) + 1
       department_id = (i%4) + 1
-      type_id = (i%5) + 1
+      type_id = (i%6) + 1
       iso_nc_id = (i%5) + 1
 
       Issue.create!(title: title, 
