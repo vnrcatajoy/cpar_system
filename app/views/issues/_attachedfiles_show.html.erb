@@ -21,7 +21,7 @@
           <b><i><%= link_to File.basename(issue_attachment.myfile.url), issue_attachment.myfile.url %></i></b> | 
           <%= issue_attachment.description %> |
           <%= link_to "View file", issue_attachment.myfile.url, target: '_blank' %>
-          <% if current_user.id == issue_attachment.user_id %>
+          <% if current_user.id == issue_attachment.user_id || current_user.admin %>
             | <%= link_to "delete", issue_attachment_path(issue_attachment, issue_id: @issue.id), confirm: "Are you sure you want to delete this File?", method: :delete  %>
           <% end %>
         </p>

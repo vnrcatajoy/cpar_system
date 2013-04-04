@@ -19,6 +19,7 @@ CparSystem::Application.routes.draw do
   resources :issues do
     get 'details', on: :member
     resources :causes
+    get 'attach_form', on: :member
   end
 
   resources :action_plans do

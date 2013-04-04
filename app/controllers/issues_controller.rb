@@ -1,6 +1,6 @@
 class IssuesController < ApplicationController
   before_filter :signed_in_user, only: [:index, :show, :new, :edit]
-  before_filter :correct_submitter, only: [:edit]
+  before_filter :correct_submitter, only: [:edit, :attach_form]
   before_filter :correct_department, only: [:show]
 
   def index
@@ -39,6 +39,11 @@ class IssuesController < ApplicationController
     @issue_comment = IssueComment.new
     @issuecomments = @issue.issue_comments.where(log_comment: 'f').paginate(page: params[:page],  per_page: 3)
     @issueupdates = @issue.issue_comments.where(log_comment: 't').paginate(page: params[:page],  per_page: 5)
+  end
+
+  def attach_form
+    @issue = Issue.find params[:id]
+    @issue_attachment = IssueAttachment.new
   end
 
   def details
