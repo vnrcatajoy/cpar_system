@@ -9,7 +9,7 @@
 <p><b>All Users Under Department: </b><%= @users.count %></p>
 <p><b>Designated Responsible Officers: </b><%= @users_officers.count %></p>
 <%= link_to 'View All Users', dept_users_path, class: "btn btn-link" %>
-
+<p></p>
 <br>
 
 <h4>Issues Summary</h4>
@@ -17,6 +17,7 @@
 <p><b>All Issues Under Department: </b><%= @issues.count %></p>
 <p><b>Verified Issues needing Assignment of Officer: </b><%= @issues_verified.count %></p>
 <p><b>Issues Secondarily Assigned to your Department: </b><%= @issues_secondary.count %></p>
+<p><b>Issues with ongoing Closeout Forms: </b><%= @issues_closeout.count %></p>
 <%= link_to 'View All Issues', dept_issues_path, class: "btn btn-link" %>
 
 </div></div>

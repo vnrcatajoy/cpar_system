@@ -8,6 +8,14 @@
 <p><b>All Issues: </b><%= @issues.count %></p>
 <p><b>Issues for Approval: </b><%= @issues_new.count %></p>
 <p><b>Rejected Issues: </b><%= @issues_rejected.count %></p>
+<p><b>Issues with ongoing Closeout Forms: </b><%= @issues_closeout.count %></p>
 <%= link_to 'Manage Issues', qmr_issues_path, class: "btn btn-link"%>
+
+<p></p>
+<br>
+<h4>Closeout Forms Summary</h4>
+<hr>
+<p><b>All Closeout Forms: </b><%= @closeoutforms_all.count %></p>
+<p><b>Closeout Forms you Closed: </b><%= @closeoutforms_closed.count %></p>
 
 </div></div>

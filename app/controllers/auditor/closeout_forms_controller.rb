@@ -36,7 +36,7 @@ class Auditor::CloseoutFormsController < ApplicationController
   def mail_list(issue)
     officer = User.find(issue.responsible_officer_id)
     title = "Closeup Form started for one of your Issues"
-    content = "One of the Issues you investigated and acted on, "+ issue.title + " has started its Closeout form. Please check back into the site in the Issue details. to sign Form."
+    content = "One of the Issues you investigated and acted on, "+ issue.title + " has started its Closeout form. Please check back into the site in the Issue details to sign Form."
     officer.send_notification_email(title, content)
     nrds= NextResponsibleDepartment.where(issue_id: issue.id)
     nrds.each do |nrd|

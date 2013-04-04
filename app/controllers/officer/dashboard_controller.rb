@@ -12,6 +12,7 @@ class Officer::DashboardController < ApplicationController
     @nrds.each do |nrd|
       @issues_secondary << Issue.find(nrd.issue_id)
     end
+    @issues_closeout = Issue.where("status_id = 5")
   end
 
   private

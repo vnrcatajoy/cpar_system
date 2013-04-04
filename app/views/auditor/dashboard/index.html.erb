@@ -9,12 +9,20 @@
 <p><b>New Action Plans to Review: </b><%= @action_plans_new.count %></p>
 <p><b>Action Plans for Implementation Review: </b><%= @action_plans_markasimplement.count %></p>
 <%= link_to 'View All Action Plans', auditor_action_plans_path, class: "btn btn-link" %>
-
+<p></p>
 <br>
 <h4>Issues Summary</h4>
 <hr>
 <p><b>All Issues: </b><%= @issues.count %></p>
 <p><b>Issues currently undergoing Correcting: </b><%= @issues_correcting.count %></p>
+<p><b>Issues with ongoing Closeout Forms: </b><%= @issues_closeout.count %></p>
 <%= link_to 'View All Issues', auditor_issues_path, class: "btn btn-link" %>
+
+<p></p>
+<br>
+<h4>Closeout Forms Summary</h4>
+<hr>
+<p><b>Closeout Forms you Started: </b><%= @closeoutforms_started.count %></p>
+<p><b>Closeout Forms you Finished: </b><%= @closeoutforms_finished.count %></p>
 
 </div></div>

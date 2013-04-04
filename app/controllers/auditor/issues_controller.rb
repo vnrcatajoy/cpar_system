@@ -18,6 +18,7 @@ class Auditor::IssuesController < ApplicationController
   	@issues = Issue.paginate(page: params[:page], per_page: 5)
     @issues_correcting = Issue.where("status_id = 4").paginate(page: params[:page], per_page: 5)
      #change to what Status/es for Issues Auditors need to see
+    @issues_closeout = Issue.where("status_id = 5").paginate(page: params[:page], per_page: 5)
   end
 
   def details

@@ -6,6 +6,7 @@ class Qmr::IssuesController < ApplicationController
      @issues = Issue.paginate(page: params[:page], per_page: 5)
      @issues_new = Issue.where("status_id = 1").paginate(page: params[:page], per_page: 5)
      @issues_rejected = Issue.where("status_id = 7").paginate(page: params[:page], per_page: 5)
+     @issues_closeout = Issue.where("status_id = 5").paginate(page: params[:page], per_page: 5)
   end
 
   def new
@@ -73,6 +74,7 @@ class Qmr::IssuesController < ApplicationController
     if @cof.qmr_id == nil 
       @cof.qmr_id = current_user.id
       @cof.closeout_date = Date.today
+      @cof.toggle!(:completed)
       if @cof.save
         @issue.status_id = 6 #Closed
         if @issue.save
@@ -82,6 +84,7 @@ class Qmr::IssuesController < ApplicationController
           @ic.save
           flash[:success] = 'Successfully signed Closeout Form and Closed Issue!'
           redirect_to details_qmr_issue_path(@issue)
+          notify_list(@cof)
         end
       end
     end
@@ -153,5 +156,20 @@ class Qmr::IssuesController < ApplicationController
        depts_under_issue << nrd.department_id
     end
     depts_under_issue
+  end
+
+  def notify_list(cof)
+    issue= Issue.find(cof.issue_id)
+    officer = User.find(cof.auditor_id)
+    title = "Closeup Form finished and Issue Closed"
+    content = "One of the Issues you investigated and acted on, "+ issue.title + " had its Closeout form finished and Issue closed. You can view the Issue log in the Issue's page on site."
+    officer.send_notification_email(title, content)
+    cofd = CloseoutFormDept.where(closeout_form_id: cof.id)
+    cofd.each do |d|
+       officer = User.find(d.officer_id)
+       officer.send_notification_email(title, content)
+       officer = User.find(d.dept_head_id)
+       officer.send_notification_email(title, content)
+    end
   end
 end

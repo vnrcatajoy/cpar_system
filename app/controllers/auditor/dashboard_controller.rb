@@ -10,6 +10,9 @@ class Auditor::DashboardController < ApplicationController
   	# For reviewing if ACtion Plan properly implemented
   	@issues = Issue.all
   	@issues_correcting = Issue.where("status_id = 4")
+    @issues_closeout = Issue.where("status_id = 5")
+    @closeoutforms_started = CloseoutForm.where(auditor_id: current_user.id)
+    @closeoutforms_finished = CloseoutForm.where(auditor_id: current_user.id, completed: 't')
   end
 
   private
