@@ -54,7 +54,8 @@ before_filter :responsibleofficer_user
   end
 
   def index
-    @action_plans = ActionPlan.paginate(page: params[:page],  per_page: 15)
+    @action_plans = ActionPlan.paginate(page: params[:page],  per_page: 10)
+    @action_plans_yours = ActionPlan.where("responsible_officer_id = " + current_user.id.to_s).paginate(page: params[:page],  per_page: 5)
   end
 
   def update

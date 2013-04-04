@@ -39,7 +39,7 @@
 	    </tr>
     <% end %>
 </table>
-<%= will_paginate %>
+<%= will_paginate @action_plans %>
 
 <h2>Action Plans for marking as Implemented</h2>
 <table class="table table-striped table-bordered">
@@ -73,4 +73,4 @@
       </tr>
     <% end %>
   </table>
-<%= will_paginate %>
+<%= will_paginate @action_plans_markasimplement %>

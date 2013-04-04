@@ -1,13 +1,20 @@
 <% provide(:title, 'Administration') %>
 <h1>Administration</h1> 
 
+<div class="row">
+	<div class="span6">
 <h4>Users Summary</h4>
-<p><b>All Users Under Department: </b><%= @users.count %></p>
+<hr>
+<p><b>All Users Registered: </b><%= @users.count %></p>
 <p><b>Users needing Approval: </b><%= @users_enable.count %></p>
 <br>
+<h4>Officer Users</h4>
+<hr>
 <p><b>Department Heads: </b><%= @users_dept.count %></p>
 <p><b>Responsible Officers: </b><%= @users_officer.count %></p>
 <p><b>incident Managers: </b><%= @users_qmr.count %></p>
 <p><b>Auditors: </b><%= @users_auditor.count %></p>
 <%= link_to 'Manage All Users', admin_users_path, class: "btn btn-link" %>
 <%= link_to "Add New User", new_admin_user_path, class: "btn btn-link" %>
+
+</div></div>

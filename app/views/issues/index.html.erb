@@ -43,7 +43,7 @@
     <% end %>
 
   </table>
-  <%= will_paginate %>
+  <%= will_paginate @issues %>
 <%= link_to 'Report New Issue', new_issue_path, class: "btn btn-large btn-primary" %>
 
 <h2>My Submitted Issues</h2>
@@ -86,4 +86,4 @@
     <% end %>
 
   </table>
-  <%= will_paginate %>
+  <%= will_paginate @issues_yours %>
