@@ -13,12 +13,20 @@ class Issue < ActiveRecord::Base
 
   has_many :closeout_forms #but only really has_one
 
-  attr_accessible :action_plan_id, :cause_id, :department_id, :description, :impact_id, :iso_nc_id, :user_id, :status_id, :title, :type_id, :responsible_officer_id, :estimated_closeout_date
+  attr_accessible :action_plan_id, :cause_id, :department_id, :description, :impact_id, :iso_nc_id, :user_id, :status_id, :title, :type_id, :responsible_officer_id, :estimated_closeout_date, :final_closeout_date
 
   validates :title, presence: true, length: { maximum: 50 }
   validates :description, presence: true
   validates :user_id, presence: true
   validates :status_id, presence: true
   validates :impact_id, presence: true
+
+  def self.total_on(date)
+    where("date(created_at) = ?", date).count #.sum(:total_price)
+  end
+
+  def self.total_closed(date)
+    where("date(final_closeout_date) = ?", date).count #.sum(:total_price)
+  end
 
 end

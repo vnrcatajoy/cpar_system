@@ -12,5 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require highcharts
+//= require highcharts/themes/skies
 //= require bootstrap
 //= require_tree .

@@ -2,10 +2,64 @@
 <div class="page-header">
 	<h1>CPAR System</h1>
 	<% if signed_in? %>
-		<div class="hero-unit">
-			<h2> Please follow the links above to your desired feature. </h2>
+		<div class ="row">
+			<div class="span9" id="issues_chart" style="width: 560px; height: 400px;"></div>
 			<!--This is temporary-->
+			<script type="text/javascript" charset="utf-8">
+				$(function () {
+				  new Highcharts.Chart({
+				    chart: { renderTo: 'issues_chart' },
+				    title: { text: 'Issues by Day' },
+				    xAxis: { type: 'datetime' },
+				    yAxis: {
+				      title: { text: 'Issues'}
+				    },
+				    tooltip: {
+				      formatter: function () {
+        				return Highcharts.dateFormat("%B %e %Y", this.x) + ': ' + this.y + " Issues";
+      					}
+    				},  
+				    series: [
+				    {
+				    	name: "Issues Started",
+				        pointInterval: <%= 1.day * 1000 %>,
+      					pointStart: <%= 2.weeks.ago.at_midnight.to_i * 1000 %>,
+      					data: <%= (2.weeks.ago.to_date..Date.today).map { |date| Issue.total_on(date).to_f}.inspect %>
+				    },
+				    {
+				      name: "Issues Closed",
+				      pointInterval: <%= 1.day * 1000 %>,
+				      pointStart: <%= 2.weeks.ago.at_midnight.to_i * 1000 %>,
+				      data: <%= (2.weeks.ago.to_date..Date.today).map { |date| Issue.total_closed(date).to_f}.inspect %>
+				    }]
+				  });
+				});
+			</script>
+			<div class="span3">
+				<p></p>
+				<br>
+				<hr>
+				<table class="table table-striped table-bordered">
+			    <tr>
+			      <th>Issues Summary</th>
+			      <th></th>
+			  	</tr>
+			  	<tr>
+			  		<td>All Issues</td>
+					<td><%= @issues.count.to_s %></td>
+				</tr>
+				<tr>
+			  		<td>Issues Submitted this month</td>
+					<td><%= @issues_thismonth.count.to_s %></td>
+				</tr>
+				<tr>
+			  		<td>Issues Closed this month</td>
+					<td><%= @issues_closed.count.to_s %></td>
+				</tr>
+			</table>
+			</div>
 		</div>
+	</div>
 	<% else %>
 		<h2>
 		  Please login to use features.

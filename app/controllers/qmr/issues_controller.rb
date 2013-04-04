@@ -77,6 +77,7 @@ class Qmr::IssuesController < ApplicationController
       @cof.toggle!(:completed)
       if @cof.save
         @issue.status_id = 6 #Closed
+        @issue.final_closeout_date = Date.today
         if @issue.save
           @ic= @issue.issue_comments.build({content: "QMR signed Closeout Form and closed Issue.",
             user_id: current_user.id, issue_id: @issue.id })
