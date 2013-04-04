@@ -41,6 +41,7 @@ CparSystem::Application.routes.draw do
       get 'details', on: :member
       get 'edit_departments', on: :member
       get 'sign_closeout', on: :member
+      get 'notify_deadline', on: :member
     end
     resources :issue_comments, only: :create
   end

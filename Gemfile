@@ -27,6 +27,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'scoped_search'
 gem "highcharts-rails", "~> 3.0.0"
 
 group :test, :development do

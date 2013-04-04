@@ -68,6 +68,13 @@ class Qmr::IssuesController < ApplicationController
     end
   end
 
+  def notify_deadline
+    @issue = Issue.find params[:id]
+    notify_officers(@issue)
+    flash[:success] = "Successfully notified all officers for this Issue about deadline."
+    redirect_to qmr_issue_path
+  end
+
   def sign_closeout
     @issue = Issue.find params[:id]
     @cof = CloseoutForm.find_by_id(params[:cof])
@@ -157,6 +164,18 @@ class Qmr::IssuesController < ApplicationController
        depts_under_issue << nrd.department_id
     end
     depts_under_issue
+  end
+
+  def notify_officers(issue)
+    officer = User.find(issue.responsible_officer_id)
+    title = "Issue nearing Closeout Date"
+    content = "One of the Issues you are investigating, "+ issue.title + " has its closeout date nearing (" + issue.estimated_closeout_date.to_s + "). You can view the Issue details on the site."
+    officer.send_notification_email(title, content)
+    nrds= NextResponsibleDepartment.where(issue_id: issue.id)
+    nrds.each do |nrd|
+       officer = User.find(nrd.responsible_officer_id)
+       officer.send_notification_email(title, content)
+    end
   end
 
   def notify_list(cof)

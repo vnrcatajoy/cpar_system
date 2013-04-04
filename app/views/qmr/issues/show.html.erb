@@ -19,6 +19,10 @@
       <b>Estimated Closeout Date:</b>
       <%= @issue.estimated_closeout_date %>
     </p>
+
+    <% if @issue.estimated_closeout_date != nil %>
+      <%= link_to "Notify Officers about deadline", notify_deadline_qmr_issue_path(@issue), confirm: 'Are you sure you want to mail all officers about deadline?', class: "btn btn-link" %>
+    <% end %>
     
     <hr>
 
