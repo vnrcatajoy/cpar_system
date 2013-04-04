@@ -17,6 +17,34 @@ namespace :db do
     UserType.create!(name: 'Auditor')
     UserType.create!(name: 'Employee')
 
+    #add sample IssueStatus
+    IssueStatus.create!(name: 'New')
+    IssueStatus.create!(name: 'Verified')
+    IssueStatus.create!(name: 'Investigating')
+    IssueStatus.create!(name: 'Correcting')
+    IssueStatus.create!(name: 'Tested')
+    IssueStatus.create!(name: 'Closed')
+    IssueStatus.create!(name: 'Rejected')
+
+    #add sample IssueImpact
+    IssueImpact.create!(name: '1-Critical')
+    IssueImpact.create!(name: '2-Major')
+    IssueImpact.create!(name: '3-Minor')
+
+    #add Action Plan Statuses
+    ActionPlanStatus.create!(name: 'New')
+    ActionPlanStatus.create!(name: 'Verified')
+    ActionPlanStatus.create!(name: 'Implemented')
+    ActionPlanStatus.create!(name: 'Closed')
+    ActionPlanStatus.create!(name: 'Rejected')
+    
+    IssueType.create!(name: "IQA-Related")
+    IssueType.create!(name: "Client Complaint")
+    IssueType.create!(name: "Partner/Supplier-Related")
+    IssueType.create!(name: "3rd Party Audit Related")
+    IssueType.create!(name: "Related to KPI/Quality Objective Review")
+    IssueType.create!(name: "HRD-Related")
+
     #add sample Users
     admin1 = User.create!(name: 'Nico Catajoy', 
                   email: 'vnrcatajoy@gmail.com',
@@ -114,38 +142,10 @@ namespace :db do
                     password_confirmation: password_confirmation)
     end
 
-    #add sample IssueStatus
-    IssueStatus.create!(name: 'New')
-    IssueStatus.create!(name: 'Verified')
-    IssueStatus.create!(name: 'Investigating')
-    IssueStatus.create!(name: 'Correcting')
-    IssueStatus.create!(name: 'Tested')
-    IssueStatus.create!(name: 'Closed')
-    IssueStatus.create!(name: 'Rejected')
-
-    #add sample IssueImpact
-    IssueImpact.create!(name: '1-Critical')
-    IssueImpact.create!(name: '2-Major')
-    IssueImpact.create!(name: '3-Minor')
-
-    #add Action Plan Statuses
-    ActionPlanStatus.create!(name: 'New')
-    ActionPlanStatus.create!(name: 'Verified')
-    ActionPlanStatus.create!(name: 'Implemented')
-    ActionPlanStatus.create!(name: 'Closed')
-    ActionPlanStatus.create!(name: 'Rejected')
-
     #add sample IssueType
     # 5.times do |n|
     #   IssueType.create!(name: "Issue#{n}")
     # end
-
-    IssueType.create!(name: "IQA-Related")
-    IssueType.create!(name: "Client Complaint")
-    IssueType.create!(name: "Partner/Supplier-Related")
-    IssueType.create!(name: "3rd Party Audit Related")
-    IssueType.create!(name: "Related to KPI/Quality Objective Review")
-    IssueType.create!(name: "HRD-Related")
 
     #add sample ISO NC Types
     5.times do |n|
