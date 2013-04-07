@@ -25,6 +25,7 @@ namespace :db do
     IssueStatus.create!(name: 'Tested')
     IssueStatus.create!(name: 'Closed')
     IssueStatus.create!(name: 'Rejected')
+    IssueStatus.create!(name: 'Closed (Rejected)')
 
     #add sample IssueImpact
     IssueImpact.create!(name: '1-Critical')
@@ -35,6 +36,7 @@ namespace :db do
     ActionPlanStatus.create!(name: 'New')
     ActionPlanStatus.create!(name: 'Verified')
     ActionPlanStatus.create!(name: 'Implemented')
+    ActionPlanStatus.create!(name: 'Pending')
     ActionPlanStatus.create!(name: 'Closed')
     ActionPlanStatus.create!(name: 'Rejected')
     
@@ -44,6 +46,18 @@ namespace :db do
     IssueType.create!(name: "3rd Party Audit Related")
     IssueType.create!(name: "Related to KPI/Quality Objective Review")
     IssueType.create!(name: "HRD-Related")
+
+    ActivityStatus.create!(name: 'New')
+    ActivityStatus.create!(name: 'Reviewed')
+    ActivityStatus.create!(name: 'Implemented')
+    ActivityStatus.create!(name: 'Approved') #Approved Implementation
+    ActivityStatus.create!(name: 'Reimplement') #for Reimplementation
+    ActivityStatus.create!(name: 'Rejected')
+
+    #add sample ISO NC Types
+    5.times do |n|
+      IsoNc.create!(title: "IsoNc#{n}")
+    end
 
     #add sample Users
     admin1 = User.create!(name: 'Nico Catajoy', 
@@ -146,11 +160,6 @@ namespace :db do
     # 5.times do |n|
     #   IssueType.create!(name: "Issue#{n}")
     # end
-
-    #add sample ISO NC Types
-    5.times do |n|
-      IsoNc.create!(title: "IsoNc#{n}")
-    end
 
     #add sample Issues
     Issue.create!(title: 'ITDC Slow Internet Connection', 

@@ -21,6 +21,40 @@ class Issue < ActiveRecord::Base
   validates :status_id, presence: true
   validates :impact_id, presence: true
 
+  def found_department(user_department_id)
+    found = false
+    if self.department_id == user_department_id
+      found = true
+    else
+      nrds= self.next_responsible_departments
+      nrds.each do |n|
+        if n.department_id == user_department_id
+          found=true
+        end
+      end
+    end
+    found
+  end
+
+  def found_officer(user_id)
+    found = false
+    if self.responsible_officer_id == user_id
+      found = true
+    else
+      nrds= self.next_responsible_departments
+      nrds.each do |n|
+        if n.responsible_officer_id == user_id
+          found=true
+        end
+      end
+    end
+    found
+  end
+
+  #scope :in_department, lambda {|user| self.found_department(user) } 
+
+  #scope :assigned_to, lambda {|user| self.found_officer(user) } 
+
   def self.total_on(date)
     where("date(created_at) = ?", date).count #.sum(:total_price)
   end

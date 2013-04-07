@@ -1,5 +1,5 @@
 class Activity < ActiveRecord::Base
-  attr_accessible :actual_date, :result, :target_date
+  attr_accessible :actual_date, :result, :target_date, :status_id
 
   belongs_to :action_plan
   belongs_to :user
