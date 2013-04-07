@@ -12,8 +12,8 @@
   	    <%= f.hidden_field :user_id, value: current_user.id %>
   	    <%= f.hidden_field :issue_id, value: @issue.id %>
 
-  	    <%= f.submit "Attach File", issue_id: @issue.id, class: "btn btn-link" %>
+  	    <%= f.submit "Attach File", issue_id: @issue.id, class: "btn btn-primary" %>
       <% end %>
-      <%= link_to 'Back', @issue, class: "btn btn-link" %>
+      <%= link_to 'Back', @issue, class: "btn btn-primary" %>
   </div>
 </div>

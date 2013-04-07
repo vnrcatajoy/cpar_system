@@ -6,7 +6,7 @@
 			<%= f.hidden_field :cause_id, value: @cause.id %>
 			<%= f.hidden_field :user_id, value: current_user.id %>
 			<%= f.text_area :content, size: "30x5" %>
-			<%= f.submit "Add Comment", class: "btn btn-small btn-link" %>
+			<%= f.submit "Add Comment", class: "btn btn-small btn-primary" %>
 		<% end %>
 		<h4>Cause Updates:</h4>
 		<hr>

@@ -42,7 +42,6 @@ class Officer::ActivitiesController < ApplicationController
   end
 
   def edit
-    flash[:success] = "Editing Activity" 
     #@activity = Activity.find(params[:id])
     @activity = @action_plan.activities.find(params[:id])
   end

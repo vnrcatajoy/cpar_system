@@ -15,7 +15,7 @@
         <td> <%= cause.description %> </td>
         <td> <%= cause.date_issued %> </td>
         <td>
-          <%= link_to "View", [Issue.find(cause.issue_id), cause], class: "btn btn-small btn-link" %>
+          <%= link_to "View", [Issue.find(cause.issue_id), cause], class: "btn btn-small btn-primary" %>
         </td>
     	</tr>
     <% end %>

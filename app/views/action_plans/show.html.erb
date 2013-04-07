@@ -41,7 +41,7 @@
 		<!--Show Activities under this Action Plan-->
 		<%= render 'shared/activities_show', action_plan: @action_plan  %>
 		<p>
-			<%= link_to 'Back to Issue', issue_path(Issue.find(@action_plan.issue_id)) , class: "btn btn-link"%>
+			<%= link_to 'Back to Issue', issue_path(Issue.find(@action_plan.issue_id)) , class: "btn btn-primary"%>
 		</p>
 		</div>
 </div>

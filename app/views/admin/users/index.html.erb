@@ -20,9 +20,9 @@
           <div id="command_container">
             <ul>
               <li id="user_<%= user.id %>">
-                <%= link_to 'Edit', edit_admin_user_path(user), class: "btn btn-link" %>
+                <%= link_to 'Edit', edit_admin_user_path(user), class: "btn btn-primary" %>
                    <% if !current_user?(user) %>
-  	                <%= link_to 'Delete', [:admin, user], :confirm => 'Are you sure you want to delete this User\'s account?', :method => :delete , class: "btn btn-link" %>
+  	                <%= link_to 'Delete', [:admin, user], :confirm => 'Are you sure you want to delete this User\'s account?', :method => :delete , class: "btn btn-primary" %>
    	               <% end %>
               </li>
             </ul>
@@ -52,7 +52,7 @@
          <td> <%= user.email %> </td>
          <td> <%= Department.where(id: user.department_id).first.name %> </td>
          <td> <%= UserType.where(id: user.type_id).first.name %> </td>
-         <td> <%= link_to "Activate Account", activate_admin_user_path(user), :confirm => 'Are you sure you want to Activate this User\'s account?', class: "btn btn-small btn-link" %> </td>
+         <td> <%= link_to "Activate Account", activate_admin_user_path(user), :confirm => 'Are you sure you want to Activate this User\'s account?', class: "btn btn-small btn-primary" %> </td>
         </tr>
       <% end %>
   </table>

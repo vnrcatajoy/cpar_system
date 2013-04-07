@@ -48,8 +48,8 @@
 		<div class="span9">
 		<!--Show Activities under this Action Plan-->
 		<%= render 'shared/activities_show', action_plan: @action_plan  %>
-		<%= link_to 'Back to Issue', auditor_issue_path(Issue.find(@action_plan.issue_id)) , class: "btn btn-link"%>
-		<%= link_to 'Back to Action Plans', auditor_action_plans_path , class: "btn btn-link"%>
+		<%= link_to 'Back to Issue', auditor_issue_path(Issue.find(@action_plan.issue_id)) , class: "btn btn-primary"%>
+		<%= link_to 'Back to Action Plans', auditor_action_plans_path , class: "btn btn-primary"%>
 	    </p>
 		</div>
 </div>

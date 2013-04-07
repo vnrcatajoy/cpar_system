@@ -43,10 +43,10 @@
 		<div class="span9">
 		<!--Show Activities under this Action Plan-->
 		<%= render 'activities_show', action_plan: @action_plan  %>
-		<p><%= link_to 'Add Activity', new_officer_action_plan_activity_path(@action_plan) , class: "btn btn-link" %>
-			<%= link_to 'Edit Action Plan', edit_officer_action_plan_path(@action_plan) , class: "btn btn-link" %>
-			<%= link_to 'Back to Issue', officer_issue_path(Issue.find(@action_plan.issue_id)) , class: "btn btn-link"%>
-			<%= link_to 'Back to Action Plans', officer_action_plans_path , class: "btn btn-link"%>   
+		<p><%= link_to 'Add Activity', new_officer_action_plan_activity_path(@action_plan) , class: "btn btn-primary" %>
+			<%= link_to 'Edit Action Plan', edit_officer_action_plan_path(@action_plan) , class: "btn btn-primary" %>
+			<%= link_to 'Back to Issue', officer_issue_path(Issue.find(@action_plan.issue_id)) , class: "btn btn-primary"%>
+			<%= link_to 'Back to Action Plans', officer_action_plans_path , class: "btn btn-primary"%>   
 		</p>
 	
 		</div>

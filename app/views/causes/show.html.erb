@@ -10,7 +10,7 @@
 		<p><%= User.find(@cause.user_id).name %></p>
 		<p> <strong>Date Issued:</strong></p>
 		<p><%= @cause.date_issued %></p>
-		<%= link_to "Back to Issue", Issue.find(@cause.issue_id), class: "btn btn-small btn-link" %>	
+		<%= link_to "Back to Issue", Issue.find(@cause.issue_id), class: "btn btn-small btn-primary" %>	
 		<hr>
 		<div class="span5">
 		    <h4>Files</h4>

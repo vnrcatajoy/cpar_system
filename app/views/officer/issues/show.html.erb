@@ -77,8 +77,8 @@
           None
         <% end %>
     </p>
-    <%= link_to 'Show Details', details_officer_issue_path, class: "btn btn-link" %>
-    <%= link_to 'Back', officer_issues_path, class: "btn btn-link" %>
+    <%= link_to 'Show Details', details_officer_issue_path, class: "btn btn-primary" %>
+    <%= link_to 'Back', officer_issues_path, class: "btn btn-primary" %>
     <hr>
     <%= render 'attachedfiles_show' %>
   </div>
@@ -86,12 +86,12 @@
   <div class="span9">
     <hr>
     <%= render 'causes_show' %>
-    <%= link_to 'Add Cause', new_officer_issue_cause_path(@issue) , class: "btn btn-small btn-link" %>
+    <%= link_to 'Add Cause', new_officer_issue_cause_path(@issue) , class: "btn btn-small btn-primary" %>
     <%= render 'actionplans_show' %>
     <% if @issue.causes.where("user_id = ?", current_user.id).empty? %>
       Add a Cause above first before adding an Action Plan
     <% else %>
-      <%= link_to 'Add New Action Plan', new_officer_action_plan_path(issue_id: @issue.id), class: "btn btn-small btn-link" %>
+      <%= link_to 'Add New Action Plan', new_officer_action_plan_path(issue_id: @issue.id), class: "btn btn-small btn-primary" %>
     <% end %>
     
   </div>

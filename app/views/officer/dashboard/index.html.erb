@@ -8,7 +8,7 @@
 <hr>
 <p><b>All Action Plans: </b><%= @action_plans.count %></p>
 <p><b>Your Submitted Action Plans: </b><%= @action_plans_yours.count %></p>
-<%= link_to 'View All Action Plans', officer_action_plans_path, class: "btn btn-link" %>
+<%= link_to 'View All Action Plans', officer_action_plans_path, class: "btn btn-primary" %>
 <p></p>
 <br>
 <h4>Issues Summary</h4>
@@ -17,6 +17,6 @@
 <p><b>Issues Assigned to You: </b><%= @issues_yours.count %></p>
 <p><b>Issues Secondarily Assigned to You: </b><%= @issues_secondary.count %></p>
 <p><b>Issues with ongoing Closeout Forms: </b><%= @issues_closeout.count %></p>
-<%= link_to 'View All Issues', officer_issues_path, class: "btn btn-link" %>
+<%= link_to 'View All Issues', officer_issues_path, class: "btn btn-primary" %>
 
 </div></div>

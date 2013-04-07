@@ -77,12 +77,12 @@
           None
         <% end %>
     </p>
-    <%= link_to 'Show Details', details_issue_path, class: "btn btn-link" %>
+    <%= link_to 'Show Details', details_issue_path, class: "btn btn-primary" %>
     <% if @issue.user_id == current_user.id %>
-      <%= link_to 'Edit', edit_issue_path(@issue), class: "btn btn-link" %>
-      <%= link_to 'Attach File', attach_form_issue_path(@issue, id: @issue.id), class: "btn btn-link" %> 
+      <%= link_to 'Edit', edit_issue_path(@issue), class: "btn btn-primary" %>
+      <%= link_to 'Attach File', attach_form_issue_path(@issue, id: @issue.id), class: "btn btn-primary" %> 
     <% end %>
-    <%= link_to 'Back', issues_path, class: "btn btn-link" %>
+    <%= link_to 'Back', issues_path, class: "btn btn-primary" %>
     <hr>
     <%= render 'attachedfiles_show' %>
   </div>

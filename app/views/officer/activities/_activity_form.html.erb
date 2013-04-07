@@ -7,8 +7,12 @@
     <%= f2.text_area :result %>
     
     <%= f2.label :target_date %>
-    <%= f2.date_select(:target_date, start_year: 1990) %>
+    <%= f2.date_field :target_date, start_year: 1990 %>
+    (click on rightmost arrow for calendar selector)
 
+    <%= f2.hidden_field :status_id, value: 1 %>
+
+    <p></p>
     <p><b> To be submitted as User: </b> <%= current_user.name %></p>
-    <%= f2.submit "Add Activity", class: "btn btn-large btn-primary" %>
+    <%= f2.submit "Add Activity", class: "btn btn-primary" %>
 <% end %>

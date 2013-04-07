@@ -27,7 +27,7 @@
 		<%= f.select :type_id, IssueType.all.collect { |t| [t.name, t.id] } %>
 		<br/>
 
-		<%= f.submit "Update", class: "btn btn-link" %>
+		<%= f.submit "Update", class: "btn btn-primary" %>
 	 <% end %>
 	 <hr>
 	 <%= form_for(@issue_attachment) do |f| %>
@@ -40,8 +40,8 @@
   	    <%= f.hidden_field :user_id, value: current_user.id %>
   	    <%= f.hidden_field :issue_id, value: @issue.id %>
 
-  	    <%= f.submit "Attach File", issue_id: @issue.id, class: "btn btn-link" %>
+  	    <%= f.submit "Attach File", issue_id: @issue.id, class: "btn btn-primary" %>
       <% end %>
-      <%= link_to 'Back', issues_path, class: "btn btn-link" %>
+      <%= link_to 'Back', issues_path, class: "btn btn-primary" %>
   </div>
 </div>

@@ -34,7 +34,7 @@
 	    	<td><%= ap.final_implementation_review_date %></td>
         <td><%= ap.implemented==true ? 'Yes' : 'No' %></td>
 	    	<td> 
-	    		<%= link_to "View", [:auditor, ap], class: "btn btn-link" %>
+	    		<%= link_to "View", [:auditor, ap], class: "btn btn-primary" %>
 	    	</td>
 	    </tr>
     <% end %>
@@ -68,7 +68,7 @@
         </td>
         <td><%= ActionPlanStatus.find(ap.ap_status_id).name %></td>
         <td> 
-          <%= link_to "View", [:auditor, ap], class: "btn btn-link" %>
+          <%= link_to "View", [:auditor, ap], class: "btn btn-primary" %>
         </td>
       </tr>
     <% end %>
@@ -102,7 +102,7 @@
         </td>
         <td><%= ActionPlanStatus.find(ap.ap_status_id).name %></td>
         <td> 
-          <%= link_to "View", [:auditor, ap], class: "btn btn-link" %>
+          <%= link_to "View", [:auditor, ap], class: "btn btn-primary" %>
         </td>
       </tr>
     <% end %>

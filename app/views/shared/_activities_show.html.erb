@@ -17,7 +17,7 @@
         <td> <%= activity.target_date %> </td>
         <td> <%= activity.actual_date %> </td>
         <td>
-          <%= link_to "View", action_plan_activity_path(ActionPlan.find(activity.action_plan_id), activity), class: "btn btn-small btn-link" %>
+          <%= link_to "View", action_plan_activity_path(ActionPlan.find(activity.action_plan_id), activity), class: "btn btn-small btn-primary" %>
         </td>
     	</tr>
     <% end %>

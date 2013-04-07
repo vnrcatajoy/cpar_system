@@ -20,8 +20,9 @@
 
     <% if @issue.status_id > 1 && @issue.status_id < 5 && found_dept(@issue) %>
       <%= form_for [:dept, @issue], url: {action: "update_date", method: "put"} do |f| %>
-        <%= f.date_select(:estimated_closeout_date, start_year: 2013) %>
-        <%= f.submit "Update Closeout Date", class: "btn btn-link" %>
+        <%= f.date_field :estimated_closeout_date, start_year: 2013 %>
+        (click on rightmost arrow for calendar selector)
+        <%= f.submit "Update Closeout Date", class: "btn btn-primary" %>
       <% end %>
     <% end %>
 
@@ -91,8 +92,8 @@
     <% if @nrd!= nil && @nrd.responsible_officer_id == nil && @nrd.department_id == current_user.department_id %>
       <%= render 'assign_secondary' %>
     <% end %>
-    <%= link_to 'Show Details', details_dept_issue_path, class: "btn btn-link" %>
-    <%= link_to 'Back', dept_issues_path, class: "btn btn-link" %>
+    <%= link_to 'Show Details', details_dept_issue_path, class: "btn btn-primary" %>
+    <%= link_to 'Back', dept_issues_path, class: "btn btn-primary" %>
     <hr>
     <%= render 'attachedfiles_show' %>
   </div>
