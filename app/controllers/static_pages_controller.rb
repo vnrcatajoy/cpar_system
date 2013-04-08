@@ -5,4 +5,7 @@ class StaticPagesController < ApplicationController
   	@issues_thismonth = Issue.where("created_at between ? and ?", Date.today.at_beginning_of_month, Date.today.next_month.beginning_of_month)
   	# can also use this format YourModel.where(:created_at => start_date..end_date)
   end
+
+  def test
+  end
 end

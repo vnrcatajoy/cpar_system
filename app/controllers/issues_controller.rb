@@ -4,13 +4,22 @@ class IssuesController < ApplicationController
   before_filter :correct_department, only: [:show]
 
   def index
-    # still needs to be revised further
-    if current_user.admin?  #super admin
-      @issues = Issue.paginate(page: params[:page], per_page: 10)
-    else  #get issues reported to you or your department
-      @issues = Issue.where("department_id = " + current_user.department_id.to_s + " OR user_id = " + current_user.id.to_s).paginate(page: params[:page], per_page: 10)
+    if params[:sort] != nil && params[:sort] == 'yours'  #get issues reported to you or your department
+      @issues = Issue.where("user_id = " + current_user.id.to_s).paginate(page: params[:page], per_page: 10)
+    else
+      if current_user.admin?  #super admin
+        @issues = Issue.paginate(page: params[:page], per_page: 10)
+      else
+        @issues_all = Issue.all
+        @issues = Array.new
+        @issues_all.each do |issue|
+          if issue.found_department(current_user.department_id)
+            @issues << issue
+          end
+        end
+        @issues = @issues.paginate(page: params[:page], per_page: 10)
+      end
     end
-      @issues_yours = Issue.where("user_id = " + current_user.id.to_s).paginate(page: params[:page], per_page: 5)
   end
 
   def new
@@ -73,20 +82,20 @@ class IssuesController < ApplicationController
     end
   end
 
-  private
+private
   def correct_department
     @issue = Issue.find params[:id]
-    if current_user.department_id != @issue.department_id
-      if !current_user.admin? 
+    if !current_user.admin? 
       #remove this condition if admin mustn't be allowed to view all Issues in public
-        if current_user.id == @issue.user_id
-          #flash[:success] = "Viewing your submitted Issue."
-        else
-          flash[:error] = "You cannot view that Issue."
-          redirect_to issues_path
-        end
-      end 
-    end
+      if current_user.id == @issue.user_id
+        #flash[:success] = "Viewing your submitted Issue."
+      elsif @issue.found_department(current_user.department_id)  
+        # Still viewable to secondarily assigned
+      else
+        flash[:error] = "You cannot view that Issue."
+        redirect_to issues_path
+      end
+    end 
   end
 
   def correct_submitter
