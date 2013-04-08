@@ -53,7 +53,6 @@ class Dept::IssuesController < ApplicationController
     @issue = Issue.find params[:id]
     @issue.status_id = 3 # Change from Verified to Investigating
     # Sure Verified first because of Assign form condition
-    @officer = User.find(params[:issue][:responsible_officer_id])
     if @issue.update_attributes params[:issue]
       @ic= @issue.issue_comments.build({content: "Dept Head assigned an Officer to Issue.",
             user_id: current_user.id, issue_id: @issue.id })
@@ -63,6 +62,7 @@ class Dept::IssuesController < ApplicationController
       redirect_to dept_issues_path
       title = "Assigned Officer to an Issue"
       content = "You have been assigned by your Department Head as a Responsible Officer for an Issue. Please check back into the site for the Issue details."
+      @officer = User.find(params[:issue][:responsible_officer_id])
       @officer.send_notification_email(title, content)
     else
       flash[:error] = 'There was an error in assigning.'

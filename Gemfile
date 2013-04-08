@@ -29,6 +29,7 @@ end
 gem 'jquery-rails'
 gem 'scoped_search'
 gem "highcharts-rails", "~> 3.0.0"
+gem "date-input-rails", "~> 0.0.3"
 
 group :test, :development do
   gem 'turn', :require => false

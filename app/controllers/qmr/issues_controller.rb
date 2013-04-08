@@ -168,29 +168,39 @@ class Qmr::IssuesController < ApplicationController
   end
 
   def notify_officers(issue)
-    officer = User.find(issue.responsible_officer_id)
     title = "Issue nearing Closeout Date"
     content = "One of the Issues you are investigating, "+ issue.title + " has its closeout date nearing (" + issue.estimated_closeout_date.to_s + "). You can view the Issue details on the site."
-    officer.send_notification_email(title, content)
+    if issue.responsible_officer_id != nil
+      officer = User.find(issue.responsible_officer_id)
+      officer.send_notification_email(title, content)
+    end
     nrds= NextResponsibleDepartment.where(issue_id: issue.id)
     nrds.each do |nrd|
-       officer = User.find(nrd.responsible_officer_id)
-       officer.send_notification_email(title, content)
+      if nrd.responsible_officer_id != nil
+        officer = User.find(nrd.responsible_officer_id)
+        officer.send_notification_email(title, content)
+      end
     end
   end
 
   def notify_list(cof)
     issue= Issue.find(cof.issue_id)
-    officer = User.find(cof.auditor_id)
     title = "Closeup Form finished and Issue Closed"
     content = "One of the Issues you investigated and acted on, "+ issue.title + " had its Closeout form finished and Issue closed. You can view the Issue log in the Issue's page on site."
-    officer.send_notification_email(title, content)
+    if cof.auditor_id != nil
+      officer = User.find(cof.auditor_id)
+      officer.send_notification_email(title, content)
+    end
     cofd = CloseoutFormDept.where(closeout_form_id: cof.id)
     cofd.each do |d|
-       officer = User.find(d.officer_id)
-       officer.send_notification_email(title, content)
-       officer = User.find(d.dept_head_id)
-       officer.send_notification_email(title, content)
+      if d.officer_id != nil
+        officer = User.find(d.officer_id)
+        officer.send_notification_email(title, content)
+      end
+      if d.dept_head_id != nil
+        officer = User.find(d.dept_head_id)
+        officer.send_notification_email(title, content)
+      end
     end
   end
 end
