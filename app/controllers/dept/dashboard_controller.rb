@@ -5,14 +5,65 @@ class Dept::DashboardController < ApplicationController
   def index
   	@users = User.where("department_id = " + current_user.department_id.to_s)
     @users_officers = User.where("department_id = " + current_user.department_id.to_s + " AND type_id = 3")
-  	@issues = Issue.where("department_id = " + current_user.department_id.to_s)
-  	@issues_verified = Issue.where("department_id = " + current_user.department_id.to_s + " AND status_id = 2")
-    @nrds = NextResponsibleDepartment.where("department_id = " + current_user.department_id.to_s)
-    @issues_secondary = Array.new
-    @nrds.each do |nrd|
-      @issues_secondary << Issue.find(nrd.issue_id)
+    # Issues
+  	@issues_all = Issue.all
+    @issues = Array.new
+    @issues_all.each do |issue|
+      if issue.found_department(current_user.department_id)
+        @issues << issue
+      end
     end
-    @issues_closeout = Issue.where("status_id = 5")
+    #@issues = @issue.all
+    @issues_all_new = Issue.where("status_id = 1")
+    @issues_new = Array.new
+    @issues_all_new.each do |issue|
+      if issue.found_department(current_user.department_id)
+        @issues_new << issue
+      end
+    end
+    @issues_all_verified = Issue.where("status_id = 2")
+    @issues_verified = Array.new
+    @issues_all_verified.each do |issue|
+      if issue.found_department(current_user.department_id)
+        @issues_verified << issue
+      end
+    end
+    @issues_all_investigating = Issue.where("status_id = 3")
+    @issues_investigating = Array.new
+    @issues_all_investigating.each do |issue|
+      if issue.found_department(current_user.department_id)
+        @issues_investigating << issue
+      end
+    end
+    @issues_all_correcting = Issue.where("status_id = 4")
+    @issues_correcting = Array.new
+    @issues_all_correcting.each do |issue|
+      if issue.found_department(current_user.department_id)
+        @issues_correcting << issue
+      end
+    end
+    @issues_all_closeout = Issue.where("status_id = 5")
+    @issues_closeout = Array.new
+    @issues_all_closeout.each do |issue|
+      if issue.found_department(current_user.department_id)
+        @issues_closeout << issue
+      end
+    end
+    @issues_all_closed = Issue.where("status_id = 6")
+    @issues_closed = Array.new
+    @issues_all_closed.each do |issue|
+      if issue.found_department(current_user.department_id)
+        @issues_closed << issue
+      end
+    end
+    @issues_all_rejected = Issue.where("status_id = 7")
+    @issues_rejected = Array.new
+    @issues_all_rejected.each do |issue|
+      if issue.found_department(current_user.department_id)
+        @issues_rejected << issue
+      end
+    end
+    # It's long but it works, since can't use scope on array
   end
 
   private

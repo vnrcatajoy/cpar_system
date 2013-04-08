@@ -1,10 +1,10 @@
 <% provide(:title, 'Issues Index') %>
+
 <ul class="nav nav-pills">
   <li class="<%= 'active' if params[:sort] == nil %>"><%= link_to "Department Issues", issues_path %></li>
   <li class="<%= 'active' if params[:sort] == 'yours' %>"><%= link_to "My Issues", issues_path(sort: 'yours') %></li>
   <li></li>
 </ul>
-
 
   <% if params[:sort] == nil %>
     <h1>View All Issues</h1>

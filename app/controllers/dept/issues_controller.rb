@@ -4,14 +4,25 @@ class Dept::IssuesController < ApplicationController
   before_filter :correct_department, only: :show
 
   def index
-  	@issues = Issue.where("department_id = " + current_user.department_id.to_s).paginate(page: params[:page], per_page: 5)
-    @issues_verified = Issue.where("department_id = " + current_user.department_id.to_s + " AND status_id = 2").paginate(page: params[:page], per_page: 5)
-    @nrds = NextResponsibleDepartment.where("department_id = " + current_user.department_id.to_s)
-    @issues_secondary = Array.new
-    @nrds.each do |nrd|
-      @issues_secondary << Issue.find(nrd.issue_id)
-    end
-    @issues_closeout = Issue.where("status_id = 5").paginate(page: params[:page], per_page: 5)
+    if params[:sort] != nil
+      @issues_all = Issue.where("status_id = " + params[:sort])
+      @issues = Array.new
+      @issues_all.each do |issue|
+        if issue.found_department(current_user.department_id)
+          @issues << issue
+        end
+      end
+      @issues = @issues.paginate(page: params[:page], per_page: 10)
+    else
+      @issues_all = Issue.all
+      @issues = Array.new
+      @issues_all.each do |issue|
+        if issue.found_department(current_user.department_id)
+          @issues << issue
+        end
+      end
+      @issues = @issues.paginate(page: params[:page], per_page: 10)
+    end  
   end
 
   def sign_closeout

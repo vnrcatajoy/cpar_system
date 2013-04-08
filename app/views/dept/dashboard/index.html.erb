@@ -4,6 +4,23 @@
 
 <div class="row">
 	<div class="span6">
+<h4>Issues Summary</h4>
+<hr>
+<ul class="nav nav-pills nav-stacked">
+<li><%= link_to "All Issues under Department: ( "+ @issues.count.to_s+" )", dept_issues_path %></li>
+<li><%= link_to "New Issues: ( "+ @issues_new.count.to_s+" )", dept_issues_path(sort: '1') %></li>
+<li><%= link_to "Verified Issues needing Officer Assignment: ( "+ @issues_verified.count.to_s+" )", dept_issues_path(sort: '2') %></li>
+<li><%= link_to "Investigating Issues: ( "+@issues_investigating.count.to_s+" )", dept_issues_path(sort: '3') %></li>
+<li><%= link_to "Correcting Issues: ( "+@issues_correcting.count.to_s+" )", dept_issues_path(sort: '4') %></li>
+<li><%= link_to "Issues for Closeout: ( "+@issues_closeout.count.to_s+" )", dept_issues_path(sort: '5') %></li>
+<li><%= link_to "Closed Issues: ( "+@issues_closed.count.to_s+" )", dept_issues_path(sort: '6') %></li>
+<li><%= link_to "Rejected Issues: ( "+@issues_rejected.count.to_s+" )", dept_issues_path(sort: '7') %></li>
+</ul>
+
+</div>
+
+<div class="span6">
+
 <h4>Users Summary</h4>
 <hr>
 <p><b>All Users Under Department: </b><%= @users.count %></p>
@@ -11,13 +28,5 @@
 <%= link_to 'View All Users', dept_users_path, class: "btn btn-primary" %>
 <p></p>
 <br>
-
-<h4>Issues Summary</h4>
-<hr>
-<p><b>All Issues Under Department: </b><%= @issues.count %></p>
-<p><b>Verified Issues needing Assignment of Officer: </b><%= @issues_verified.count %></p>
-<p><b>Issues Secondarily Assigned to your Department: </b><%= @issues_secondary.count %></p>
-<p><b>Issues with ongoing Closeout Forms: </b><%= @issues_closeout.count %></p>
-<%= link_to 'View All Issues', dept_issues_path, class: "btn btn-primary" %>
 
 </div></div>

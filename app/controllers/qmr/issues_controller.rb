@@ -3,10 +3,11 @@ class Qmr::IssuesController < ApplicationController
   before_filter :qmr_user
 
   def index
-     @issues = Issue.paginate(page: params[:page], per_page: 5)
-     @issues_new = Issue.where("status_id = 1").paginate(page: params[:page], per_page: 5)
-     @issues_rejected = Issue.where("status_id = 7").paginate(page: params[:page], per_page: 5)
-     @issues_closeout = Issue.where("status_id = 5").paginate(page: params[:page], per_page: 5)
+    if params[:sort] != nil
+      @issues = Issue.where("status_id = " + params[:sort]).paginate(page: params[:page], per_page: 10)
+    else
+     @issues = Issue.paginate(page: params[:page], per_page: 10)
+    end
   end
 
   def new
