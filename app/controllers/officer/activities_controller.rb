@@ -28,6 +28,7 @@ class Officer::ActivitiesController < ApplicationController
     @action_plan=ActionPlan.find(params[:action_plan])
     @activity = Activity.find(params[:id])
     @activity.actual_date = Date.today
+    @activity.status_id = 3
     if @activity.save
       flash[:success] = "Activity marked as Done!"
       redirect_to [:officer, @action_plan]

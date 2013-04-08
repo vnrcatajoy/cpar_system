@@ -90,6 +90,8 @@ class Dept::IssuesController < ApplicationController
   	@issue = Issue.find params[:id]
     @users = User.where("department_id = " + current_user.department_id.to_s + " AND type_id = 3")
     # moved Causes and ActionPlans to details view
+    @users_dept = User.where("department_id = " + current_user.department_id.to_s + " AND type_id = 2")
+    # Department Head assign
     @nrd= nrd_for_this(@issue)
     @issue_comment = IssueComment.new
     @issuecomments = @issue.issue_comments.where(log_comment: 'f').paginate(page: params[:page],  per_page: 3)

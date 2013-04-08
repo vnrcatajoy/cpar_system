@@ -2,6 +2,11 @@
 <h1>Showing Activity</h1>
 <div class="row">
   <div class="span6">
+  		<p><strong>Status:</strong></p>
+  		<p><%= ActivityStatus.find(@activity.status_id).name %></p>
+  		<% if @activity.status_id == 2 && current_user?(User.find(@activity.user_id)) %>
+            <%= link_to "(Mark as Done)", mark_done_officer_action_plan_activity_path(@activity, id: @activity.id ,action_plan: @action_plan), confirm: "Are you sure you want to mark Activity as Done?" %>
+          <% end %>
 		<p> <strong>Description:</strong> </p>
 		<p><%= @activity.result %> </p>
 		<p><strong>Author:</strong></p>
@@ -9,12 +14,7 @@
 		<p> <strong>Target Date:</strong></p>
 		<p><%= @activity.target_date %></p>
 		<p> <strong>Actual Date:</strong></p>
-		<p><% if @activity.actual_date == nil && current_user?(User.find(@activity.user_id)) %>
-            <%= link_to "Mark as Done", mark_done_officer_action_plan_activity_path(@activity, id: @activity.id ,action_plan: @action_plan), confirm: "Are you sure you want to mark Activity as Done?" %>
-          <% else %>
-            <%= @activity.actual_date %> 
-          <% end %>
-      </p>
+		<p><%= @activity.actual_date %> </p>
 		<% if current_user?(User.find(@activity.user_id)) %>
     		<%= link_to "Edit Activity", [:edit, :officer, ActionPlan.find(@activity.action_plan_id), @activity], class: "btn btn-small btn-primary" %>
 		<% end %>

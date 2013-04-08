@@ -13,7 +13,7 @@
 			Otherwise, if you change Department to a Department that isn't added as additional yet, Just change as normal, no changes to Additional Depts below.-->
 	    <hr>
 	    <p><b>Add Additional Departments:</b></p>
-	    Additional Departments already added:
+	    <small>Additional Departments already added:</small>
 	    <% if @issue.next_responsible_departments.any? %>
 	       <% @issue.next_responsible_departments.each do |nrd| %>
 	    	   <%= Department.where(id: nrd.department_id).first.name + " " %>

@@ -8,10 +8,7 @@
 		<% if @action_plan.ap_status_id == 1 %>
 			<strong>This Action plan has not yet been reviewed.</strong>
 			<!--insert button to Review this as an Auditor-->
-			<p>
-				<%= render 'review' , action_plan: @action_plan %>
-				<%= render 'reject', action_plan: @action_plan %>
-			</p>
+			<p>To Review or Reject Action Plan, please select Activities below to Approve or Reject.</p>
 		<% else %>
 			<strong>This Action plan has been reviewed by:</strong>
 				<% if @action_plan.ap_reviewer_id != nil %>
@@ -45,11 +42,13 @@
       	<p><strong>Final Implementation Review Date:</strong> <%= @action_plan.final_implementation_review_date %></p>
 	</div>
 	<%= render 'actionplancomments_show' %>
-		<div class="span9">
-		<!--Show Activities under this Action Plan-->
-		<%= render 'shared/activities_show', action_plan: @action_plan  %>
+	<div class="span9">
+	<!--Show Activities under this Action Plan-->
 		<%= link_to 'Back to Issue', auditor_issue_path(Issue.find(@action_plan.issue_id)) , class: "btn btn-primary"%>
 		<%= link_to 'Back to Action Plans', auditor_action_plans_path , class: "btn btn-primary"%>
-	    </p>
-		</div>
+		<%= render 'activities_show', action_plan: @action_plan  %>
+		
+		<%= link_to "Mark following Activities as Reviewed", '#', class: "btn btn-small btn-primary" %>
+          <%= link_to "Reject following Activities", '#', class: "btn btn-small btn-primary" %>
+	</div>
 </div>

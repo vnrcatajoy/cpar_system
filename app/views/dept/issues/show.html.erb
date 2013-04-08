@@ -21,7 +21,7 @@
     <% if @issue.status_id > 1 && @issue.status_id < 5 && found_dept(@issue) %>
       <%= form_for [:dept, @issue], url: {action: "update_date", method: "put"} do |f| %>
         <%= f.date_field :estimated_closeout_date, start_year: 2013 %>
-        (click on rightmost arrow for calendar selector)
+        <small>(click on rightmost arrow for calendar selector)</small>
         <%= f.submit "Update Closeout Date", class: "btn btn-primary" %>
       <% end %>
     <% end %>
