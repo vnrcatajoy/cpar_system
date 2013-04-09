@@ -1,7 +1,5 @@
 CparSystem::Application.routes.draw do
 
-  get "static_pages/test"
-
   root to: 'static_pages#home'
   
   get "users/new"

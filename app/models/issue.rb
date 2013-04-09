@@ -55,8 +55,40 @@ class Issue < ActiveRecord::Base
 
   #scope :assigned_to, lambda {|user| self.found_officer(user) } 
 
+  def new_issues(dept_id)
+    where(status_id: 1, department_id: dept_id).count
+  end
+
+  def verified_issues(dept_id)
+    where(status_id: 2, department_id: dept_id).count
+  end
+
+  def investigating_issues(dept_id)
+    where(status_id: 3, department_id: dept_id).count
+  end
+
+  def correcting_issues(dept_id)
+    where(status_id: 4, department_id: dept_id).count
+  end
+
+  def implemented_issues(dept_id)
+    where(status_id: 5, department_id: dept_id).count
+  end
+
+  def closed_issues(dept_id)
+    where(status_id: 6, department_id: dept_id).count
+  end
+
+  def rejected_issues(dept_id)
+    where(status_id: 7, department_id: dept_id).count
+  end
+
   def self.total_on(date)
     where("date(created_at) = ?", date).count #.sum(:total_price)
+  end
+
+  def self.pending_on(date)
+    where("date(estimated_closeout_date) = ?", date).count #.sum(:total_price)
   end
 
   def self.total_closed(date)
