@@ -53,6 +53,8 @@ CparSystem::Application.routes.draw do
     resources :action_plans do
       get 'review', :on => :member
       get 'reject', on: :member
+      put 'update_activities', on: :member
+      get 'activity_statuschange', on: :member
       get 'implemented', on: :member
       get 'not_implemented', on: :member
     end
