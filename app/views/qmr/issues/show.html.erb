@@ -24,6 +24,10 @@
       <%= link_to "Notify Officers about deadline", notify_deadline_qmr_issue_path(@issue), confirm: 'Are you sure you want to mail all officers about deadline?', class: "btn btn-primary" %>
     <% end %>
     
+    <% if @issue.closeout_forms.count == 1 %>
+      <p>Closeout form started, View it in details. </p>
+    <% end %>
+    
     <hr>
 
     <h4>Issue Details</h4>

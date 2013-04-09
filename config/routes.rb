@@ -61,6 +61,7 @@ CparSystem::Application.routes.draw do
     end
     resources :issues do
       get 'details', on: :member
+      get 'sign_closeout', on: :member
     end
     resources :closeout_forms, only: :create
     resources :issue_comments, only: :create

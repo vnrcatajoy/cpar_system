@@ -26,6 +26,10 @@
       <% end %>
     <% end %>
 
+    <% if @issue.closeout_forms.count == 1 %>
+      <p>Closeout form started, View it in details. </p>
+    <% end %>
+
     <hr>
 
     <h4>Issue Details</h4>

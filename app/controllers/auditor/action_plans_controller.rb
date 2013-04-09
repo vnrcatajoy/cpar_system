@@ -80,7 +80,12 @@ class Auditor::ActionPlansController < ApplicationController
     end
     #flash[:success] =  "Status: "+ activities_approved.count.to_s + " activities approved, "+ activities_rejected.count.to_s+" activities rejected"
     #redirect_to :back
-    activities_all_approved_check(@action_plan, 2)
+    if activities_rejected.count == 0
+      activities_all_approved_check(@action_plan, 2)
+    else
+      flash[:success] = "Activities successfully reviewed. Not all are approved yet."
+      redirect_to auditor_action_plan_path(@action_plan)
+    end
   end
 
   def update_activities2
@@ -122,7 +127,15 @@ class Auditor::ActionPlansController < ApplicationController
     end
     #flash[:success] =  "Status: "+ activities_approved.count.to_s + " activities approved, "+ activities_rejected.count.to_s+" activities rejected"
     #redirect_to :back
-    activities_all_implemented_check(@action_plan, 4)
+    if activities_reimplement.count == 0
+      activities_all_implemented_check(@action_plan, 4)
+    else 
+      @action_plan.ap_status_id = 4 #Implemented (3) to Pending (4)
+      # Some to be Reimplemented
+      @action_plan.save
+      flash[:success] = "Activities Implementation successfully reviewed. Some are still for Reimplementation or not yet Reviewed."
+      redirect_to auditor_action_plan_path(@action_plan)
+    end
   end
 
   def implemented

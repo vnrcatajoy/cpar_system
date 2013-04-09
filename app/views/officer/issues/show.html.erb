@@ -18,6 +18,10 @@
       <%= @issue.estimated_closeout_date %>
     </p>
 
+    <% if @issue.closeout_forms.count == 1 %>
+      <p>Closeout form started, View it in details. </p>
+    <% end %>
+
     <hr>
 
     <h4>Issue Details</h4>
@@ -86,12 +90,16 @@
   <div class="span9">
     <hr>
     <%= render 'causes_show' %>
-    <%= link_to 'Add Cause', new_officer_issue_cause_path(@issue) , class: "btn btn-small btn-primary" %>
+    <% if @issue.found_officer(current_user.id) %>
+      <%= link_to 'Add Cause', new_officer_issue_cause_path(@issue) , class: "btn btn-small btn-primary" %>
+    <% end %>
     <%= render 'actionplans_show' %>
-    <% if @issue.causes.where("user_id = ?", current_user.id).empty? %>
-      Add a Cause above first before adding an Action Plan
-    <% else %>
-      <%= link_to 'Add New Action Plan', new_officer_action_plan_path(issue_id: @issue.id), class: "btn btn-small btn-primary" %>
+    <% if @issue.found_officer(current_user.id) %>
+      <% if @issue.causes.where("user_id = ?", current_user.id).empty? %>
+        Add a Cause above first before adding an Action Plan
+      <% else %>
+        <%= link_to 'Add New Action Plan', new_officer_action_plan_path(issue_id: @issue.id), class: "btn btn-small btn-primary" %>
+      <% end %>
     <% end %>
     
   </div>

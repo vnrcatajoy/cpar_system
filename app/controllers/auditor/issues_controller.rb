@@ -9,6 +9,7 @@ class Auditor::IssuesController < ApplicationController
     @closeoutforms= CloseoutForm.where(issue_id: @issue.id)
     @closeoutform = CloseoutForm.new
     #@cof = CloseoutForm.find_by_issue_id(@issue.id) #should be in details
+    @action_plans = ActionPlan.where("issue_id = " + @issue.id.to_s).paginate(page: params[:page], per_page: 5)
     @issue_comment = IssueComment.new
     @issuecomments = @issue.issue_comments.where(log_comment: 'f').paginate(page: params[:page],  per_page: 3)
     @issueupdates = @issue.issue_comments.where(log_comment: 't').paginate(page: params[:page],  per_page: 5)
@@ -19,6 +20,22 @@ class Auditor::IssuesController < ApplicationController
       @issues = Issue.where("status_id = " + params[:sort]).paginate(page: params[:page], per_page: 10)
     else
      @issues = Issue.paginate(page: params[:page], per_page: 10)
+    end
+  end
+
+  def sign_closeout
+    @issue = Issue.find params[:id]
+    @cof = CloseoutForm.find_by_id(params[:cof])
+    if @cof.auditor_id == nil 
+      @cof.auditor_id = current_user.id
+      if @cof.save
+        @ic= @issue.issue_comments.build({content: "Auditor signed Closeout Form.",
+            user_id: current_user.id, issue_id: @issue.id })
+        @ic.toggle!(:log_comment)
+        @ic.save
+        flash[:success] = "Successfully signed Closeout form of Issue!"
+        redirect_to details_auditor_issue_path(@issue)
+      end
     end
   end
 

@@ -48,7 +48,7 @@
     </tr>
       <% @users_enable.each do |user| %>    
         <tr>
-         <td> <%= user.name %> </td>
+         <td> <%= link_to user.name, admin_user_path(user) %> </td>
          <td> <%= user.email %> </td>
          <td> <%= Department.where(id: user.department_id).first.name %> </td>
          <td> <%= UserType.where(id: user.type_id).first.name %> </td>

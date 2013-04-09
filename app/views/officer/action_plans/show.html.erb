@@ -43,11 +43,13 @@
 		<div class="span9">
 		<!--Show Activities under this Action Plan-->
 		<%= render 'activities_show', action_plan: @action_plan  %>
-		<p><% if @action_plan.ap_status_id < 2 %>
+		<p><% if @action_plan.ap_status_id < 2 && current_user?(User.find(@action_plan.responsible_officer_id)) %>
 			<%= link_to 'Add Activity', new_officer_action_plan_activity_path(@action_plan) , class: "btn btn-primary" %>
 			<!--Can't add any more Activities when AP is Verified onwards-->
 			<% end %>
-			<%= link_to 'Edit Action Plan', edit_officer_action_plan_path(@action_plan) , class: "btn btn-primary" %>
+			<% if current_user?(User.find(@action_plan.responsible_officer_id)) %>
+				<%= link_to 'Edit Action Plan', edit_officer_action_plan_path(@action_plan) , class: "btn btn-primary" %>
+			<% end %>
 			<%= link_to 'Back to Issue', officer_issue_path(Issue.find(@action_plan.issue_id)) , class: "btn btn-primary"%>
 			<%= link_to 'Back to Action Plans', officer_action_plans_path , class: "btn btn-primary"%>   
 		</p>

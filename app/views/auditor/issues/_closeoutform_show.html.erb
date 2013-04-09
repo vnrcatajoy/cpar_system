@@ -12,7 +12,16 @@
 
       	<tr>
           <td>Officer Acknowledgement</td>
-          <td> <%= @cof.auditor_id != nil ? User.find(@cof.auditor_id).name : "Pending" %> </td>
+          <td><% if @cof.auditor_id == nil %> 
+                <% if current_user.type_id == 5 %>
+                  <%= link_to "Sign Closeout", sign_closeout_auditor_issue_path(@issue, cof: @cof.id), confirm: "Are you sure you want to sign the Closeout form for this Issue?" %>
+                <% else %>
+                  Pending
+                <% end %>
+              <% else %>
+                <%= User.find(@cof.auditor_id).name %>
+              <% end %>
+          </td>
           <td> 
             <% if @cof.qmr_id == nil %>
               Pending
