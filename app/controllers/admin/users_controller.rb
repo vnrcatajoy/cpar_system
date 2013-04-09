@@ -19,8 +19,15 @@ class Admin::UsersController < ApplicationController
   end
 
   def index
-  	@users = User.paginate(page: params[:page],  per_page: 10)
-    @users_enable = User.where(verified: 't', account_enabled: 'f').paginate(page: params[:page],  per_page: 5)
+    if params[:sort] != nil
+      if params[:sort] == '1'
+        @users = User.where(verified: 't', account_enabled: 'f').paginate(page: params[:page], per_page: 10)
+      else 
+        @users = User.where("type_id = "+ params[:sort]).paginate(page: params[:page], per_page: 10)
+      end
+    else
+  	  @users = User.paginate(page: params[:page],  per_page: 10)
+    end
   end
 
   def activate

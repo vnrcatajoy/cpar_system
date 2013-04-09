@@ -3,9 +3,11 @@ class Auditor::ActionPlansController < ApplicationController
   before_filter :auditor_user
 
   def index
-    @action_plans = ActionPlan.paginate(page: params[:page],  per_page: 10)
-    @action_plans_new = ActionPlan.where("ap_status_id = 1").paginate(page: params[:page],  per_page: 5)
-    @action_plans_markasimplement = ActionPlan.where(ap_status_id: 2, implemented: 't').paginate(page: params[:page],  per_page: 5)
+    if params[:sort] != nil
+      @action_plans = ActionPlan.where("ap_status_id = " + params[:sort]).paginate(page: params[:page], per_page: 10)
+    else
+     @action_plans = ActionPlan.paginate(page: params[:page], per_page: 10)
+    end
   end
 
   def review

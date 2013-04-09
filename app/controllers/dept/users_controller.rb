@@ -3,7 +3,13 @@ class Dept::UsersController < ApplicationController
   before_filter :dept_user
 
   def index
-  	@users = User.where("department_id = " + current_user.department_id.to_s).paginate(page: params[:page], per_page: 10)
+    if params[:sort] != nil
+      if params[:sort] == '1'
+        @users = User.where("department_id = " + current_user.department_id.to_s + " AND type_id = 3").paginate(page: params[:page], per_page: 10)
+      end
+    else
+    	@users = User.where("department_id = " + current_user.department_id.to_s).paginate(page: params[:page], per_page: 10)
+    end
   end
   #Add - Designate user for Changing to Responsible Officer
   #       *Must be Employee

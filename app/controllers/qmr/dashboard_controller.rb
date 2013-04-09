@@ -12,7 +12,7 @@ class Qmr::DashboardController < ApplicationController
     @issues_closed = Issue.where("status_id = 6")
     @issues_rejected = Issue.where("status_id = 7 OR status_id = 8")
     @closeoutforms_all = CloseoutForm.all
-    @closeoutforms_closed = CloseoutForm.where(qmr_id: current_user.id, completed: 't')
+    @closeoutforms_closed = CloseoutForm.where(completed: 't')
   end
 
   private

@@ -15,11 +15,13 @@ class Auditor::DashboardController < ApplicationController
     # Action Plans
   	@action_plans = ActionPlan.all
   	@action_plans_new = ActionPlan.where("ap_status_id = 1")
-  	@action_plans_review = ActionPlan.where("ap_status_id = 2")
-    @action_plans_markasimplement = ActionPlan.where(ap_status_id: 2, implemented: 't')
+  	@action_plans_verified = ActionPlan.where("ap_status_id = 2")
+    @action_plans_implemented = ActionPlan.where("ap_status_id = 3")
+    @action_plans_pending = ActionPlan.where("ap_status_id = 4")
+    @action_plans_closed = ActionPlan.where("ap_status_id = 5")
   	# For reviewing if ACtion Plan properly implemented
-    @closeoutforms_started = CloseoutForm.where(auditor_id: current_user.id)
-    @closeoutforms_finished = CloseoutForm.where(auditor_id: current_user.id, completed: 't')
+    @closeoutforms_started = CloseoutForm.all
+    @closeoutforms_finished = CloseoutForm.where(completed: 't')
   end
 
   private

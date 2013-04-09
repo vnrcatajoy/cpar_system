@@ -4,7 +4,12 @@ class Officer::DashboardController < ApplicationController
 
   def index
   	@action_plans = ActionPlan.all
-  	@action_plans_yours = ActionPlan.where("responsible_officer_id = " + current_user.id.to_s)
+    @action_plans_yours = ActionPlan.where("responsible_officer_id = "+current_user.id.to_s)
+    @action_plans_new = ActionPlan.where("ap_status_id = 1")
+    @action_plans_verified = ActionPlan.where("ap_status_id = 2")
+    @action_plans_implemented = ActionPlan.where("ap_status_id = 3")
+    @action_plans_pending = ActionPlan.where("ap_status_id = 4")
+    @action_plans_closed = ActionPlan.where("ap_status_id = 5")
     # Issues
     @issues_all = Issue.all
     @issues = Array.new

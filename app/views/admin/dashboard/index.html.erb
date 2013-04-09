@@ -5,16 +5,20 @@
 	<div class="span6">
 <h4>Users Summary</h4>
 <hr>
-<p><b>All Users Registered: </b><%= @users.count %></p>
-<p><b>Users needing Approval: </b><%= @users_enable.count %></p>
+
+<ul class="nav nav-pills nav-stacked">
+<li><%= link_to "All Users: ( "+ @users.count.to_s+" )", admin_users_path %></li>
+<li><%= link_to "Users needing Approval: ( "+ @users_enable.count.to_s+" )", admin_users_path(sort: '1') %></li>
+</ul>
 <br>
 <h4>Officer Users</h4>
 <hr>
-<p><b>Department Heads: </b><%= @users_dept.count %></p>
-<p><b>Responsible Officers: </b><%= @users_officer.count %></p>
-<p><b>incident Managers: </b><%= @users_qmr.count %></p>
-<p><b>Auditors: </b><%= @users_auditor.count %></p>
-<%= link_to 'Manage All Users', admin_users_path, class: "btn btn-primary" %>
+<ul class="nav nav-pills nav-stacked">
+<li><%= link_to "Department Heads: ( "+ @users_dept.count.to_s+" )", admin_users_path(sort: '2') %></li>
+<li><%= link_to "Responsible Officer: ( "+ @users_officer.count.to_s+" )", admin_users_path(sort: '3') %></li>
+<li><%= link_to "Incident Managers: ( "+ @users_qmr.count.to_s+" )", admin_users_path(sort: '4') %></li>
+<li><%= link_to "Auditors: ( "+ @users_auditor.count.to_s+" )", admin_users_path(sort: '5') %></li>
+</ul>
 <%= link_to "Add New User", new_admin_user_path, class: "btn btn-primary" %>
 
 </div></div>

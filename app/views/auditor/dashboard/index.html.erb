@@ -20,18 +20,20 @@
 <div class="span6">
 <h4>Action Plans Summary</h4>
 <hr>
-<p><b>All Action Plans: </b><%= @action_plans.count %></p>
-<p><b>New Action Plans to Review: </b><%= @action_plans_new.count %></p>
-<p><b>Action Plans for Implementation Review: </b><%= @action_plans_markasimplement.count %></p>
-<%= link_to 'View All Action Plans', auditor_action_plans_path, class: "btn btn-primary" %>
-<p></p>
-<br>
 
-<p></p>
+<ul class="nav nav-pills nav-stacked">
+<li><%= link_to "All Action Plans: ( "+ @action_plans.count.to_s+" )", auditor_action_plans_path %></li>
+<li><%= link_to "New Action Plans: ( "+ @action_plans_new.count.to_s+" )", auditor_action_plans_path(sort: '1') %></li>
+<li><%= link_to "Verified Action Plans: ( "+ @action_plans_verified.count.to_s+" )", auditor_action_plans_path(sort: '2') %></li>
+<li><%= link_to "Implemented Action Plans: ( "+ @action_plans_implemented.count.to_s+" )", auditor_action_plans_path(sort: '3') %></li>
+<li><%= link_to "Pending Action Plans: ( "+ @action_plans_pending.count.to_s+" )", auditor_action_plans_path(sort: '4') %></li>
+<li><%= link_to "Closed Action Plans: ( "+ @action_plans_closed.count.to_s+" )", auditor_action_plans_path(sort: '5') %></li>
+</ul>
+
 <br>
 <h4>Closeout Forms Summary</h4>
 <hr>
-<p><b>Closeout Forms you Started: </b><%= @closeoutforms_started.count %></p>
-<p><b>Closeout Forms you Finished: </b><%= @closeoutforms_finished.count %></p>
+<p><b>Closeout Forms Started: </b>( <%= @closeoutforms_started.count %> )</p>
+<p><b>Closeout Forms Finished: </b>( <%= @closeoutforms_finished.count %> )</p>
 
 </div></div>

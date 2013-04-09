@@ -171,7 +171,7 @@ namespace :db do
                     type_id: 1,
                     iso_nc_id: 1)
 
-    10.times do |i|
+    20.times do |i|
       title = "Sample Title#{i+1}"
       description = "Sample Description#{i+1}"
       user_id = i + 1 
@@ -191,19 +191,19 @@ namespace :db do
                       iso_nc_id: iso_nc_id)
     end
 
-    10.times do |a|
+    #10.times do |a|
       
-      description = "This is the #{a+1}th Action Plan for the #{a+1}th Issue. Edit this #{a+1}th description later on."
-      stat_id = 1
+     # description = "This is the #{a+1}th Action Plan for the #{a+1}th Issue. Edit this #{a+1}th description later on."
+      #stat_id = 1
 
-      actplan = ActionPlan.create!(description: description, 
-                  issue_id: a+1, ap_status_id: stat_id)
+      #actplan = ActionPlan.create!(description: description, 
+      #            issue_id: a+1, ap_status_id: stat_id)
 
       # Can't populate-generate Activities under Action Plan because one way or the
       # other, either action_plan_id or user_id of the Activity will be left blank,
       # which will result to create! failing
 
-    end
+    #end
 
   end
 end
