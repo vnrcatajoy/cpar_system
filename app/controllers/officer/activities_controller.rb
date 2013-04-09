@@ -27,14 +27,11 @@ class Officer::ActivitiesController < ApplicationController
   def mark_done
     @action_plan=ActionPlan.find(params[:action_plan])
     @activity = Activity.find(params[:id])
-    @activity.actual_date = Date.today
+    #@activity.actual_date = Date.today
     @activity.status_id = 3
     if @activity.save
-      flash[:success] = "Activity marked as Done!"
-      redirect_to [:officer, @action_plan]
-    else
-      flash[:error] = "Error while marking Activity as Done"
-      redirect_to :back
+      #flash[:success] = "Activity marked as Implemented!"
+      all_activities_implemented(@action_plan)
     end
   end
 
@@ -85,5 +82,34 @@ class Officer::ActivitiesController < ApplicationController
 
     def responsibleofficer_user
       redirect_to(root_path) unless current_user.type_id==3
-  end
+    end
+
+    def all_activities_implemented(action_plan)
+      all_implemented = true
+      if action_plan.activities != nil
+        action_plan.activities.each do |act|
+          if act.status_id != 3 && act.status_id != 6 
+          # 2 is the status_id for Approved/Verified Activity, 6 for Rejected
+          # Basically now ignores Rejected activities in checking if all Approved
+            all_implemented = false
+          # If there's a remaining Rejected Activity still undeleted, it won't register as all approved
+          end
+        end
+      end
+      if all_implemented
+        action_plan.ap_status_id = 3
+        if action_plan.save
+          @ac= @action_plan.action_plan_comments.build({content: "Officer implemented all activities in Action Plan, Action Plan status updated.",
+            user_id: current_user.id, action_plan_id: @action_plan.id })
+          @ac.toggle!(:log_comment)
+          @ac.save
+          flash[:success] = "All Activities marked as Implemented, Action Plan status updated to Implemented. Activities now to be reviewed by Auditor."
+          redirect_to officer_action_plan_path(action_plan)
+        end
+      else
+        # Not all Implemented yet, normal redirect
+        flash[:success] = "Activity marked as Implemented!"
+        redirect_to [:officer, @action_plan]
+      end
+    end
 end
