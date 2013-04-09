@@ -242,8 +242,15 @@ class Auditor::ActionPlansController < ApplicationController
         @ac.toggle!(:log_comment)
         @ac.save
         # Insert here checking if ALL Action Plans in Issue are Closed
-        flash[:success] = "All Activities Implementation successfully reviewed. Action Plan Implementation successfully reviewed and Closed."
-        redirect_to auditor_action_plan_path(action_plan)
+        if check_all_action_plans_closed(action_plan.issue_id)
+          @issue=Issue.find(action_plan.issue_id)
+          start_closeout_form(@issue)
+          #flash[:success] = "All Activities Implementation reviewed. Action Plan Status updated to Closed. Starting Closeout Form."
+          #redirect_to auditor_action_plan_path(action_plan)
+        else
+          flash[:success] = "All Activities Implementation successfully reviewed. Action Plan Implementation successfully reviewed and Closed."
+          redirect_to auditor_action_plan_path(action_plan)
+        end
       end
     else
       action_plan.ap_status_id = 4 #Implemented (3) to Pending (4)
@@ -251,6 +258,64 @@ class Auditor::ActionPlansController < ApplicationController
       action_plan.save
       flash[:success] = "Activities Implementation successfully reviewed. Some are still for Reimplementation or not yet Reviewed."
       redirect_to auditor_action_plan_path(action_plan)
+    end
+  end
+
+  def check_all_action_plans_closed(issue_idd)
+    action_plans = ActionPlan.where(issue_id: issue_idd)
+    all_closed = true
+    if action_plans != nil
+      action_plans.each do |ap|
+        if ap.ap_status_id != 5 && ap.ap_status_id != 6 #Ignore Rejected APs again
+          all_closed = false
+        end
+      end
+    end
+    all_closed
+  end
+
+  def start_closeout_form(issue) #functions like a better COF create action
+    @closeout_form = issue.closeout_forms.build({issue_id: issue.id})
+    if @closeout_form.save
+      if issue.status_id < 5
+         issue.status_id = 5 #Update Issue Status to Implemented
+         issue.save
+      end
+      if @closeout_form.closeout_form_depts.empty?
+        generate_closeoutform_depts(issue, @closeout_form)
+      end
+      @ic= issue.issue_comments.build({content: "Closeout Form for Issue started.",
+            user_id: current_user.id, issue_id: issue.id })
+      @ic.toggle!(:log_comment)
+      @ic.save
+      flash[:success] = "Closeout Form started. All Activities Implementation reviewed, Action Plan Status updated to Closed."
+      redirect_to details_auditor_issue_path(issue)
+      mail_list(issue)
+    end
+  end
+
+  def generate_closeoutform_depts(issue, cof)
+    @cof_dept = cof.closeout_form_depts.build({dept_id: issue.department_id, closeout_form_id: cof.id})
+    @cof_dept.save
+    issue.next_responsible_departments.each do |nrd|
+      @cof_dept=cof.closeout_form_depts.build({dept_id: nrd.department_id, closeout_form_id: cof.id})
+      @cof_dept.save
+    end
+  end
+
+  def mail_list(issue)
+    title = "Closeup Form started for one of your Issues"
+    content = "One of the Issues you investigated and acted on, "+ issue.title + " has started its Closeout form. Please check back into the site in the Issue details to sign Form."
+    if issue.responsible_officer_id != nil
+      officer = User.find(issue.responsible_officer_id)
+      officer.send_notification_email(title, content)
+    end
+    nrds= NextResponsibleDepartment.where(issue_id: issue.id)
+    nrds.each do |nrd|
+      if nrd.responsible_officer_id != nil
+        officer = User.find(nrd.responsible_officer_id)
+        officer.send_notification_email(title, content)
+      end
     end
   end
 
