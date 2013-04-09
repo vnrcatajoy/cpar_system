@@ -18,6 +18,8 @@
         <td> <%= ActivityStatus.find(activity.status_id).name %> 
           <% if @action_plan.ap_status_id > 1 && activity.status_id == 2 && current_user?(User.find(activity.user_id)) %>
             <%= link_to "(Mark as Done)", mark_done_officer_action_plan_activity_path(activity, id: activity.id ,action_plan: @action_plan), confirm: "Are you sure you want to mark Activity as Done?" %>
+          <% elsif @action_plan.ap_status_id == 4 && activity.status_id == 5 && current_user?(User.find(activity.user_id)) %>
+            <%= link_to "(Mark as Done)", mark_done_officer_action_plan_activity_path(activity, id: activity.id ,action_plan: @action_plan), confirm: "Are you sure you want to mark Activity as Done?" %>
           <% end %>
           <!--Mark as Reimplemented/Done again-->
         </td>

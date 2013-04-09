@@ -31,7 +31,12 @@ class Officer::ActivitiesController < ApplicationController
     @activity.status_id = 3
     if @activity.save
       #flash[:success] = "Activity marked as Implemented!"
-      all_activities_implemented(@action_plan)
+      if @action_plan.ap_status_id < 3
+        all_activities_implemented(@action_plan)
+      else
+        flash[:success] = "Activity marked as Implemented!"
+        redirect_to [:officer, @action_plan]
+      end
     end
   end
 

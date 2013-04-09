@@ -54,6 +54,7 @@ CparSystem::Application.routes.draw do
       get 'review', :on => :member
       get 'reject', on: :member
       put 'update_activities', on: :member
+      put 'update_activities2', on: :member
       get 'activity_statuschange', on: :member
       get 'implemented', on: :member
       get 'not_implemented', on: :member

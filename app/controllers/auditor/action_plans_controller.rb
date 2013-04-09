@@ -44,25 +44,21 @@ class Auditor::ActionPlansController < ApplicationController
 
   def update_activities
     @action_plan = ActionPlan.find params[:id]
-    outstring = "Approved: "
     activities_approved = Array.new
     activities_rejected = Array.new
     if params[:action_plan][:approve_list] != nil
       params[:action_plan][:approve_list].each do |act_id|
         if in_opposite_list(act_id, params[:action_plan][:reject_list]) == false
           act = Activity.find(act_id)
-          outstring += "- " + act.result + ", "
           # append to final approve array of Activities if no conflict
           activities_approved << act
         end
       end
     end
-    outstring += " Rejected: "
     if params[:action_plan][:reject_list] != nil
       params[:action_plan][:reject_list].each do |act_id|
         if in_opposite_list(act_id, params[:action_plan][:approve_list]) == false
           act = Activity.find(act_id)
-          outstring += "- " + act.result + ", "
           # append to final reject array of Activities if no conflict
           activities_rejected << act
         end
@@ -85,6 +81,48 @@ class Auditor::ActionPlansController < ApplicationController
     #flash[:success] =  "Status: "+ activities_approved.count.to_s + " activities approved, "+ activities_rejected.count.to_s+" activities rejected"
     #redirect_to :back
     activities_all_approved_check(@action_plan, 2)
+  end
+
+  def update_activities2
+    @action_plan = ActionPlan.find params[:id]
+    activities_approved = Array.new
+    activities_reimplement = Array.new
+    if params[:action_plan][:approve_list] != nil
+      params[:action_plan][:approve_list].each do |act_id|
+        if in_opposite_list(act_id, params[:action_plan][:reimplement_list]) == false
+          act = Activity.find(act_id)
+          # append to final approve array of Activities if no conflict
+          activities_approved << act
+        end
+      end
+    end
+    if params[:action_plan][:reimplement_list] != nil
+      params[:action_plan][:reimplement_list].each do |act_id|
+        if in_opposite_list(act_id, params[:action_plan][:approve_list]) == false
+          act = Activity.find(act_id)
+          # append to final reject array of Activities if no conflict
+          activities_reimplement << act
+        end
+      end
+    end
+    if activities_approved != nil
+      activities_approved.each do |a|
+        # approve them one at a time
+        a.status_id = 4 #Approved Implementation
+        a.actual_date = Date.today
+        a.save
+      end
+    end
+    if activities_reimplement != nil
+      activities_reimplement.each do |a|
+        # mark as reimplement one at a time
+        a.status_id = 5 #Reimplement
+        a.save
+      end
+    end
+    #flash[:success] =  "Status: "+ activities_approved.count.to_s + " activities approved, "+ activities_rejected.count.to_s+" activities rejected"
+    #redirect_to :back
+    activities_all_implemented_check(@action_plan, 4)
   end
 
   def implemented
@@ -159,7 +197,6 @@ class Auditor::ActionPlansController < ApplicationController
         # 2 is the status_id for Approved/Verified Activity, 6 for Rejected
         # Basically now ignores Rejected activities in checking if all Approved
           all_approved = false
-          # If there's a remaining Rejected Activity still undeleted, it won't register as all approved
         end
       end
     end
@@ -180,6 +217,39 @@ class Auditor::ActionPlansController < ApplicationController
     else
       # Not all Approved yet
       flash[:success] = "Activities successfully reviewed. Not all are approved yet."
+      redirect_to auditor_action_plan_path(action_plan)
+    end
+  end
+
+  def activities_all_implemented_check(action_plan, stat_id)
+    all_implemented = true
+    if action_plan.activities != nil
+      action_plan.activities.each do |act|
+        if act.status_id != stat_id && act.status_id != 6 
+        # Basically ignores Rejected activities in checking if all Approved
+          all_implemented = false
+        end
+      end
+    end
+    if all_implemented
+      action_plan.ap_status_id = 5 
+      # Implemented to Closed 
+      action_plan.implementation_reviewer_id = current_user.id
+      action_plan.final_implementation_review_date = Date.today
+      if action_plan.save
+        @ac= @action_plan.action_plan_comments.build({content: "Auditor reviewed Action Plan Implementation and closed Action Plan.",
+            user_id: current_user.id, action_plan_id: @action_plan.id })
+        @ac.toggle!(:log_comment)
+        @ac.save
+        # Insert here checking if ALL Action Plans in Issue are Closed
+        flash[:success] = "All Activities Implementation successfully reviewed. Action Plan Implementation successfully reviewed and Closed."
+        redirect_to auditor_action_plan_path(action_plan)
+      end
+    else
+      action_plan.ap_status_id = 4 #Implemented (3) to Pending (4)
+      # Some to be Reimplemented
+      action_plan.save
+      flash[:success] = "Activities Implementation successfully reviewed. Some are still for Reimplementation or not yet Reviewed."
       redirect_to auditor_action_plan_path(action_plan)
     end
   end
