@@ -15,5 +15,11 @@ class StaticPagesController < ApplicationController
     @issues_development = @issues_development.round(2)
   	@issues_verification = Issue.where("department_id = 4").count / @issues_total
     @issues_verification = @issues_verification.round(2)
+    @average = 0
+    @closed_issues = Issue.where("final_closeout_date is NOT NULL")
+    @closed_issues.each do |i|
+      @average += i.time_to_resolve
+    end
+    @average = @average / @closed_issues.count
   end
 end

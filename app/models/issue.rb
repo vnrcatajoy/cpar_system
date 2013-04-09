@@ -51,37 +51,13 @@ class Issue < ActiveRecord::Base
     found
   end
 
+  def time_to_resolve
+    (self.final_closeout_date - self.created_at.to_date).to_i
+  end
+
   #scope :in_department, lambda {|user| self.found_department(user) } 
 
   #scope :assigned_to, lambda {|user| self.found_officer(user) } 
-
-  def new_issues(dept_id)
-    where(status_id: 1, department_id: dept_id).count
-  end
-
-  def verified_issues(dept_id)
-    where(status_id: 2, department_id: dept_id).count
-  end
-
-  def investigating_issues(dept_id)
-    where(status_id: 3, department_id: dept_id).count
-  end
-
-  def correcting_issues(dept_id)
-    where(status_id: 4, department_id: dept_id).count
-  end
-
-  def implemented_issues(dept_id)
-    where(status_id: 5, department_id: dept_id).count
-  end
-
-  def closed_issues(dept_id)
-    where(status_id: 6, department_id: dept_id).count
-  end
-
-  def rejected_issues(dept_id)
-    where(status_id: 7, department_id: dept_id).count
-  end
 
   def self.total_on(date)
     where("date(created_at) = ?", date).count #.sum(:total_price)
