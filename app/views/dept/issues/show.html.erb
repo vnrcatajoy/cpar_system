@@ -103,4 +103,22 @@
   </div>
   <%= render 'comments_show' %>
   
+  <% if @issue.found_officer(current_user.id) %>
+  <div class="span9">
+    <hr>
+    <%= render 'causes_show' %>
+    <% if @issue.found_officer(current_user.id) %>
+      <%= link_to 'Add Cause', new_dept_issue_cause_path(@issue) , class: "btn btn-small btn-primary" %>
+    <% end %>
+    <%= render 'actionplans_show' %>
+    <% if @issue.found_officer(current_user.id) %>
+      <% if @issue.causes.where("user_id = ?", current_user.id).empty? %>
+        Add a Cause above first before adding an Action Plan
+      <% else %>
+        <%= link_to 'Add New Action Plan', new_dept_action_plan_path(issue_id: @issue.id), class: "btn btn-small btn-primary" %>
+      <% end %>
+    <% end %>
+  </div>
+  <% end %>
+
 </div>

@@ -95,10 +95,23 @@ CparSystem::Application.routes.draw do
     resources :issues do
       get 'details', on: :member
       get 'sign_closeout', on: :member
+      get 'sign_closeout2', on: :member
       put 'update_date', on: :member
+      resources :causes do
+        post 'create_nrd', on: :collection
+      end
+    end
+    resources :action_plans do
+      resources :activities do
+        get 'mark_done', on: :member
+      end
+      get 'implemented', :on => :member
     end
     resources :next_responsible_departments, only: :update
     resources :issue_comments, only: :create
+    resources :action_plan_comments, only: :create
+    resources :cause_comments, only: :create
+    resources :cause_attachments, only: [:create, :destroy]
   end
 
   get "sessions/new"

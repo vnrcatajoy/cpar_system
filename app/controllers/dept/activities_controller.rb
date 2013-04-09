@@ -1,6 +1,6 @@
-class Officer::ActivitiesController < ApplicationController
+class Dept::ActivitiesController < ApplicationController
   before_filter :signed_in_user
-  before_filter :responsibleofficer_user
+  before_filter :dept_user
   before_filter :actionplan_notnil
   before_filter :set_user
 
@@ -17,7 +17,7 @@ class Officer::ActivitiesController < ApplicationController
       @ac.toggle!(:log_comment)
       @ac.save
       flash[:success] = "Successfully added Activity!" 
-      redirect_to [:officer, @action_plan]
+      redirect_to [:dept, @action_plan]
     else
       flash.now[:error] = "Please fill in the fields properly." 
       render 'new'
@@ -35,7 +35,7 @@ class Officer::ActivitiesController < ApplicationController
         all_activities_implemented(@action_plan)
       else
         flash[:success] = "Activity marked as Implemented!"
-        redirect_to [:officer, @action_plan]
+        redirect_to [:dept, @action_plan]
       end
     end
   end
@@ -58,7 +58,7 @@ class Officer::ActivitiesController < ApplicationController
       @ac.toggle!(:log_comment)
       @ac.save
       flash[:success] = "Activity updated."
-      redirect_to [:officer, @action_plan]
+      redirect_to [:dept, @action_plan]
     else
       flash.now[:error] = "Please don't leave the fields blank."
       render 'edit'
@@ -72,7 +72,7 @@ class Officer::ActivitiesController < ApplicationController
     @ac.toggle!(:log_comment)
     @ac.save
     flash[:success] = "Activity destroyed!"
-    redirect_to [:officer, @action_plan]
+    redirect_to [:dept, @action_plan]
   end
 
   private
@@ -85,8 +85,8 @@ class Officer::ActivitiesController < ApplicationController
       @user = current_user
     end
 
-    def responsibleofficer_user
-      redirect_to(root_path) unless current_user.type_id==3
+    def dept_user
+      redirect_to(root_path) unless current_user.type_id==2
     end
 
     def all_activities_implemented(action_plan)
@@ -109,12 +109,12 @@ class Officer::ActivitiesController < ApplicationController
           @ac.toggle!(:log_comment)
           @ac.save
           flash[:success] = "All Activities marked as Implemented, Action Plan status updated to Implemented. Activities now to be reviewed by Auditor."
-          redirect_to officer_action_plan_path(action_plan)
+          redirect_to dept_action_plan_path(action_plan)
         end
       else
         # Not all Implemented yet, normal redirect
         flash[:success] = "Activity marked as Implemented!"
-        redirect_to [:officer, @action_plan]
+        redirect_to [:dept, @action_plan]
       end
     end
 end

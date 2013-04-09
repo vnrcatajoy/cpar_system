@@ -1,6 +1,6 @@
-class Officer::CausesController < ApplicationController
+class Dept::CausesController < ApplicationController
   before_filter :signed_in_user
-  before_filter :responsibleofficer_user
+  before_filter :dept_user
   before_filter :issue_notnil
   before_filter :set_user
   before_filter :assigned_officer, only: [:new, :edit, :destroy]
@@ -10,7 +10,7 @@ class Officer::CausesController < ApplicationController
   end
 
   def create
-    @cause = @issue.causes.build(params[:cause])
+  	@cause = @issue.causes.build(params[:cause])
     @cause.user_id = @user.id
     if @cause.save
       @ic= @issue.issue_comments.build({content: "Officer submitted Cause for Issue.",
@@ -22,20 +22,16 @@ class Officer::CausesController < ApplicationController
             user_id: current_user.id, cause_id: @cause.id })
       @cc.toggle!(:log_comment)
       @cc.save
-        # Fail so far, since these conditions only means the first Cause that gets submitted
-        # changes the NRD's status to Correcting (If there is an NRD), then 2nd Cause
-        # to get added updates Main's Issue status to Correcting; A 2nd NRD/3rd Department
-        # would mean its NRD wouldn't ever get updated to Correcting
       if @issue.status_id == 3
         @issue.status_id = 4
         addstring = "Updated Issue status to \'Correcting\'."
         if @issue.save
           flash[:success] = "Successfully added new Cause! " + addstring
-          redirect_to [:officer, @issue]
+          redirect_to [:dept, @issue]
         end
       else
         flash[:success] = "Successfully added new Cause!"
-        redirect_to [:officer, @issue]
+        redirect_to [:dept, @issue]
       end
     else
       flash.now[:error] = "Please fill in the fields properly." 
@@ -57,25 +53,24 @@ class Officer::CausesController < ApplicationController
             user_id: current_user.id, cause_id: @cause.id })
       @cc.toggle!(:log_comment)
       @cc.save
-
       @nrds.each do |nrd|
         if nrd != nil && nrd.responsible_officer_id == current_user.id && nrd.dept_status_id < 4 
           nrd.dept_status_id = 4
           if nrd.save
             addstring = "Updated Issue status under secondary Department to \'Correcting\'."
             flash[:success] = "Successfully added new Cause! " + addstring
-            redirect_to [:officer, @issue]
+            redirect_to [:dept, @issue]
           end  
         end
       end
-    else
-      flash.now[:error] = "Please fill in the fields properly." 
+  	else
+  	  flash.now[:error] = "Please fill in the fields properly." 
       render 'new'
     end
   end
 
   def show
-    @cause=Cause.find(params[:id])
+  	@cause=Cause.find(params[:id])
     @cause_comment = CauseComment.new
     @cause_comments = @cause.cause_comments.where(log_comment: 'f').paginate(page: params[:page],  per_page: 3)
     @cause_updates = @cause.cause_comments.where(log_comment: 't').paginate(page: params[:page],  per_page: 5)
@@ -83,21 +78,18 @@ class Officer::CausesController < ApplicationController
   end
 
   def edit
-    flash[:success] = "Editing Cause" 
-    #@cause = Cause.find(params[:id])
-    @cause = @issue.causes.find(params[:id])
+  	@cause = @issue.causes.find(params[:id])
   end
 
   def update
-    #@cause = Cause.find(params[:id])
-    @cause = @issue.causes.find(params[:id])
+  	@cause = @issue.causes.find(params[:id])
     if @cause.update_attributes(params[:cause])
       @cc= @cause.cause_comments.build({content: "Officer updated Cause details.",
             user_id: current_user.id, cause_id: @cause.id })
       @cc.toggle!(:log_comment)
       @cc.save
       flash[:success] = "Cause updated."
-      redirect_to [:officer, @issue]
+      redirect_to [:dept, @issue]
     else
       flash.now[:error] = "Please don't leave the fields blank."
       render 'edit'
@@ -107,10 +99,10 @@ class Officer::CausesController < ApplicationController
   def destroy
     Cause.find(params[:id]).destroy
     flash[:success] = "Cause destroyed!"
-    redirect_to [:officer, @issue]
+    redirect_to [:dept, @issue]
   end
 
-  private
+private
 
   def issue_notnil
     @issue = Issue.find(params[:issue_id])
@@ -120,8 +112,8 @@ class Officer::CausesController < ApplicationController
     @user = current_user
   end
 
-  def responsibleofficer_user
-    redirect_to(root_path) unless current_user.type_id==3
+  def dept_user
+    redirect_to(root_path) unless current_user.type_id==2
   end
 
   def assigned_officer 
@@ -137,7 +129,8 @@ class Officer::CausesController < ApplicationController
       flash[:success] = "Root Cause Adding/Editing by Secondary Officer" 
     elsif @issue.responsible_officer_id != current_user.id
       flash[:error] = "You're not allowed to Add or Edit Causes for Issues not assigned to you."
-      redirect_to officer_issues_path
+      redirect_to dept_issues_path
     end
   end
+  
 end

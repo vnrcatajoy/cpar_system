@@ -41,6 +41,22 @@ class Dept::IssuesController < ApplicationController
     end
   end
 
+  def sign_closeout2
+    @issue = Issue.find params[:id]
+    @cofd = CloseoutFormDept.find_by_id(params[:cofd])
+    if @cofd.officer_id == nil 
+      @cofd.officer_id = current_user.id
+      if @cofd.save
+        @ic= @issue.issue_comments.build({content: "Officer signed Closeout Form.",
+            user_id: current_user.id, issue_id: @issue.id })
+        @ic.toggle!(:log_comment)
+        @ic.save
+        flash[:success] = "Successfully signed Closeout form of Issue!"
+        redirect_to details_dept_issue_path(@issue)
+      end
+    end
+  end
+
   def details
     @issue = Issue.find params[:id]
     @causes= @issue.causes.paginate(page: params[:page],  per_page: 5)
@@ -91,6 +107,8 @@ class Dept::IssuesController < ApplicationController
     @users = User.where("department_id = " + current_user.department_id.to_s + " AND type_id = 3")
     # moved Causes and ActionPlans to details view
     @users_dept = User.where("department_id = " + current_user.department_id.to_s + " AND type_id = 2")
+    @causes= @issue.causes.paginate(page: params[:page],  per_page: 5)
+    @action_plans = ActionPlan.where("issue_id = " + @issue.id.to_s).paginate(page: params[:page], per_page: 5)
     # Department Head assign
     @nrd= nrd_for_this(@issue)
     @issue_comment = IssueComment.new
