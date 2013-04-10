@@ -18,7 +18,7 @@
       <%= @issue.estimated_closeout_date %>
     </p>
 
-    <% if @issue.closeout_forms.count == 1 %>
+    <% if @issue.closeout_forms.count == 1 && @issue.status_id == 5 %>
       <p>Closeout form started, View it in details. </p>
     <% end %>
 

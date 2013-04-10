@@ -2,7 +2,6 @@ namespace :db do
   desc "Fill database with sample data"
 
   task populate: :environment do
-    require 'faker'
     #add sample Departments
     Department.create!(name: 'Administration')
     Department.create!(name: 'Maintainance')
@@ -13,7 +12,7 @@ namespace :db do
     UserType.create!(name: 'System Administrator')
     UserType.create!(name: 'Department Head')
     UserType.create!(name: 'Responsible Officer')
-    UserType.create!(name: 'Incident Manager')
+    UserType.create!(name: 'QMR')
     UserType.create!(name: 'Auditor')
     UserType.create!(name: 'Employee')
 
@@ -71,90 +70,117 @@ namespace :db do
     admin1.toggle!(:admin)
     admin1.toggle!(:with_role)
 
-    admin2 = User.create!(name: 'Homer Isidro', 
+    qmr_user = User.create!(name: 'Homer Isidro', 
                   email: 'homer.isidro@gmail.com',
                   phone: '1234567',
                   mobile: '09123456789',
-                  type_id: 1,
-                  department_id: 1,
-                  password: 'password',
-                  password_confirmation: 'password')
-    admin2.toggle!(:admin)
-    admin2.toggle!(:with_role)
-
-    #Note: it accepted email like qmr@.a.com before, with extra misplaced dot
-    User.create!(name: 'Isi QMR', 
-                  email: 'qmr@a.com',
-                  phone: '1234567',
-                  mobile: '09123456789',
                   type_id: 4,
-                  department_id: 2,
-                  password: 'password',
-                  password_confirmation: 'password')
-
-    User.create!(name: 'Dept Head', 
-                  email: 'dept@a.com',
-                  phone: '1234567',
-                  mobile: '09123456789',
-                  type_id: 2,
                   department_id: 1,
                   password: 'password',
                   password_confirmation: 'password')
+    # admin2.toggle!(:admin)
+    # admin2.toggle!(:with_role)
 
-    User.create!(name: 'Off Icer', 
-                  email: 'officer@a.com',
-                  phone: '1234567',
-                  mobile: '09123456789',
-                  type_id: 3,
-                  department_id: 1,
-                  password: 'password',
-                  password_confirmation: 'password')
-
-    User.create!(name: 'Audi Thor', 
-                  email: 'auditor@a.com',
+    auditor_user = User.create!(name: 'Homer Isidro', 
+                  email: 'homerisidro@yahoo.com',
                   phone: '1234567',
                   mobile: '09123456789',
                   type_id: 5,
-                  department_id: 2,
+                  department_id: 1,
                   password: 'password',
                   password_confirmation: 'password')
 
-    User.create!(name: 'Foo Dept', 
-                  email: 'foo@dept.com',
+    dept_user = User.create!(name: 'Vincent C', 
+                  email: 'vnrcatajoy@yahoo.com',
                   phone: '1234567',
                   mobile: '09123456789',
                   type_id: 2,
-                  department_id: 2,
-                  password: 'foobar',
-                  password_confirmation: 'foobar')
+                  department_id: 1,
+                  password: 'password',
+                  password_confirmation: 'password')
 
-    User.create!(name: 'Foo Officer', 
-                  email: 'foo@officer.com',
+    officer_user = User.create!(name: 'Cata Joy', 
+                  email: 'vcatajoy005@yahoo.com',
                   phone: '1234567',
                   mobile: '09123456789',
                   type_id: 3,
-                  department_id: 2,
-                  password: 'foobar',
-                  password_confirmation: 'foobar')
+                  department_id: 1,
+                  password: 'password',
+                  password_confirmation: 'password')
 
-    10.times do |n|
-      name = Faker::Name.name
-      email = Faker::Internet.email
-      type_id = (n%6) + 1
-      phone = Faker::PhoneNumber.phone_number
-      mobile = Faker::PhoneNumber.cell_phone
-      department_id = (n%4) + 1
-      password = "password#{n}"
-      password_confirmation = "password#{n}"
-      User.create!(name: name,
-                    email: email,
-                    type_id: type_id,
-                    phone: phone,
-                    mobile: mobile,
-                    department_id: department_id,
-                    password: password,
-                    password_confirmation: password_confirmation)
-    end
+#    Note: it accepted email like qmr@.a.com before, with extra misplaced dot
+    # User.create!(name: 'Isi QMR', 
+    #               email: 'qmr@a.com',
+    #               phone: '1234567',
+    #               mobile: '09123456789',
+    #               type_id: 4,
+    #               department_id: 2,
+    #               password: 'password',
+    #               password_confirmation: 'password')
+
+    # User.create!(name: 'Dept Head', 
+    #               email: 'dept@a.com',
+    #               phone: '1234567',
+    #               mobile: '09123456789',
+    #               type_id: 2,
+    #               department_id: 1,
+    #               password: 'password',
+    #               password_confirmation: 'password')
+
+    # User.create!(name: 'Off Icer', 
+    #               email: 'officer@a.com',
+    #               phone: '1234567',
+    #               mobile: '09123456789',
+    #               type_id: 3,
+    #               department_id: 1,
+    #               password: 'password',
+    #               password_confirmation: 'password')
+
+    # User.create!(name: 'Audi Thor', 
+    #               email: 'auditor@a.com',
+    #               phone: '1234567',
+    #               mobile: '09123456789',
+    #               type_id: 5,
+    #               department_id: 2,
+    #               password: 'password',
+    #               password_confirmation: 'password')
+
+    # User.create!(name: 'Foo Dept', 
+    #               email: 'foo@dept.com',
+    #               phone: '1234567',
+    #               mobile: '09123456789',
+    #               type_id: 2,
+    #               department_id: 2,
+    #               password: 'foobar',
+    #               password_confirmation: 'foobar')
+
+    # User.create!(name: 'Foo Officer', 
+    #               email: 'foo@officer.com',
+    #               phone: '1234567',
+    #               mobile: '09123456789',
+    #               type_id: 3,
+    #               department_id: 2,
+    #               password: 'foobar',
+    #               password_confirmation: 'foobar')
+
+    # 10.times do |n|
+     # name = Faker::Name.name
+    #  email = Faker::Internet.email
+     # type_id = (n%6) + 1
+     # phone = Faker::PhoneNumber.phone_number
+     # mobile = Faker::PhoneNumber.cell_phone
+      #department_id = (n%4) + 1
+      #password = "password#{n}"
+      #password_confirmation = "password#{n}"
+      #User.create!(name: name,
+       #             email: email,
+        #            type_id: type_id,
+         #           phone: phone,
+          #          mobile: mobile,
+          #          department_id: department_id,
+           #         password: password,
+            #        password_confirmation: password_confirmation)
+    #end
 
     #add sample IssueType
     # 5.times do |n|
@@ -162,34 +188,34 @@ namespace :db do
     # end
 
     #add sample Issues
-    Issue.create!(title: 'ITDC Slow Internet Connection', 
-                    description: 'Low bandwidth', 
-                    user_id: 1, 
-                    impact_id: 1, 
-                    status_id: 1, 
-                    department_id: 1,
-                    type_id: 1,
-                    iso_nc_id: 1)
+    # Issue.create!(title: 'ITDC Slow Internet Connection', 
+    #                 description: 'Low bandwidth', 
+    #                 user_id: 1, 
+    #                 impact_id: 1, 
+    #                 status_id: 1, 
+    #                 department_id: 1,
+    #                 type_id: 1,
+    #                 iso_nc_id: 1)
 
-    20.times do |i|
-      title = "Sample Title#{i+1}"
-      description = "Sample Description#{i+1}"
-      user_id = i + 1 
-      impact_id = (i%3) + 1
-      status_id = 1
-      department_id = (i%4) + 1
-      type_id = (i%6) + 1
-      iso_nc_id = (i%5) + 1
+    # 10.times do |i|
+    #   title = "Sample Title#{i+1}"
+    #   description = "Sample Description#{i+1}"
+    #   user_id = i + 1 
+    #   impact_id = (i%3) + 1
+    #   status_id = 1
+    #   department_id = (i%4) + 1
+    #   type_id = (i%6) + 1
+    #   iso_nc_id = (i%5) + 1
 
-      Issue.create!(title: title, 
-                      description: description,
-                      user_id: user_id,
-                      impact_id: impact_id,
-                      status_id: status_id,
-                      department_id: department_id,
-                      type_id: type_id,
-                      iso_nc_id: iso_nc_id)
-    end
+    #   Issue.create!(title: title, 
+    #                   description: description,
+    #                   user_id: user_id,
+    #                   impact_id: impact_id,
+    #                   status_id: status_id,
+    #                   department_id: department_id,
+    #                   type_id: type_id,
+    #                   iso_nc_id: iso_nc_id)
+    # end
 
     #10.times do |a|
       

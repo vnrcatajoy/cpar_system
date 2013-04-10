@@ -2,19 +2,15 @@
   #email_settings = YAML::load(File.open("#{Rails.root.to_s}/config/email.yml"))
   #ActionMailer::Base.smtp_settings = email_settings[Rails.env] unless email_settings[Rails.env].nil?
 #end
-begin
-  sock = TCPSocket.new("localhost", 1025)
-  sock.close
-  catcher = true
-rescue
-  catcher = false
-end
+# begin
+#   sock = TCPSocket.new("localhost", 1025)
+#   sock.close
+#   catcher = true
+# rescue
+#   catcher = false
+# end
 
-ActionMailer::Base.smtp_settings = if Rails.env.development? && catcher
-  { :address => "localhost", 
-  	:port => '1025' } 
-else
-	{
+ActionMailer::Base.smtp_settings = {
 	:address => "smtp.gmail.com",
 	:port => 587,
 	:domain => "webcpar12.herokuapp.com",
@@ -22,8 +18,22 @@ else
 	:password => "09152151552",
 	:authentication => "plain",
 	:enable_starttls_auto => true
-	}
+	} 
 end
+#&& catcher
+#   { :address => "localhost", 
+#   	:port => '1025' } 
+# else
+	# {
+	# :address => "smtp.gmail.com",
+	# :port => 587,
+	# :domain => "webcpar12.herokuapp.com",
+	# :user_name => "webcpartest@gmail.com",
+	# :password => "09152151552",
+	# :authentication => "plain",
+	# :enable_starttls_auto => true
+	# }
+
 
 ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.raise_delivery_errors = true

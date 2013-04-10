@@ -12,7 +12,7 @@ gem 'bootstrap-will_paginate', '0.0.6'
 # Using gem mailcatcher, mailcatcher site itself suggested not to add to gemfile
 # but to use gem install mailcatcher instead. Just run mailcatcher at command line
 #gem 'eventmachine', :git => 'https://github.com/eventmachine/eventmachine.git'
-gem 'thin'
+gem 'thin', :require => false
 gem 'carrierwave'
 
 # Gems used only for assets and not required
@@ -30,6 +30,7 @@ gem 'jquery-rails'
 gem 'scoped_search'
 gem "highcharts-rails", "~> 3.0.0"
 gem "date-input-rails", "~> 0.0.3"
+gem 'sqlite3'
 
 group :test, :development do
   gem 'turn', :require => false
@@ -40,13 +41,7 @@ group :test, :development do
   gem 'minitest'
   gem 'launchy'
   gem 'faker'
-  gem 'factory_girl_rails', :require => false #don't Use anymore
-  gem 'sqlite3'
-end
-
-group :production do
-  gem 'pg', '0.12.2'
-  gem 'faker'
+  gem 'factory_girl_rails', :require => false #don't Use anymore  
 end
 
 # To use ActiveModel has_secure_password

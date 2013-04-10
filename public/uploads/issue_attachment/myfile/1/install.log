@@ -1,196 +1,0 @@
-Ign http://ph.archive.ubuntu.com precise InRelease
-Ign http://ph.archive.ubuntu.com precise-updates InRelease
-Ign http://ph.archive.ubuntu.com precise-backports InRelease
-Hit http://ph.archive.ubuntu.com precise Release.gpg
-Ign http://ppa.launchpad.net precise InRelease
-Get:1 http://ph.archive.ubuntu.com precise-updates Release.gpg [198 B]
-Hit http://ppa.launchpad.net precise Release.gpg
-Hit http://ph.archive.ubuntu.com precise-backports Release.gpg
-Hit http://ppa.launchpad.net precise Release
-Hit http://ph.archive.ubuntu.com precise Release
-Hit http://ppa.launchpad.net precise/main Sources
-Get:2 http://ph.archive.ubuntu.com precise-updates Release [49.6 kB]
-Hit http://ppa.launchpad.net precise/main i386 Packages
-Ign http://ppa.launchpad.net precise/main TranslationIndex
-Hit http://ph.archive.ubuntu.com precise-backports Release
-Hit http://ph.archive.ubuntu.com precise/main Sources
-Hit http://ph.archive.ubuntu.com precise/restricted Sources
-Hit http://ph.archive.ubuntu.com precise/universe Sources
-Hit http://ph.archive.ubuntu.com precise/multiverse Sources
-Hit http://ph.archive.ubuntu.com precise/main i386 Packages
-Hit http://ph.archive.ubuntu.com precise/restricted i386 Packages
-Hit http://ph.archive.ubuntu.com precise/universe i386 Packages
-Hit http://ph.archive.ubuntu.com precise/multiverse i386 Packages
-Hit http://ph.archive.ubuntu.com precise/main TranslationIndex
-Hit http://ph.archive.ubuntu.com precise/multiverse TranslationIndex
-Hit http://ph.archive.ubuntu.com precise/restricted TranslationIndex
-Hit http://ph.archive.ubuntu.com precise/universe TranslationIndex
-Get:3 http://ph.archive.ubuntu.com precise-updates/main Sources [190 kB]
-Ign http://extras.ubuntu.com precise InRelease
-Get:4 http://ph.archive.ubuntu.com precise-updates/restricted Sources [4,419 B]
-Get:5 http://ph.archive.ubuntu.com precise-updates/universe Sources [63.4 kB]
-Ign http://ppa.launchpad.net precise/main Translation-en_PH
-Hit http://extras.ubuntu.com precise Release.gpg
-Ign http://ppa.launchpad.net precise/main Translation-en
-Hit http://extras.ubuntu.com precise Release
-Get:6 http://ph.archive.ubuntu.com precise-updates/multiverse Sources [4,241 B]
-Get:7 http://ph.archive.ubuntu.com precise-updates/main i386 Packages [438 kB]
-Hit http://extras.ubuntu.com precise/main Sources
-Hit http://extras.ubuntu.com precise/main i386 Packages
-Ign http://extras.ubuntu.com precise/main TranslationIndex
-Get:8 http://ph.archive.ubuntu.com precise-updates/restricted i386 Packages [8,374 B]
-Get:9 http://ph.archive.ubuntu.com precise-updates/universe i386 Packages [156 kB]
-Get:10 http://ph.archive.ubuntu.com precise-updates/multiverse i386 Packages [9,661 B]
-Hit http://ph.archive.ubuntu.com precise-updates/main TranslationIndex
-Hit http://ph.archive.ubuntu.com precise-updates/multiverse TranslationIndex
-Hit http://ph.archive.ubuntu.com precise-updates/restricted TranslationIndex
-Hit http://ph.archive.ubuntu.com precise-updates/universe TranslationIndex
-Hit http://ph.archive.ubuntu.com precise-backports/main Sources
-Hit http://ph.archive.ubuntu.com precise-backports/restricted Sources
-Hit http://ph.archive.ubuntu.com precise-backports/universe Sources
-Hit http://ph.archive.ubuntu.com precise-backports/multiverse Sources
-Hit http://ph.archive.ubuntu.com precise-backports/main i386 Packages
-Hit http://ph.archive.ubuntu.com precise-backports/restricted i386 Packages
-Hit http://ph.archive.ubuntu.com precise-backports/universe i386 Packages
-Hit http://ph.archive.ubuntu.com precise-backports/multiverse i386 Packages
-Hit http://ph.archive.ubuntu.com precise-backports/main TranslationIndex
-Hit http://ph.archive.ubuntu.com precise-backports/multiverse TranslationIndex
-Hit http://ph.archive.ubuntu.com precise-backports/restricted TranslationIndex
-Hit http://ph.archive.ubuntu.com precise-backports/universe TranslationIndex
-Hit http://ph.archive.ubuntu.com precise/main Translation-en
-Hit http://ph.archive.ubuntu.com precise/multiverse Translation-en
-Hit http://ph.archive.ubuntu.com precise/restricted Translation-en
-Hit http://ph.archive.ubuntu.com precise/universe Translation-en
-Hit http://ph.archive.ubuntu.com precise-updates/main Translation-en
-Hit http://ph.archive.ubuntu.com precise-updates/multiverse Translation-en
-Hit http://ph.archive.ubuntu.com precise-updates/restricted Translation-en
-Ign http://security.ubuntu.com precise-security InRelease
-Ign http://extras.ubuntu.com precise/main Translation-en_PH
-Hit http://ph.archive.ubuntu.com precise-updates/universe Translation-en
-Hit http://ph.archive.ubuntu.com precise-backports/main Translation-en
-Hit http://ph.archive.ubuntu.com precise-backports/multiverse Translation-en
-Hit http://ph.archive.ubuntu.com precise-backports/restricted Translation-en
-Hit http://ph.archive.ubuntu.com precise-backports/universe Translation-en
-Get:11 http://security.ubuntu.com precise-security Release.gpg [198 B]
-Ign http://extras.ubuntu.com precise/main Translation-en
-Get:12 http://security.ubuntu.com precise-security Release [49.6 kB]
-Get:13 http://security.ubuntu.com precise-security/main Sources [54.9 kB]
-Get:14 http://security.ubuntu.com precise-security/restricted Sources [1,950 B]
-Get:15 http://security.ubuntu.com precise-security/universe Sources [16.9 kB]
-Get:16 http://security.ubuntu.com precise-security/multiverse Sources [1,392 B]
-Get:17 http://security.ubuntu.com precise-security/main i386 Packages [204 kB]
-Get:18 http://security.ubuntu.com precise-security/restricted i386 Packages [3,968 B]
-Get:19 http://security.ubuntu.com precise-security/universe i386 Packages [56.6 kB]
-Get:20 http://security.ubuntu.com precise-security/multiverse i386 Packages [2,388 B]
-Hit http://security.ubuntu.com precise-security/main TranslationIndex
-Hit http://security.ubuntu.com precise-security/multiverse TranslationIndex
-Hit http://security.ubuntu.com precise-security/restricted TranslationIndex
-Hit http://security.ubuntu.com precise-security/universe TranslationIndex
-Hit http://security.ubuntu.com precise-security/main Translation-en
-Hit http://security.ubuntu.com precise-security/multiverse Translation-en
-Hit http://security.ubuntu.com precise-security/restricted Translation-en
-Hit http://security.ubuntu.com precise-security/universe Translation-en
-Fetched 1,316 kB in 23s (55.7 kB/s)
-Reading package lists...
-Reading package lists...
-Building dependency tree...
-Reading state information...
-The following extra packages will be installed:
-  git-man liberror-perl
-Suggested packages:
-  git-daemon-run git-daemon-sysvinit git-doc git-el git-arch git-cvs git-svn
-  git-email git-gui gitk gitweb
-The following NEW packages will be installed:
-  git git-man liberror-perl
-0 upgraded, 3 newly installed, 0 to remove and 238 not upgraded.
-Need to get 6,617 kB of archives.
-After this operation, 15.2 MB of additional disk space will be used.
-Get:1 http://ph.archive.ubuntu.com/ubuntu/ precise/main liberror-perl all 0.17-1 [23.8 kB]
-Get:2 http://ph.archive.ubuntu.com/ubuntu/ precise/main git-man all 1:1.7.9.5-1 [630 kB]
-Get:3 http://ph.archive.ubuntu.com/ubuntu/ precise/main git i386 1:1.7.9.5-1 [5,963 kB]
-Fetched 6,617 kB in 53s (124 kB/s)
-Selecting previously unselected package liberror-perl.
-(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 150693 files and directories currently installed.)
-Unpacking liberror-perl (from .../liberror-perl_0.17-1_all.deb) ...
-Selecting previously unselected package git-man.
-Unpacking git-man (from .../git-man_1%3a1.7.9.5-1_all.deb) ...
-Selecting previously unselected package git.
-Unpacking git (from .../git_1%3a1.7.9.5-1_i386.deb) ...
-Processing triggers for man-db ...
-Setting up liberror-perl (0.17-1) ...
-Setting up git-man (1:1.7.9.5-1) ...
-Setting up git (1:1.7.9.5-1) ...
-Reading package lists...
-Building dependency tree...
-Reading state information...
-curl is already the newest version.
-0 upgraded, 0 newly installed, 0 to remove and 238 not upgraded.
-Downloading RVM from wayneeseguin branch stable
-
-Installing RVM to /home/nico/.rvm/
-    Adding rvm PATH line to /home/nico/.bashrc /home/nico/.zshenv.
-    Adding rvm loading line to /home/nico/.bash_profile /home/nico/.zprofile.
-
-# RVM:  Shell scripts enabling management of multiple ruby environments.
-# RTFM: https://rvm.io/
-# HELP: http://webchat.freenode.net/?channels=rvm (#rvm on irc.freenode.net)
-# Cheatsheet: http://cheat.errtheblog.com/s/rvm/
-# Screencast: http://screencasts.org/episodes/how-to-use-rvm
-
-# In case of any issues read output of 'rvm requirements' and/or 'rvm notes'
-
-Installation of RVM in /home/nico/.rvm/ is almost complete:
-
-  * To start using RVM you need to run `source /home/nico/.rvm/scripts/rvm`
-    in all your open shell windows, in rare cases you need to reopen all shell windows.
-
-# nico,
-#
-#   Thank you for using RVM!
-#   I sincerely hope that RVM helps to make your life easier and more enjoyable!!!
-#
-# ~Wayne
-
-Ruby (and needed base gems) for your selection will be installed shortly.
-Before it happens, please read and execute the instructions below.
-Please use a separate terminal to execute any additional commands.
-
-Requirements for Linux "Ubuntu 12.04.1 LTS"
-
-NOTE: 'ruby' represents Matz's Ruby Interpreter (MRI) (1.8.X, 1.9.X)
-             This is the *original* / standard Ruby Language Interpreter
-      'ree'  represents Ruby Enterprise Edition
-      'rbx'  represents Rubinius
-
-bash >= 4.1 required
-curl is required
-git is required (>= 1.7 for ruby-head)
-patch is required (for 1.8 rubies and some ruby-head's).
-
-To install rbx and/or Ruby 1.9 head (MRI) (eg. 1.9.2-head),
-then you must install and use rvm 1.8.7 first.
-
-Additional Dependencies:
-# For Ruby / Ruby HEAD (MRI, Rubinius, & REE), install the following:
-  ruby: /usr/bin/apt-get install build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion pkg-config
-
-# For JRuby, install the following:
-  jruby: /usr/bin/apt-get install curl g++ openjdk-6-jre-headless
-  jruby-head: /usr/bin/apt-get install ant openjdk-6-jdk
-
-# For IronRuby, install the following:
-  ironruby: /usr/bin/apt-get install curl mono-2.0-devel
-
-Press 'q' to continue.
-https://rvm.io/binaries/ubuntu/12.04/i386/ruby-1.9.3-p327.tar.bz2 - #configure
-ruby-1.9.3-p327 - #download
-Mounting remote ruby failed, trying to compile.
-Fetching yaml-0.1.4.tar.gz to /home/nico/.rvm/archives
-Extracting yaml-0.1.4.tar.gz to /home/nico/.rvm/src
-Prepare yaml in /home/nico/.rvm/src/yaml-0.1.4.
-Configuring yaml in /home/nico/.rvm/src/yaml-0.1.4.
-Compiling yaml in /home/nico/.rvm/src/yaml-0.1.4.
-Installing yaml to /home/nico/.rvm/usr
-Installing Ruby from source to: /home/nico/.rvm/rubies/ruby-1.9.3-p327, this may take a while depending on your cpu(s)...
-ruby-1.9.3-p327 - #downloading ruby-1.9.3-p327, this may take a while depending on your connection...
-To install do: 'rvm install ruby-1.9.3-p327'

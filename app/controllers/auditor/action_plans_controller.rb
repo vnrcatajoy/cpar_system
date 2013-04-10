@@ -290,7 +290,7 @@ class Auditor::ActionPlansController < ApplicationController
   end
 
   def start_closeout_form(issue) #functions like a better COF create action
-    @closeout_form = issue.closeout_forms.build({issue_id: issue.id})
+    @closeout_form = issue.closeout_forms.build({issue_id: issue.id, auditor_id: current_user.id})
     if @closeout_form.save
       if issue.status_id < 5
          issue.status_id = 5 #Update Issue Status to Implemented

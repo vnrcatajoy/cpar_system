@@ -57,7 +57,7 @@
     		                    color: '#000000',
             		            connectorColor: '#000000',
                     		    formatter: function() {
-                            	return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
+                            	return '<b>'+ this.point.name +'</b>: '+ Math.round(this.percentage) +' %';
                         		}
                     		}
                 		}
@@ -67,10 +67,10 @@
                 		name: 'Issues by Department',
                 		data: [
                 			
-                    		['Administration',   <%= @issues_admin.round(2) %>],
-		                    ['Maintenance',       <%= @issues_maintenance.round(2) %>],
-                    		['Development',    <%= @issues_development.round(2) %>],
-                    		['Verification',     <%= @issues_verification.round(2) %>],
+                    		['Administration',   <%= @issues_admin  %>],
+		                    ['Maintenance',       <%= @issues_maintenance %>],
+                    		['Development',    <%= @issues_development %>],
+                    		['Verification',     <%= @issues_verification %>],
                 		]
                 	}]
 				  });
@@ -170,7 +170,7 @@
 				</tr>
 				<tr>
 			  		<td>Issue Rejection Rate</td>
-					<td><%= @issues_rejected / @issues_total %></td>
+					<td><%= ((@issues_rejected / @issues_total) * 100).to_s + " %" if @issues_total != 0 %></td>
 				</tr>
 				<tr>
 			  		<td>Average Days to Resolve Issues</td>

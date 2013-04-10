@@ -18,9 +18,7 @@
       <%= @issue.estimated_closeout_date %>
     </p>
 
-    <% if @action_plans_implemented.any? && @closeoutforms.count == 0 %>
-      <%= render 'start_closeout', cof: @cof %>
-    <% elsif @closeoutforms.count == 1 %>
+    <% if @closeoutforms.count == 1 && @issue.status_id == 5 %>
       Closeout form started, View it in details. 
     <% end %>
 

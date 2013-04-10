@@ -70,9 +70,13 @@ hr {
 }*/
 
 .navbar .brand {
-  padding: 8px 20px 12px;
-  font-size: 23px;
-  color: #878c8e;
+  //padding: 8px 20px 12px;
+  //font-size: 23px;
+  //color: #878c8e;
+  max-height: 40px;
+  overflow: visible;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .navbar .divider-vertical {

@@ -29,7 +29,7 @@
     <% @issues.each do |issue| %>
     	<tr>
         <td> <%= link_to issue.title, issue %> </td>
-        <td> <%= issue.user.name %> </td>
+        <td> <%= User.find(issue.user_id).name %> </td>
         <td> <% if issue.impact_id == 1 %>
               <span class="label label-important"><%= issue.issue_impact.name %></spn>
               <% elsif issue.impact_id == 2 %>

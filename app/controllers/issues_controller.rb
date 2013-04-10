@@ -8,7 +8,7 @@ class IssuesController < ApplicationController
       @issues = Issue.where("user_id = " + current_user.id.to_s).paginate(page: params[:page], per_page: 10)
     else
       if current_user.admin?  #super admin
-        @issues = Issue.paginate(page: params[:page], per_page: 10)
+        @issues = Issue.paginate(page: params[:page], per_page: 10 )
       else
         @issues_all = Issue.all
         @issues = Array.new
