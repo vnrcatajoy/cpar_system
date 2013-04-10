@@ -30,7 +30,7 @@ gem 'jquery-rails'
 gem 'scoped_search'
 gem "highcharts-rails", "~> 3.0.0"
 gem "date-input-rails", "~> 0.0.3"
-gem 'sqlite3'
+
 
 group :test, :development do
   gem 'turn', :require => false
@@ -42,6 +42,7 @@ group :test, :development do
   gem 'launchy'
   gem 'faker'
   gem 'factory_girl_rails', :require => false #don't Use anymore  
+  gem 'sqlite3'
 end
 
 group :production do

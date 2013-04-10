@@ -19,7 +19,7 @@ ActionMailer::Base.smtp_settings = {
 	:authentication => "plain",
 	:enable_starttls_auto => true
 	} 
-end
+#end
 #&& catcher
 #   { :address => "localhost", 
 #   	:port => '1025' } 
