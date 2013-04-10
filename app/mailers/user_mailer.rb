@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "smtp://localhost:1025" #"WebCPAR <smtp://localhost:1025>"
+  default from: "webcpartest@gmail.com" #{}"smtp://localhost:1025" #"WebCPAR <smtp://localhost:1025>"
 
   def welcome_email(user)
     @user = user
