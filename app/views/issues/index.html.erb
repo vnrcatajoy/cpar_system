@@ -8,7 +8,7 @@
 
   <% if params[:sort] == nil %>
     <h1>View All Issues</h1>
-    <h2>Department: <%= Department.where(current_user.department_id).first.name %></h2>
+    <h2>Department: <%= Department.where(id: current_user.department_id).first.name %></h2>
   <% else %>
     <h1>Viewing your Submitted Issues</h1>
   <% end %>
